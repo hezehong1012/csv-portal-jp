@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSVとは？作り方・Excel変換・文字化けの直し方まで完全ガイド｜2026年版</title>
+<meta name="description" content="CSV（Comma-Separated Values）の意味から、CSVファイルの作り方、Excelとの相互変換、文字化けの直し方、プログラムでの読み込み、郵便番号や祝日などの公開データまで。公式ドキュメントの出典つきで解説します。">
+<link rel="canonical" href="https://example.com/csv/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSVとは？作り方・Excel変換・文字化けの直し方まで完全ガイド">
+<meta property="og:description" content="CSV（Comma-Separated Values）の意味から、CSVファイルの作り方、Excelとの相互変換、文字化けの直し方、プログラムでの読み込み、郵便番号や祝日などの公開データまで。公式ドキュメントの出典つきで解説します。">
+<meta property="og:locale" content="ja_JP">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf8f5; --surface:#ffffff; --ink:#14161a; --ink-2:#43474f; --ink-3:#7c818a;
+    --line:#e5e1d9; --line-strong:#d3cec3; --accent:#c4472c; --accent-soft:#fbeee9;
+    --indigo:#1d3557; --tip:#0d6a58; --tip-soft:#eaf5f1; --warn:#a8641b; --warn-soft:#fdf3e4;
+    --radius:10px; --maxw:1180px; --code-bg:#171b22;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic","Meiryo",system-ui,sans-serif;
+    font-size:16px;line-height:1.9;letter-spacing:.01em;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(196,71,44,.28);transition:border-color .18s}
+  a:hover{border-bottom-color:var(--accent)}
+  code,pre{font-family:"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace}
+  #progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:90}
+
+  .site-head{position:sticky;top:0;z-index:80;background:rgba(250,248,245,.88);
+    backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
+  .site-head .inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;height:60px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:.14em;color:var(--ink);border:0}
+  .brand .mark{width:26px;height:26px;border:1.5px solid var(--ink);border-radius:5px;display:grid;place-items:center;
+    font-size:10px;letter-spacing:.02em;font-family:"Noto Serif JP",serif}
+  .head-nav{display:flex;gap:20px;font-size:13.5px;color:var(--ink-2)}
+  .head-nav a{border:0;color:inherit;padding:4px 2px;border-radius:6px}
+  .head-nav a:hover{color:var(--accent)}
+  .head-nav a.here{color:var(--accent);font-weight:700}
+  .search-btn{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line-strong);
+    background:var(--surface);border-radius:8px;padding:6px 10px 6px 12px;font-size:12.5px;
+    color:var(--ink-3);cursor:pointer;font-family:inherit;white-space:nowrap}
+  .search-btn:hover{border-color:var(--accent);color:var(--ink-2)}
+  .search-btn kbd{font-family:inherit;font-size:10.5px;border:1px solid var(--line-strong);
+    border-radius:4px;padding:1px 5px;background:#f4f1ea;color:var(--ink-3)}
+  .search-btn svg{flex:none}
+  @media (max-width:900px){.head-nav{display:none}.search-btn span.lbl,.search-btn kbd{display:none}}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .hero{padding:48px 0 36px;border-bottom:1px solid var(--line)}
+  .crumbs{font-size:12.5px;color:var(--ink-3);margin-bottom:20px}
+  .crumbs a{color:var(--ink-3);border:0}.crumbs a:hover{color:var(--accent)}
+  .crumbs .sep{margin:0 8px;color:var(--line-strong)}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;letter-spacing:.18em;
+    color:var(--accent);font-weight:700;margin-bottom:16px;text-transform:uppercase}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent);display:block}
+  h1{font-family:"Noto Serif JP",serif;font-weight:700;font-size:clamp(27px,4vw,42px);
+    line-height:1.44;margin:0 0 20px;max-width:21em}
+  .lead{font-size:16px;color:var(--ink-2);max-width:44em;margin:0 0 24px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12.5px;color:var(--ink-3)}
+  .meta b{font-weight:500;color:var(--ink-2)}
+  .answer{margin:30px 0 0;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--accent);border-radius:var(--radius);padding:22px 24px;max-width:56em}
+  .answer .lbl{font-size:11px;letter-spacing:.16em;color:var(--accent);font-weight:700;margin-bottom:8px}
+  .answer p{margin:0;font-size:15.5px;color:var(--ink-2)}
+  .answer strong{color:var(--ink)}
+
+  /* ツールポータル帯 */
+  .tools-band{margin:36px 0 0;padding:26px 28px 24px;background:var(--surface);
+    border:1px solid var(--line);border-radius:14px;position:relative;overflow:hidden}
+  .tools-band::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;
+    background:linear-gradient(180deg,#2f855a,#667eea,#2b6cb0,#ed8936,#1a365d)}
+  .tools-hd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .tools-badge{font-size:10.5px;letter-spacing:.16em;font-weight:700;color:#fff;
+    background:var(--indigo);border-radius:5px;padding:3px 9px}
+  .tools-title{font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px}
+  .tools-sub{font-size:12px;color:var(--ink-3)}
+  .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:13px}
+  .tool-card{display:flex;flex-direction:column;gap:6px;background:#fff;
+    border:1px solid var(--line);border-top:3px solid var(--tc);border-radius:10px;
+    padding:15px 15px 13px;color:var(--ink);border-bottom:1px solid var(--line);
+    text-decoration:none;transition:transform .18s,box-shadow .18s,border-color .18s}
+  .tool-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(20,22,26,.09);border-color:var(--tc)}
+  .tool-tag{font-size:10.5px;letter-spacing:.14em;font-weight:700;color:var(--tc)}
+  .tool-name{font-weight:700;font-size:14.5px;line-height:1.5}
+  .tool-desc{font-size:12.5px;color:var(--ink-2);line-height:1.75;flex:1}
+  .tool-go{font-size:12.5px;font-weight:700;color:var(--tc);margin-top:2px}
+  @media (max-width:720px){.tools-band{padding:20px 18px}.tools-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:520px){.tools-grid{grid-template-columns:1fr}}
+
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 252px;gap:72px;padding:8px 0 90px;align-items:start}
+  @media (max-width:1020px){.layout{grid-template-columns:1fr;gap:0}aside.toc{display:none}}
+  article{min-width:0}
+  section.sec{padding:50px 0 8px;border-bottom:1px solid var(--line)}
+  section.sec:last-of-type{border-bottom:0}
+  .sec-no{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;font-size:11.5px;
+    letter-spacing:.18em;color:var(--ink-3);font-weight:500}
+  .sec-no i{font-style:normal;font-family:"Noto Serif JP",serif;font-size:13px;color:var(--accent);letter-spacing:.02em}
+  .sec-no::after{content:"";flex:1;height:1px;background:var(--line);margin-bottom:4px}
+  h2{font-family:"Noto Serif JP",serif;font-weight:700;font-size:clamp(22px,2.6vw,29px);
+    line-height:1.5;margin:0 0 18px;scroll-margin-top:84px}
+  h3{font-family:"Noto Serif JP",serif;font-weight:600;font-size:18px;line-height:1.6;margin:34px 0 12px;scroll-margin-top:84px}
+  p{margin:0 0 17px;color:var(--ink-2)}
+  article p strong{color:var(--ink)}
+  .u{background:linear-gradient(transparent 62%,rgba(196,71,44,.16) 62%)}
+  ul,ol{margin:0 0 18px;padding-left:1.4em;color:var(--ink-2)}
+  li{margin:0 0 8px}li::marker{color:var(--accent)}
+  ol.steps{list-style:none;counter-reset:s;padding:0;margin:20px 0 22px}
+  ol.steps>li{counter-increment:s;position:relative;padding:0 0 0 44px;margin-bottom:15px}
+  ol.steps>li::before{content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;
+    border-radius:50%;background:var(--ink);color:var(--paper);font-size:12.5px;font-weight:700;
+    display:grid;place-items:center}
+  ol.steps>li b{display:block;color:var(--ink);margin-bottom:2px}
+
+  .box{border-radius:var(--radius);padding:17px 20px;margin:22px 0;font-size:14.5px;line-height:1.85;border:1px solid transparent}
+  .box .t{font-weight:700;font-size:13px;letter-spacing:.04em;display:flex;gap:8px;align-items:center;margin-bottom:6px}
+  .box p{margin:0;font-size:14.5px}.box p+p{margin-top:8px}
+  .box.note{background:#f1f4f9;border-color:#dfe5ef}.box.note .t{color:var(--indigo)}
+  .box.warn{background:var(--warn-soft);border-color:#f0e0c4}.box.warn .t{color:var(--warn)}
+  .box.tip{background:var(--tip-soft);border-color:#d5e9e2}.box.tip .t{color:var(--tip)}
+
+  .tbl-scroll{overflow-x:auto;margin:20px 0 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+  th,td{padding:11px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+  th{background:#f4f1ea;font-weight:700;font-size:13px;color:var(--ink);white-space:nowrap}
+  tbody tr:last-child td{border-bottom:0}
+  td{color:var(--ink-2)}td b{color:var(--ink)}
+
+  .codeblock{position:relative;margin:18px 0 24px;background:var(--code-bg);border-radius:var(--radius);overflow:hidden}
+  .codeblock .bar{display:flex;align-items:center;justify-content:space-between;padding:9px 14px 7px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .codeblock .lang{font-size:11px;letter-spacing:.12em;color:#9aa4b2;font-weight:700}
+  .copy{background:transparent;border:1px solid rgba(255,255,255,.2);color:#c3cad4;font-size:11px;
+    padding:4px 10px;border-radius:5px;cursor:pointer;font-family:inherit}
+  .copy:hover{border-color:rgba(255,255,255,.45);color:#fff}
+  pre{margin:0;padding:15px 18px;overflow-x:auto;font-size:13px;line-height:1.75;color:#dfe4ec;tab-size:2}
+  pre .c{color:#6f7d8c}pre .k{color:#8bb8f0}pre .s{color:#a8d3a0}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:14px;margin:22px 0 26px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px;display:flex;flex-direction:column;gap:6px}
+  .card .k{font-size:11px;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase}
+  .card .n{font-weight:700;font-size:15px;color:var(--ink);line-height:1.5}
+  .card .d{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+  .card a{font-size:12.5px;align-self:flex-start;margin-top:2px}
+
+  .faq{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin-bottom:10px;overflow:hidden}
+  .faq summary{list-style:none;cursor:pointer;padding:16px 52px 16px 20px;position:relative;
+    font-weight:700;font-size:15px;color:var(--ink);line-height:1.7}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"";position:absolute;right:22px;top:25px;width:9px;height:9px;
+    border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);
+    transform:rotate(45deg);transition:transform .22s}
+  .faq[open] summary::after{transform:rotate(-135deg)}
+  .faq[open] summary{background:#f7f4ee}
+  .faq .a{padding:2px 22px 19px;font-size:14.5px;color:var(--ink-2);line-height:1.9}
+  .faq .a p{margin:0 0 10px;font-size:14.5px}.faq .a p:last-child{margin-bottom:0}
+  .q{color:var(--accent);font-family:"Noto Serif JP",serif;margin-right:6px}
+
+  /* 出典ブロック */
+  .src{margin:26px 0 6px;border-top:1px dashed var(--line-strong);padding:13px 2px 4px;font-size:13px;color:var(--ink-3)}
+  .src-t{font-weight:700;font-size:11.5px;letter-spacing:.14em;color:var(--ink-2);margin-bottom:6px}
+  .src-date{font-weight:400;letter-spacing:.02em;color:var(--ink-3)}
+  .src ul{margin:0;padding-left:1.2em}
+  .src li{margin-bottom:4px;font-size:12.8px}
+  .src a{color:var(--indigo);border-bottom:1px solid rgba(29,53,87,.25)}
+  .src a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+  .src-note{color:var(--ink-3)}
+
+  /* 関連ページカード */
+  .jump{margin:44px 0 8px}
+  .jump-hd{font-size:11.5px;letter-spacing:.18em;color:var(--ink-3);font-weight:700;margin-bottom:14px}
+  .jump-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .jump-card{display:flex;flex-direction:column;gap:5px;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);padding:16px 18px;color:var(--ink);border-bottom:1px solid var(--line);
+    transition:border-color .18s,transform .18s}
+  .jump-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .jump-card .k{font-size:10.5px;letter-spacing:.12em;color:var(--accent);font-weight:700;text-transform:uppercase}
+  .jump-card .n{font-weight:700;font-size:14.5px;line-height:1.5}
+  .jump-card .d{font-size:12.5px;color:var(--ink-2);line-height:1.65}
+  .jump-card .go{font-size:12px;color:var(--accent);margin-top:3px}
+
+  aside.toc{position:sticky;top:92px;font-size:13px}
+  aside.toc .hd{font-size:11px;letter-spacing:.18em;color:var(--ink-3);font-weight:700;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  aside.toc ol{list-style:none;margin:0;padding:0;counter-reset:t}
+  aside.toc li{counter-increment:t;margin:0}
+  aside.toc a{display:block;padding:6px 0 6px 26px;color:var(--ink-2);border:0;position:relative;line-height:1.6}
+  aside.toc a::before{content:counter(t,decimal-leading-zero);position:absolute;left:0;top:7px;font-size:10.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  aside.toc a:hover{color:var(--accent)}
+  aside.toc a.active{color:var(--accent);font-weight:700}
+  aside.toc a.active::before{color:var(--accent)}
+
+  .mobile-toc{display:none;margin:26px 0 0;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:0 18px}
+  .mobile-toc summary{list-style:none;cursor:pointer;padding:14px 0;font-size:13.5px;font-weight:700;position:relative}
+  .mobile-toc summary::-webkit-details-marker{display:none}
+  .mobile-toc summary::after{content:"＋";position:absolute;right:2px;top:13px;color:var(--ink-3)}
+  .mobile-toc[open] summary::after{content:"−"}
+  .mobile-toc ol{list-style:none;margin:0;padding:0 0 12px}
+  .mobile-toc a{display:block;padding:7px 0;border-top:1px solid var(--line);color:var(--ink-2);font-size:13.5px}
+  @media (max-width:1020px){.mobile-toc{display:block}}
+
+  /* 検索オーバーレイ */
+  .ov{position:fixed;inset:0;z-index:200;display:none}
+  .ov.open{display:block}
+  .ov-bg{position:absolute;inset:0;background:rgba(20,22,26,.45);backdrop-filter:blur(2px)}
+  .ov-panel{position:relative;max-width:640px;margin:9vh auto 0;background:var(--surface);
+    border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.28);overflow:hidden}
+  .ov-head{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+  .ov-head svg{flex:none;color:var(--ink-3)}
+  #ovq{flex:1;border:0;outline:0;font-size:15.5px;font-family:inherit;color:var(--ink);background:transparent}
+  #ovq::placeholder{color:var(--ink-3)}
+  .ov-esc{font-size:11px;border:1px solid var(--line-strong);border-radius:5px;padding:2px 7px;color:var(--ink-3);background:#f4f1ea}
+  .ov-res{max-height:52vh;overflow-y:auto;padding:8px}
+  .ov-res:empty::after{content:"一致するページが見つかりません。別のキーワードでお試しください。";
+    display:block;padding:26px 14px;color:var(--ink-3);font-size:13.5px;text-align:center}
+  .ov-item{display:block;padding:11px 12px;border-radius:9px;cursor:pointer;border:0;color:inherit}
+  .ov-item.sel,.ov-item:hover{background:#f7f4ee}
+  .ov-item .t{font-weight:700;font-size:14px;color:var(--ink);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .ov-item .t .pg{font-size:10.5px;letter-spacing:.1em;color:var(--accent);font-weight:700;text-transform:uppercase}
+  .ov-item .x{font-size:12.5px;color:var(--ink-2);line-height:1.65;margin-top:3px}
+  .ov-item mark{background:rgba(196,71,44,.18);color:inherit;padding:0 1px;border-radius:2px}
+  .ov-hint{padding:9px 16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-3);display:flex;gap:14px}
+  @media (max-width:640px){.ov-panel{margin:5vh 14px 0}}
+
+  footer.site{border-top:1px solid var(--line);padding:36px 0 60px;font-size:13px;color:var(--ink-3)}
+  footer.site .inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+  footer.site .refs{margin:0;padding-left:1.2em;max-width:46em}
+  footer.site .refs li{margin-bottom:5px;font-size:12.5px}
+  footer.site a{color:var(--ink-2);border-color:var(--line-strong)}
+  .stamp{font-size:12px;letter-spacing:.04em;margin:0}
+  @media print{.site-head,#progress,aside.toc,.ov{display:none}body{background:#fff}}
+</style>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "CSVとは？作り方・Excel変換・文字化けの直し方まで完全ガイド",
+   "description": "CSV（Comma-Separated Values）の意味から、CSVファイルの作り方、Excelとの相互変換、文字化けの直し方、プログラムでの読み込み、郵便番号や祝日などの公開データまで。公式ドキュメントの出典つきで解説します。",
+   "inLanguage": "ja-JP",
+   "datePublished": "2026-10-30",
+   "dateModified": "2026-10-30",
+   "author": {
+    "@type": "Organization",
+    "name": "CSV GUIDE"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "CSVとは何の略ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Comma-Separated Values（カンマ区切り値）の略です。データをカンマで区切って並べたテキストファイルを指し、拡張子は <code>.csv</code> です。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "CSVとExcelは何が違いますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Excelは表計算ソフト、CSVはデータの入れ物（テキスト形式）です。CSVは書式・数式・複数シートを保持できませんが、軽量でどのソフトからも読めます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "CSVをExcelで開くと文字化けするのはなぜですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "保存時の文字コードとExcelが想定する文字コードが違うためです。「データ」→「テキスト/CSVから」で文字コードを指定して開けば解消します。詳しくは<a href=\"mojibake.html\">文字化けの専用ページ</a>へ。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "UTF-8とShift-JISはどちらで保存すべきですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Webサービスやクラウドツールとの連携はUTF-8、国内の基幹システム・会計ソフト・官公庁提出はShift-JISが基本です。相手側の仕様を確認してください。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "先頭の0が消えてしまうのはなぜですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Excelが数値と解釈するためです。インポート時に該当列を「テキスト」に指定するのが最も確実です。詳しくは<a href=\"excel-convert.html\">変換の専用ページ</a>へ。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "CSVは複数シートにできますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "できません。CSVは1ファイル＝1シートです。複数シートのブックをCSV保存すると、アクティブなシートだけが書き出されます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "CSVとTSVの違いは何ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "区切り文字が違うだけです。CSVはカンマ、TSVはタブで区切ります。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "「CSV経営」のCSVは同じ意味ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "別物です。Creating Shared Value（共通価値の創造）の略で、社会課題の解決と経済価値の創出を両立させる経営手法を指します。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "CSVファイルのアイコンがExcelになってしまう",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Windowsが.csvをExcelに関連付けているためです。実害はありませんが、ダブルクリックで開くと文字化けの原因になります。右クリック→「プログラムから開く」→「メモ帳」を選びましょう。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "数万行のCSVがExcelで開けません",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Excelの上限は1,048,576行です。超えると切り捨てられることがあります。Power Queryで必要列だけ読むか、Python＋pandasで集計してください。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "CSVをPDFに変換できますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "できます。Excelで開いてレイアウトを整え、「エクスポート」→「PDF/XPSの作成」を選びます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "CSVの区切り文字をカンマ以外にできますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "できます。ヨーロッパではセミコロン、日本ではタブ（TSV）が使われることがあります。"
+     }
+    }
+   ]
+  }
+ ]
+}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://example.com/csv/"}, {"@type": "ListItem", "position": 2, "name": "CSV完全ガイド", "item": "https://example.com/csv/index.html"}]}</script>
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="site-head">
+  <div class="inner">
+    <a href="index.html" class="brand"><span class="mark">CSV</span>CSV GUIDE</a>
+    <nav class="head-nav"><a href="index.html" class="here">全体ガイド</a><a href="csv-create.html">作り方</a><a href="excel-convert.html">変換</a><a href="mojibake.html">文字化け</a><a href="reading.html">読み込み</a></nav>
+    
+<button class="search-btn" data-search type="button" aria-label="サイト内検索">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+  <span class="lbl">サイト内を検索</span>
+  <kbd>Ctrl K</kbd>
+</button>
+  </div>
+</header>
+<div class="wrap">
+  <div class="hero">
+    <div class="crumbs"><a href="index.html">ホーム</a><span class="sep">›</span><span>CSV完全ガイド</span></div>
+    <div class="eyebrow">Complete Guide · 2026</div>
+    <h1>CSVとは？作り方・Excel変換・文字化けの直し方まで完全ガイド</h1>
+    <p class="lead">CSVは、いまもっとも多くやり取りされるデータ形式のひとつです。けれど「開いたら文字化けした」「先頭の0が消えた」といったつまずきは、たいてい同じ数か所から生まれます。このガイドは全体像を1ページで押さえ、深掘りしたいトピックは専用ページへ——全5ページ構成です。</p>
+    <div class="meta"><span>更新日 <b>2026年10月30日</b></span><span>読了時間 <b>約10分</b></span><span>出典 <b>公式ドキュメントのみ</b></span></div>
+    <div class="answer"><div class="lbl">結論</div><p><strong>CSV（Comma-Separated Values）とは、データをカンマで区切って並べたテキストファイル</strong>です。1行が1件のレコードという単純な構造で、Excel・Googleスプレッドシート・データベースなど、ほとんどすべてのソフトが読み書きできます。拡張子は <code>.csv</code>。</p></div>
+  </div>
+  <div class="tools-band" aria-label="CSVツール"><div class="tools-hd"><span class="tools-badge">TOOL</span><span class="tools-title">無料で使えるCSVツール</span><span class="tools-sub">このガイドで解説している作業を、そのままブラウザで実行できます。</span></div><div class="tools-grid"><a class="tool-card" href="https://csv-mojibake.vercel.app/" target="_blank" rel="noopener" style="--tc:#2f855a"><span class="tool-tag">文字化け修正</span><span class="tool-name">CSV 文字化け修正ツール</span><span class="tool-desc">CSVファイルをアップロードするだけで文字コードを自動判定し、正しいエンコーディングへ変換してダウンロード。</span><span class="tool-go">ツールを開く <span aria-hidden="true">→</span></span></a><a class="tool-card" href="https://csv-henkan.vercel.app/" target="_blank" rel="noopener" style="--tc:#667eea"><span class="tool-tag">双方向変換</span><span class="tool-name">CSV ⇔ Excel 変換ツール</span><span class="tool-desc">ブラウザ内だけで完結する双方向変換。一括処理に対応し、ファイルはサーバーに送信されません。</span><span class="tool-go">ツールを開く <span aria-hidden="true">→</span></span></a><a class="tool-card" href="https://moji-code-tool.vercel.app/" target="_blank" rel="noopener" style="--tc:#2b6cb0"><span class="tool-tag">エンコーディング</span><span class="tool-name">文字コード 判別・変換ツール</span><span class="tool-desc">UTF-8／Shift-JIS／EUC-JP を自動判別し、テキスト・ファイルをその場で相互変換。</span><span class="tool-go">ツールを開く <span aria-hidden="true">→</span></span></a><a class="tool-card" href="https://excel-moji-fix.vercel.app/" target="_blank" rel="noopener" style="--tc:#ed8936"><span class="tool-tag">Excel修復</span><span class="tool-name">Excel CSV 文字化け 修復</span><span class="tool-desc">Excelで開いたときに乱れたCSVを、Excel対応のエンコーディングへ一括変換。手順つきでガイドします。</span><span class="tool-go">ツールを開く <span aria-hidden="true">→</span></span></a><a class="tool-card" href="https://csv-editor-mu.vercel.app/" target="_blank" rel="noopener" style="--tc:#1a365d"><span class="tool-tag">編集・生成</span><span class="tool-name">CSV オンラインエディタ（日英対応）</span><span class="tool-desc">表形式でその場編集。ダミーデータ生成（マイナンバー・SSN・日付）と Excel／CSV／JSON／JSONL 書き出しに対応。</span><span class="tool-go">ツールを開く <span aria-hidden="true">→</span></span></a></div></div>
+  <details class="mobile-toc"><summary>目次</summary><ol><li><a href="#what">CSVとは（定義とルール）</a></li><li><a href="#make">作り方</a></li><li><a href="#excel">Excel変換</a></li><li><a href="#mojibake">文字化け</a></li><li><a href="#diff">CSVとExcelの違い</a></li><li><a href="#dev">プログラムで読み込む</a></li><li><a href="#data">公開CSVデータ</a></li><li><a href="#faq">よくある質問</a></li></ol></details>
+  <div class="layout">
+    <article>
+
+<section class="sec" id="what">
+  <div class="sec-no"><i>01</i><span>基礎</span></div>
+  <h2>CSVとは（定義と3つのルール）</h2>
+  <p>CSVは <strong>Comma-Separated Values</strong> の略で、日本語では「カンマ区切り値」と呼ばれます。規格として広く参照されるのは <a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener">RFC 4180（IETF 発行の仕様書）</a> で、ファイル形式・引用符・改行の扱いが定義されています。覚えておくべきルールは次の3つだけです。</p>
+  <ol class="steps"><li><b>1行＝1件のデータ</b>1行目は項目名（ヘッダー）にするのが一般的です。2行目以降が実データになります。</li><li><b>項目はカンマで区切る</b>カンマの位置で列が決まります。列の順番に意味があるため、途中で入れ替えると別物になります。</li><li><b>カンマ・改行・ダブルクォートを含む値は「"」で囲む</b>値の中のダブルクォートは二重にして <code>""</code> と書きます。ここを守らないと列がずれます。</li></ol>
+  <h3>Excelの表示と、CSVの中身は違う</h3>
+  <p>同じデータでも、Excelで見たときとテキストとしての中身は別物です。</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Excelでの表示</th><th>CSVファイルの中身</th></tr></thead>
+    <tbody>
+      <tr><td>氏名 / 部署 / 備考</td><td><code>氏名,部署,備考</code></td></tr>
+      <tr><td>佐藤 / 営業 / 東京</td><td><code>佐藤,営業,東京</code></td></tr>
+      <tr><td>鈴木 / 開発 / 大阪, 出張可</td><td><code>鈴木,開発,"大阪, 出張可"</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>3行目の備考にカンマが入っているため、値全体がダブルクォートで囲まれています。<span class="u">この引用符がないと列が1つずつずれ、以降の行がすべて崩れます。</span>CSVのトラブルの多くはここに起因します。</p>
+  <div class="box note"><div class="t">区切り文字はカンマとは限らない</div>
+  <p>ヨーロッパ圏では小数点にカンマを使うため、区切り文字をセミコロンにしたCSVが一般的です。読み込む側では区切り文字を固定せず、判定させるのが安全です。</p></div>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener">RFC 4180 — CSV の共通形式と MIME 型</a><span class="src-note"> — 形式の一次資料</span></li><li><a href="https://ja.wikipedia.org/wiki/Comma-separated_values" target="_blank" rel="noopener">Wikipedia — Comma-Separated Values</a><span class="src-note"> — 概要の確認</span></li></ul></div>
+</section>
+<section class="sec" id="make">
+  <div class="sec-no"><i>02</i><span>作成</span></div>
+  <h2>CSVファイルの作り方（3通り）</h2>
+  <p>CSVを作る方法は、大きく分けて<strong>Excel・テキストエディタ・Googleスプレッドシート</strong>の3つです。文字コードをどう扱うかで最適解が変わります。Excelで作るときの落とし穴（シートは1枚しか保存されない／先頭の0が消える）と、開き方の注意まで、手順つきで別ページにまとめています。</p>
+  <p>要約すると：<strong>手早さ重視ならExcel、文字コード厳密管理ならエディタ、共有前提ならスプレッドシート</strong>です。</p>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://support.microsoft.com/ja-jp/office/csv-%E6%96%87%E4%BB%B6%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88" target="_blank" rel="noopener">Microsoft サポート — CSV ファイルの形式</a><span class="src-note"> — Excelでの保存形式の公式解説</span></li><li><a href="https://support.google.com/docs/answer/49114" target="_blank" rel="noopener">Google ヘルプ — スプレッドシート ファイルのダウンロード</a><span class="src-note"> — CSV書き出しの公式手順</span></li></ul></div>
+  <div class="jump"><div class="jump-hd">このトピックの詳細ページ</div><div class="jump-grid"><a class="jump-card" href="csv-create.html"><span class="k">Guide 01</span><span class="n">CSVファイルの作り方・開き方</span><span class="d">Excel・メモ帳・スプレッドシートの3通りの手順と、0落ち・列ずれを防ぐコツ</span><span class="go">読む →</span></a></div></div>
+</section>
+<section class="sec" id="excel">
+  <div class="sec-no"><i>03</i><span>変換</span></div>
+  <h2>CSVとExcelの相互変換</h2>
+  <p>「開く」と「保存する」は別の操作で、落とし穴も別です。<strong>ダブルクリックでの起動は避け</strong>、Excelの「データ」→「テキスト/CSVから」を使うのが基本。<a href="https://support.microsoft.com/ja-jp/office/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB-txt-%E3%81%BE%E3%81%9F%E3%81%AF-csv-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B-5250ac4c-663c-47ce-937b-339e391393ba" target="_blank" rel="noopener">Microsoft 公式のインポート手順</a>に沿えば、先頭0の消失や指数表記（1.23457E+17）は防げます。</p>
+  <p>詳しい手順（両方向の変換・形式の選び方・トラブル対処）は専用ページにまとめています。</p>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://support.microsoft.com/ja-jp/office/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB-txt-%E3%81%BE%E3%81%9F%E3%81%AF-csv-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B-5250ac4c-663c-47ce-937b-339e391393ba" target="_blank" rel="noopener">Microsoft サポート — テキスト/CSV ファイルのインポート</a><span class="src-note"> — 読み込みの公式手順</span></li><li><a href="https://support.microsoft.com/ja-jp/office/%E5%90%8D%E5%89%8D%E3%82%92%E4%BB%98%E3%81%91%E3%81%A6%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B-34b0bbc1-3096-4e57-8f17-4c6e05eb5b58" target="_blank" rel="noopener">Microsoft サポート — 名前を付けて保存</a><span class="src-note"> — 保存形式の公式解説</span></li></ul></div>
+  <div class="jump"><div class="jump-hd">このトピックの詳細ページ</div><div class="jump-grid"><a class="jump-card" href="excel-convert.html"><span class="k">Guide 02</span><span class="n">CSV⇔Excel 変換のすべて</span><span class="d">インポート・保存の両方向の手順と、変換トラブルTop5の直し方</span><span class="go">読む →</span></a></div></div>
+</section>
+<section class="sec" id="mojibake">
+  <div class="sec-no"><i>04</i><span>トラブル</span></div>
+  <h2>文字化けの原因と直し方</h2>
+  <p>「縺ゅ＞縺・」と表示されたとき、データは壊れていません。<strong>保存時と読み込み時の文字コードが食い違っている</strong>だけです。日本語CSVは <a href="https://developer.mozilla.org/ja/docs/Web/API/Encoding_API/Encodings" target="_blank" rel="noopener">Shift-JIS（CP932）と UTF-8</a> の2系統が並存しており、これが文字化けの根っこです。</p>
+  <p>原因の特定手順・3つの直し方・上書きしてしまった場合の限界まで、専用ページにまとめています。</p>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://developer.mozilla.org/ja/docs/Web/API/Encoding_API/Encodings" target="_blank" rel="noopener">MDN Web Docs — エンコーディング（Encoding API）</a><span class="src-note"> — 文字コードの公式リファレンス</span></li><li><a href="https://support.microsoft.com/ja-jp/office/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB-txt-%E3%81%BE%E3%81%9F%E3%81%AF-csv-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B-5250ac4c-663c-47ce-937b-339e391393ba" target="_blank" rel="noopener">Microsoft サポート — インポート時の文字コード指定</a><span class="src-note"> — Excelでの対処</span></li></ul></div>
+  <div class="jump"><div class="jump-hd">このトピックの詳細ページ</div><div class="jump-grid"><a class="jump-card" href="mojibake.html"><span class="k">Guide 03</span><span class="n">CSVの文字化けを直す</span><span class="d">原因の切り分け、Excel／ツール／プログラムでの3つの修復手順</span><span class="go">読む →</span></a></div></div>
+</section>
+<section class="sec" id="diff">
+  <div class="sec-no"><i>05</i><span>比較</span></div>
+  <h2>CSVとExcelの違い</h2>
+  <p>結論から言えば、<strong>Excelはアプリケーション、CSVはデータの入れ物</strong>です。</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>観点</th><th>CSV</th><th>Excel（.xlsx）</th></tr></thead>
+    <tbody>
+      <tr><td>実体</td><td>ただのテキスト</td><td>書式・数式・グラフを保持する複合ファイル</td></tr>
+      <tr><td>見た目</td><td>保てない（色・太字・列幅は消える）</td><td>保てる</td></tr>
+      <tr><td>数式</td><td>保存されない（計算結果の値のみ）</td><td>保存される</td></tr>
+      <tr><td>シート数</td><td>1ファイル1シート</td><td>複数シート可</td></tr>
+      <tr><td>行数の上限</td><td>なし（ソフト側の制限のみ）</td><td>1,048,576行 / 16,384列</td></tr>
+      <tr><td>相互運用性</td><td>ほぼすべてのソフトが読める</td><td>Excel系ソフトが必要</td></tr>
+      <tr><td>向く用途</td><td>システム間のデータ連携</td><td>人に見せる資料・分析</td></tr>
+    </tbody>
+  </table></div>
+  <p>実務では「<strong>受け渡しはCSV、加工と提示はExcel</strong>」という役割分担が基本です。</p>
+  <div class="box note"><div class="t">「CSV経営」はファイル形式とは無関係</div>
+  <p>「csv 経営」「csr csv 違い」の検索で当たる<strong>Creating Shared Value</strong>（共通価値の創造）は、マイケル・ポーターが提唱した経営概念で、社会課題の解決と経済価値の創出を両立させる考え方です（<a href="https://www.sharedvalue.org/" target="_blank" rel="noopener">FSG / Shared Value イニシアティブ（公式）</a>）。ファイル形式のCSVとは綴りが同じだけの別物です。</p></div>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://www.sharedvalue.org/" target="_blank" rel="noopener">Shared Value Initiative — Creating Shared Value</a><span class="src-note"> — 経営用語としてのCSVの一次情報</span></li><li><a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener">RFC 4180</a><span class="src-note"> — ファイル形式としてのCSVの定義</span></li></ul></div>
+</section>
+<section class="sec" id="dev">
+  <div class="sec-no"><i>06</i><span>実装</span></div>
+  <h2>プログラムで読み込む（Python／VBA／C#）</h2>
+  <p>どの言語でも基本は同じ「<strong>エンコーディングを明示する</strong>」です。Pythonなら <a href="https://docs.python.org/ja/3/library/csv.html" target="_blank" rel="noopener">csv モジュール（公式ドキュメント）</a> と <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">pandas の read_csv</a>、VBAなら <a href="https://learn.microsoft.com/ja-jp/office/vba/api/excel.querytables.add" target="_blank" rel="noopener">QueryTables.Add（Microsoft Learn）</a>、C#なら <a href="https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.visualbasic.fileio.textfieldparser" target="_blank" rel="noopener">TextFieldParser（Microsoft Learn）</a> が定番です。</p>
+  <p>コード例・文字コード指定の一覧・書き出しの注意は専用ページにまとめています。</p>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://docs.python.org/ja/3/library/csv.html" target="_blank" rel="noopener">Python 公式ドキュメント — csv モジュール</a></li><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">pandas 公式 — read_csv</a></li><li><a href="https://learn.microsoft.com/ja-jp/office/vba/api/excel.querytables.add" target="_blank" rel="noopener">Microsoft Learn — QueryTables.Add</a></li><li><a href="https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.visualbasic.fileio.textfieldparser" target="_blank" rel="noopener">Microsoft Learn — TextFieldParser</a></li></ul></div>
+  <div class="jump"><div class="jump-hd">このトピックの詳細ページ</div><div class="jump-grid"><a class="jump-card" href="reading.html"><span class="k">Guide 04</span><span class="n">プログラムでCSVを読み書きする</span><span class="d">Python・pandas・VBA・C# のコード例と、encoding指定の早見表</span><span class="go">読む →</span></a></div></div>
+</section>
+<section class="sec" id="data">
+  <div class="sec-no"><i>07</i><span>実務</span></div>
+  <h2>実務で使える公開CSVデータ</h2>
+  <p>官公庁・業界団体が配布する日本語CSVは<strong>Shift-JISのものが少なくありません</strong>。取り込み前の文字コード確認が必須です。</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>データ</th><th>提供元</th><th>形式・文字コード</th><th>実務での注意</th></tr></thead>
+    <tbody>
+      <tr><td><b><a href="https://www.post.japanpost.jp/zipcode/download.html" target="_blank" rel="noopener">郵便番号データ</a></b></td><td>日本郵便</td><td>CSV / Shift-JIS</td><td>全半角混在。住所の分割に注意</td></tr>
+      <tr><td><b><a href="https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html" target="_blank" rel="noopener">国民の祝日</a></b></td><td>内閣府</td><td>CSV / UTF-8</td><td>1970〜2050年分。祝日判定の定番</td></tr>
+      <tr><td><b><a href="https://www.zenginkyo.or.jp/" target="_blank" rel="noopener">金融機関コード</a></b></td><td>全国銀行データ通信システム</td><td>CSV / Shift-JIS</td><td>合併・改称で頻繁に更新</td></tr>
+      <tr><td><b><a href="https://indexes.nikkei.co.jp/" target="_blank" rel="noopener">日経225 銘柄一覧</a></b></td><td>日本経済新聞社</td><td>CSV / UTF-8</td><td>定期入れ替えあり</td></tr>
+      <tr><td><b><a href="https://www.yayoi-kk.co.jp/" target="_blank" rel="noopener">会計ソフト取込</a></b></td><td>弥生会計など</td><td>CSV / Shift-JIS</td><td>日付 YYYY/MM/DD・金額にカンマ禁止</td></tr>
+      <tr><td><b><a href="https://support.google.com/calendar/answer/37118" target="_blank" rel="noopener">カレンダー予定</a></b></td><td>Googleカレンダー</td><td>CSV / UTF-8</td><td>専用テンプレートの列名が必要</td></tr>
+      <tr><td><b><a href="https://www.amazon.co.jp/gp/help/customer/display.html" target="_blank" rel="noopener">購入履歴</a></b></td><td>Amazon</td><td>CSV / UTF-8</td><td>個人情報の除去してから保存</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cards">
+    <div class="card"><span class="k">Dataset</span><span class="n">郵便番号データ</span><span class="d">KEN_ALL.csv など。読み込み時は Shift-JIS 指定が必要。</span><a href="https://www.post.japanpost.jp/zipcode/download.html" target="_blank" rel="noopener">ダウンロードページ</a></div>
+    <div class="card"><span class="k">Dataset</span><span class="n">国民の祝日</span><span class="d">営業日計算・スケジュール生成の土台になる公式データ。</span><a href="https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html" target="_blank" rel="noopener">内閣府のページ</a></div>
+    <div class="card"><span class="k">Format</span><span class="n">RFC 4180</span><span class="d">CSVの事実上の標準規格。引用符や改行の扱いの一次資料。</span><a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener">仕様を読む</a></div>
+  </div>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://www.post.japanpost.jp/zipcode/download.html" target="_blank" rel="noopener">日本郵便 — 郵便番号データダウンロード</a></li><li><a href="https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html" target="_blank" rel="noopener">内閣府 — 国民の祝日について</a></li><li><a href="https://www.zenginkyo.or.jp/" target="_blank" rel="noopener">全国銀行データ通信システム</a></li><li><a href="https://support.google.com/calendar/answer/37118" target="_blank" rel="noopener">Google カレンダー ヘルプ — イベントのインポート</a></li></ul></div>
+</section>
+<section class="sec" id="faq">
+  <div class="sec-no"><i>08</i><span>FAQ</span></div>
+  <h2>よくある質問</h2>
+  <details class="faq" open><summary><span class="q">Q.</span>CSVとは何の略ですか？</summary><div class="a"><p>Comma-Separated Values（カンマ区切り値）の略です。データをカンマで区切って並べたテキストファイルを指し、拡張子は <code>.csv</code> です。</p></div></details><details class="faq"><summary><span class="q">Q.</span>CSVとExcelは何が違いますか？</summary><div class="a"><p>Excelは表計算ソフト、CSVはデータの入れ物（テキスト形式）です。CSVは書式・数式・複数シートを保持できませんが、軽量でどのソフトからも読めます。</p></div></details><details class="faq"><summary><span class="q">Q.</span>CSVをExcelで開くと文字化けするのはなぜですか？</summary><div class="a"><p>保存時の文字コードとExcelが想定する文字コードが違うためです。「データ」→「テキスト/CSVから」で文字コードを指定して開けば解消します。詳しくは<a href="mojibake.html">文字化けの専用ページ</a>へ。</p></div></details><details class="faq"><summary><span class="q">Q.</span>UTF-8とShift-JISはどちらで保存すべきですか？</summary><div class="a"><p>Webサービスやクラウドツールとの連携はUTF-8、国内の基幹システム・会計ソフト・官公庁提出はShift-JISが基本です。相手側の仕様を確認してください。</p></div></details><details class="faq"><summary><span class="q">Q.</span>先頭の0が消えてしまうのはなぜですか？</summary><div class="a"><p>Excelが数値と解釈するためです。インポート時に該当列を「テキスト」に指定するのが最も確実です。詳しくは<a href="excel-convert.html">変換の専用ページ</a>へ。</p></div></details><details class="faq"><summary><span class="q">Q.</span>CSVは複数シートにできますか？</summary><div class="a"><p>できません。CSVは1ファイル＝1シートです。複数シートのブックをCSV保存すると、アクティブなシートだけが書き出されます。</p></div></details><details class="faq"><summary><span class="q">Q.</span>CSVとTSVの違いは何ですか？</summary><div class="a"><p>区切り文字が違うだけです。CSVはカンマ、TSVはタブで区切ります。</p></div></details><details class="faq"><summary><span class="q">Q.</span>「CSV経営」のCSVは同じ意味ですか？</summary><div class="a"><p>別物です。Creating Shared Value（共通価値の創造）の略で、社会課題の解決と経済価値の創出を両立させる経営手法を指します。</p></div></details><details class="faq"><summary><span class="q">Q.</span>CSVファイルのアイコンがExcelになってしまう</summary><div class="a"><p>Windowsが.csvをExcelに関連付けているためです。実害はありませんが、ダブルクリックで開くと文字化けの原因になります。右クリック→「プログラムから開く」→「メモ帳」を選びましょう。</p></div></details><details class="faq"><summary><span class="q">Q.</span>数万行のCSVがExcelで開けません</summary><div class="a"><p>Excelの上限は1,048,576行です。超えると切り捨てられることがあります。Power Queryで必要列だけ読むか、Python＋pandasで集計してください。</p></div></details><details class="faq"><summary><span class="q">Q.</span>CSVをPDFに変換できますか？</summary><div class="a"><p>できます。Excelで開いてレイアウトを整え、「エクスポート」→「PDF/XPSの作成」を選びます。</p></div></details><details class="faq"><summary><span class="q">Q.</span>CSVの区切り文字をカンマ以外にできますか？</summary><div class="a"><p>できます。ヨーロッパではセミコロン、日本ではタブ（TSV）が使われることがあります。</p></div></details>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener">RFC 4180</a><span class="src-note"> — 本FAQの回答は原則この仕様と各公式ドキュメントに基づきます</span></li><li><a href="https://support.microsoft.com/ja-jp/office/csv-%E6%96%87%E4%BB%B6%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88" target="_blank" rel="noopener">Microsoft サポート — CSV ファイル形式</a></li></ul></div>
+</section>
+<div class="jump"><div class="jump-hd">詳細ページ一覧</div><div class="jump-grid"><a class="jump-card" href="csv-create.html"><span class="k">Guide 01</span><span class="n">作り方・開き方</span><span class="d">3通りの作成手順と開き方の注意</span><span class="go">読む →</span></a><a class="jump-card" href="excel-convert.html"><span class="k">Guide 02</span><span class="n">変換のすべて</span><span class="d">両方向の変換とトラブル対処</span><span class="go">読む →</span></a><a class="jump-card" href="mojibake.html"><span class="k">Guide 03</span><span class="n">文字化けを直す</span><span class="d">原因の切り分けと3つの修復法</span><span class="go">読む →</span></a><a class="jump-card" href="reading.html"><span class="k">Guide 04</span><span class="n">プログラムで読み書き</span><span class="d">Python／pandas／VBA／C#</span><span class="go">読む →</span></a></div></div>
+    </article>
+    <aside class="toc" aria-label="目次"><div class="hd">目次</div><ol><li><a href="#what">CSVとは（定義とルール）</a></li><li><a href="#make">作り方</a></li><li><a href="#excel">Excel変換</a></li><li><a href="#mojibake">文字化け</a></li><li><a href="#diff">CSVとExcelの違い</a></li><li><a href="#dev">プログラムで読み込む</a></li><li><a href="#data">公開CSVデータ</a></li><li><a href="#faq">よくある質問</a></li></ol></aside>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="inner">
+    <div>
+      <p class="stamp">最終更新：2026年10月30日</p>
+      <p class="stamp" style="margin-top:6px">本サイトの各記事は、文中の出典（一次情報・公式ドキュメント）に基づいて作成しています。</p>
+    </div>
+    <ul class="refs"><li><a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener">RFC 4180 — CSV の共通形式</a></li><li><a href="https://support.microsoft.com/ja-jp/office/csv-%E6%96%87%E4%BB%B6%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88" target="_blank" rel="noopener">Microsoft サポート — CSV ファイル形式</a></li><li><a href="https://www.post.japanpost.jp/zipcode/download.html" target="_blank" rel="noopener">日本郵便 — 郵便番号データ</a></li><li><a href="https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html" target="_blank" rel="noopener">内閣府 — 国民の祝日</a></li></ul>
+  </div>
+</footer>
+
+<div class="ov" id="ov" role="dialog" aria-label="サイト内検索">
+  <div class="ov-bg"></div>
+  <div class="ov-panel">
+    <div class="ov-head">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      <input id="ovq" type="text" placeholder="キーワードで検索（例：文字化け・変換・pandas・郵便番号）" autocomplete="off">
+      <span class="ov-esc">Esc</span>
+    </div>
+    <div class="ov-res" id="res"></div>
+    <div class="ov-hint"><span>↑↓ 移動</span><span>Enter で開く</span><span>Esc で閉じる</span></div>
+  </div>
+</div>
+<script>
+(function(){
+  // 進捗バー
+  var bar=document.getElementById('progress');
+  function prog(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;
+    bar.style.width=(m>0?(h.scrollTop/m)*100:0)+'%';}
+  document.addEventListener('scroll',prog,{passive:true});prog();
+
+  // 目次ハイライト
+  var links=[].slice.call(document.querySelectorAll('aside.toc a'));
+  var targets=links.map(function(a){return document.querySelector(a.getAttribute('href'));}).filter(Boolean);
+  if(targets.length&&'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){links.forEach(function(l){
+        l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id);});}
+    });},{rootMargin:'-84px 0px -62% 0px',threshold:0});
+    targets.forEach(function(t){io.observe(t);});
+  }
+
+  // コードコピー
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=btn.closest('.codeblock').querySelector('pre');
+      var txt=pre.innerText;
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){btn.textContent='コピー済み';},
+          function(){btn.textContent='選択してください';});
+      }else{btn.textContent='選択してください';}
+      setTimeout(function(){btn.textContent='コピー';},1600);
+    });
+  });
+
+  // ------- サイト内検索 -------
+  var INDEX=[{"u": "index.html#what", "s": "全体ガイド", "t": "CSVとは（定義と3つのルール）", "k": "csv とは 意味 略 comma separated values 定義 ルール 引用符", "x": "CSVはComma-Separated Valuesの略。RFC 4180で定義され、1行1レコード・カンマ区切り・引用符の3ルールで成り立つテキスト形式。"}, {"u": "index.html#diff", "s": "全体ガイド", "t": "CSVとExcelの違い", "k": "csv エクセル 違い 違 比較 上限 シート 数式", "x": "Excelはアプリケーション、CSVはデータの入れ物。書式・数式・シートの扱いと1,048,576行の上限など8項目で比較。"}, {"u": "index.html#diff", "s": "全体ガイド", "t": "CSV経営とCSRとの違い（Creating Shared Value）", "k": "csv 経営 csr 違い creating shared value 共通価値", "x": "「CSV経営」のCSVはCreating Shared Valueの略でファイル形式とは無関係。ポーター提唱の経営概念。"}, {"u": "index.html#data", "s": "全体ガイド", "t": "実務で使える公開CSVデータ一覧", "k": "郵便番号 祝日 金融機関コード 日経225 弥生会計 google カレンダー amazon csv", "x": "日本郵便の郵便番号、内閣府の祝日、全銀の金融機関コードなど、公式配布のCSVデータとその文字コードまとめ。"}, {"u": "index.html#faq", "s": "全体ガイド", "t": "CSVのよくある質問（FAQ 12問）", "k": "faq よくある 質問 q&a 略 違い", "x": "「CSVとは何の略？」「複数シートにできる？」「TSVとの違い？」など12の質問に短く回答。"}, {"u": "csv-create.html", "s": "作り方", "t": "CSVファイルの作り方・開き方", "k": "csv ファイル 作り方 開き方 作成 作る 作成方法", "x": "Excel・メモ帳・Googleスプレッドシートでの作成手順と、開くときの注意。0落ちや列ずれを防ぐコツ。"}, {"u": "excel-convert.html", "s": "変換", "t": "CSV⇔Excel 変換のすべて", "k": "csv エクセル 変換 エクセル csv 変換 csv to excel 出力", "x": "CSVをExcelに読み込む／ExcelをCSVに保存する、両方向の正しい手順と変換トラブルTop5。"}, {"u": "mojibake.html", "s": "文字化け", "t": "CSVの文字化けを直す", "k": "csv 文字化け 化け shift-jis utf-8 保存 開く", "x": "文字コードの食い違いが原因。Excelでの開き直し、コード変換、プログラム側の指定の3つの直し方。"}, {"u": "reading.html", "s": "読み込み", "t": "プログラムでCSVを読み書きする", "k": "python csv 読み込み pandas read_csv vba c# csv reader", "x": "Python・pandas・VBA・C#での読み書きコード例とencoding指定の早見表。"}, {"u": "https://csv-mojibake.vercel.app/", "s": "TOOL", "t": "CSV 文字化け修正ツール", "k": "csv 文字化け 直す 修正", "x": "CSVファイルをアップロードするだけで文字コードを自動判定し、正しいエンコーディングへ変換してダウンロード。"}, {"u": "https://csv-henkan.vercel.app/", "s": "TOOL", "t": "CSV ⇔ Excel 変換ツール", "k": "csv エクセル 変換 csv to excel", "x": "ブラウザ内だけで完結する双方向変換。一括処理に対応し、ファイルはサーバーに送信されません。"}, {"u": "https://moji-code-tool.vercel.app/", "s": "TOOL", "t": "文字コード 判別・変換ツール", "k": "文字コード 変換 utf-8 shift-jis 判別", "x": "UTF-8／Shift-JIS／EUC-JP を自動判別し、テキスト・ファイルをその場で相互変換。"}, {"u": "https://excel-moji-fix.vercel.app/", "s": "TOOL", "t": "Excel CSV 文字化け 修復", "k": "エクセル 文字化け 直し方 excel csv", "x": "Excelで開いたときに乱れたCSVを、Excel対応のエンコーディングへ一括変換。手順つきでガイドします。"}, {"u": "https://csv-editor-mu.vercel.app/", "s": "TOOL", "t": "CSV オンラインエディタ（日英対応）", "k": "csv 編集 オンライン editor dummy data", "x": "表形式でその場編集。ダミーデータ生成（マイナンバー・SSN・日付）と Excel／CSV／JSON／JSONL 書き出しに対応。"}];
+  var ov=document.getElementById('ov'),q=document.getElementById('ovq'),
+      res=document.getElementById('res');
+  if(!ov)return;
+  var sel=-1,items=[];
+
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+
+  function norm(s){return s.toLowerCase().replace(/\u3000/g,' ').trim();}
+
+  function search(query){
+    var terms=norm(query).split(/\s+/).filter(Boolean);
+    if(!terms.length)return [];
+    var out=[];
+    INDEX.forEach(function(it){
+      var title=norm(it.t),keys=norm(it.k||''),body=norm(it.x||''),sec=norm(it.s||'');
+      var score=0,miss=0;
+      terms.forEach(function(t){
+        var hit=false;
+        if(title.indexOf(t)>=0){score+=10;hit=true;}
+        if(sec.indexOf(t)>=0){score+=6;hit=true;}
+        if(keys.indexOf(t)>=0){score+=5;hit=true;}
+        if(body.indexOf(t)>=0){score+=2;hit=true;}
+        if(!hit)miss++;
+      });
+      if(miss===0&&score>0){out.push({it:it,score:score});}
+    });
+    out.sort(function(a,b){return b.score-a.score;});
+    return out.slice(0,12).map(function(o){return o.it;});
+  }
+
+  function highlight(text,query){
+    var terms=norm(query).split(/\s+/).filter(Boolean).sort(function(a,b){return b.length-a.length;});
+    var safe=esc(text),html=safe;
+    terms.forEach(function(t){
+      var re=new RegExp('('+escRe(esc(t))+')','ig');
+      html=html.replace(re,'<mark>$1</mark>');
+    });
+    return html;
+  }
+
+  function render(query){
+    items=search(query);sel=-1;
+    var html='';
+    items.forEach(function(it,i){
+      html+='<a class="ov-item" data-i="'+i+'" href="'+it.u+'">'
+        +'<div class="t"><span class="pg">'+esc(it.s||'GUIDE')+'</span><span>'+highlight(it.t,query)+'</span></div>'
+        +'<div class="x">'+highlight((it.x||'').slice(0,120),query)+'</div></a>';
+    });
+    res.innerHTML=html;
+    [].slice.call(res.querySelectorAll('.ov-item')).forEach(function(el){
+      el.addEventListener('click',function(){close();});
+      el.addEventListener('mouseenter',function(){setSel(+el.dataset.i);});
+    });
+  }
+  function setSel(i){
+    sel=i;
+    [].slice.call(res.querySelectorAll('.ov-item')).forEach(function(el,j){
+      el.classList.toggle('sel',j===sel);
+    });
+    var cur=res.querySelectorAll('.ov-item')[sel];
+    if(cur)cur.scrollIntoView({block:'nearest'});
+  }
+
+  function open(){
+    ov.classList.add('open');document.body.style.overflow='hidden';
+    q.value='';render('');setTimeout(function(){q.focus();},30);
+  }
+  function close(){
+    ov.classList.remove('open');document.body.style.overflow='';
+  }
+
+  document.querySelectorAll('[data-search]').forEach(function(b){
+    b.addEventListener('click',open);
+  });
+  document.querySelector('.ov-bg').addEventListener('click',close);
+  document.querySelector('.ov-esc').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){
+    var typing=/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();ov.classList.contains('open')?close():open();return;}
+    if(e.key==='/'&&!typing){e.preventDefault();open();return;}
+    if(e.key==='Escape'&&ov.classList.contains('open')){close();return;}
+    if(!ov.classList.contains('open'))return;
+    if(e.key==='ArrowDown'){e.preventDefault();setSel(Math.min(sel+1,items.length-1));}
+    else if(e.key==='ArrowUp'){e.preventDefault();setSel(Math.max(sel-1,0));}
+    else if(e.key==='Enter'&&sel>=0&&items[sel]){location.href=items[sel].u;close();}
+  });
+  q.addEventListener('input',function(){render(q.value);});
+})();
+</script>
+</body>
+</html>

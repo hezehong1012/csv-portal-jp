@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>プログラムでCSVを読み書きする方法｜Python・pandas・VBA・C# のコード例【2026年版】</title>
+<meta name="description" content="Python（csv・pandas）、Excel VBA、C# でCSVを読み書きするコード例を、公式ドキュメントの出典つきで解説。encoding指定の早見表、read_csv の実用オプション、巨大ファイルの読み方も。">
+<link rel="canonical" href="https://example.com/csv/reading.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="プログラムでCSVを読み書きする">
+<meta property="og:description" content="Python（csv・pandas）、Excel VBA、C# でCSVを読み書きするコード例を、公式ドキュメントの出典つきで解説。encoding指定の早見表、read_csv の実用オプション、巨大ファイルの読み方も。">
+<meta property="og:locale" content="ja_JP">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf8f5; --surface:#ffffff; --ink:#14161a; --ink-2:#43474f; --ink-3:#7c818a;
+    --line:#e5e1d9; --line-strong:#d3cec3; --accent:#c4472c; --accent-soft:#fbeee9;
+    --indigo:#1d3557; --tip:#0d6a58; --tip-soft:#eaf5f1; --warn:#a8641b; --warn-soft:#fdf3e4;
+    --radius:10px; --maxw:1180px; --code-bg:#171b22;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic","Meiryo",system-ui,sans-serif;
+    font-size:16px;line-height:1.9;letter-spacing:.01em;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(196,71,44,.28);transition:border-color .18s}
+  a:hover{border-bottom-color:var(--accent)}
+  code,pre{font-family:"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace}
+  #progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:90}
+
+  .site-head{position:sticky;top:0;z-index:80;background:rgba(250,248,245,.88);
+    backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
+  .site-head .inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;height:60px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:.14em;color:var(--ink);border:0}
+  .brand .mark{width:26px;height:26px;border:1.5px solid var(--ink);border-radius:5px;display:grid;place-items:center;
+    font-size:10px;letter-spacing:.02em;font-family:"Noto Serif JP",serif}
+  .head-nav{display:flex;gap:20px;font-size:13.5px;color:var(--ink-2)}
+  .head-nav a{border:0;color:inherit;padding:4px 2px;border-radius:6px}
+  .head-nav a:hover{color:var(--accent)}
+  .head-nav a.here{color:var(--accent);font-weight:700}
+  .search-btn{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line-strong);
+    background:var(--surface);border-radius:8px;padding:6px 10px 6px 12px;font-size:12.5px;
+    color:var(--ink-3);cursor:pointer;font-family:inherit;white-space:nowrap}
+  .search-btn:hover{border-color:var(--accent);color:var(--ink-2)}
+  .search-btn kbd{font-family:inherit;font-size:10.5px;border:1px solid var(--line-strong);
+    border-radius:4px;padding:1px 5px;background:#f4f1ea;color:var(--ink-3)}
+  .search-btn svg{flex:none}
+  @media (max-width:900px){.head-nav{display:none}.search-btn span.lbl,.search-btn kbd{display:none}}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .hero{padding:48px 0 36px;border-bottom:1px solid var(--line)}
+  .crumbs{font-size:12.5px;color:var(--ink-3);margin-bottom:20px}
+  .crumbs a{color:var(--ink-3);border:0}.crumbs a:hover{color:var(--accent)}
+  .crumbs .sep{margin:0 8px;color:var(--line-strong)}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;letter-spacing:.18em;
+    color:var(--accent);font-weight:700;margin-bottom:16px;text-transform:uppercase}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent);display:block}
+  h1{font-family:"Noto Serif JP",serif;font-weight:700;font-size:clamp(27px,4vw,42px);
+    line-height:1.44;margin:0 0 20px;max-width:21em}
+  .lead{font-size:16px;color:var(--ink-2);max-width:44em;margin:0 0 24px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12.5px;color:var(--ink-3)}
+  .meta b{font-weight:500;color:var(--ink-2)}
+  .answer{margin:30px 0 0;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--accent);border-radius:var(--radius);padding:22px 24px;max-width:56em}
+  .answer .lbl{font-size:11px;letter-spacing:.16em;color:var(--accent);font-weight:700;margin-bottom:8px}
+  .answer p{margin:0;font-size:15.5px;color:var(--ink-2)}
+  .answer strong{color:var(--ink)}
+
+  /* ツールポータル帯 */
+  .tools-band{margin:36px 0 0;padding:26px 28px 24px;background:var(--surface);
+    border:1px solid var(--line);border-radius:14px;position:relative;overflow:hidden}
+  .tools-band::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;
+    background:linear-gradient(180deg,#2f855a,#667eea,#2b6cb0,#ed8936,#1a365d)}
+  .tools-hd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .tools-badge{font-size:10.5px;letter-spacing:.16em;font-weight:700;color:#fff;
+    background:var(--indigo);border-radius:5px;padding:3px 9px}
+  .tools-title{font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px}
+  .tools-sub{font-size:12px;color:var(--ink-3)}
+  .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:13px}
+  .tool-card{display:flex;flex-direction:column;gap:6px;background:#fff;
+    border:1px solid var(--line);border-top:3px solid var(--tc);border-radius:10px;
+    padding:15px 15px 13px;color:var(--ink);border-bottom:1px solid var(--line);
+    text-decoration:none;transition:transform .18s,box-shadow .18s,border-color .18s}
+  .tool-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(20,22,26,.09);border-color:var(--tc)}
+  .tool-tag{font-size:10.5px;letter-spacing:.14em;font-weight:700;color:var(--tc)}
+  .tool-name{font-weight:700;font-size:14.5px;line-height:1.5}
+  .tool-desc{font-size:12.5px;color:var(--ink-2);line-height:1.75;flex:1}
+  .tool-go{font-size:12.5px;font-weight:700;color:var(--tc);margin-top:2px}
+  @media (max-width:720px){.tools-band{padding:20px 18px}.tools-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:520px){.tools-grid{grid-template-columns:1fr}}
+
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 252px;gap:72px;padding:8px 0 90px;align-items:start}
+  @media (max-width:1020px){.layout{grid-template-columns:1fr;gap:0}aside.toc{display:none}}
+  article{min-width:0}
+  section.sec{padding:50px 0 8px;border-bottom:1px solid var(--line)}
+  section.sec:last-of-type{border-bottom:0}
+  .sec-no{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;font-size:11.5px;
+    letter-spacing:.18em;color:var(--ink-3);font-weight:500}
+  .sec-no i{font-style:normal;font-family:"Noto Serif JP",serif;font-size:13px;color:var(--accent);letter-spacing:.02em}
+  .sec-no::after{content:"";flex:1;height:1px;background:var(--line);margin-bottom:4px}
+  h2{font-family:"Noto Serif JP",serif;font-weight:700;font-size:clamp(22px,2.6vw,29px);
+    line-height:1.5;margin:0 0 18px;scroll-margin-top:84px}
+  h3{font-family:"Noto Serif JP",serif;font-weight:600;font-size:18px;line-height:1.6;margin:34px 0 12px;scroll-margin-top:84px}
+  p{margin:0 0 17px;color:var(--ink-2)}
+  article p strong{color:var(--ink)}
+  .u{background:linear-gradient(transparent 62%,rgba(196,71,44,.16) 62%)}
+  ul,ol{margin:0 0 18px;padding-left:1.4em;color:var(--ink-2)}
+  li{margin:0 0 8px}li::marker{color:var(--accent)}
+  ol.steps{list-style:none;counter-reset:s;padding:0;margin:20px 0 22px}
+  ol.steps>li{counter-increment:s;position:relative;padding:0 0 0 44px;margin-bottom:15px}
+  ol.steps>li::before{content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;
+    border-radius:50%;background:var(--ink);color:var(--paper);font-size:12.5px;font-weight:700;
+    display:grid;place-items:center}
+  ol.steps>li b{display:block;color:var(--ink);margin-bottom:2px}
+
+  .box{border-radius:var(--radius);padding:17px 20px;margin:22px 0;font-size:14.5px;line-height:1.85;border:1px solid transparent}
+  .box .t{font-weight:700;font-size:13px;letter-spacing:.04em;display:flex;gap:8px;align-items:center;margin-bottom:6px}
+  .box p{margin:0;font-size:14.5px}.box p+p{margin-top:8px}
+  .box.note{background:#f1f4f9;border-color:#dfe5ef}.box.note .t{color:var(--indigo)}
+  .box.warn{background:var(--warn-soft);border-color:#f0e0c4}.box.warn .t{color:var(--warn)}
+  .box.tip{background:var(--tip-soft);border-color:#d5e9e2}.box.tip .t{color:var(--tip)}
+
+  .tbl-scroll{overflow-x:auto;margin:20px 0 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+  th,td{padding:11px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+  th{background:#f4f1ea;font-weight:700;font-size:13px;color:var(--ink);white-space:nowrap}
+  tbody tr:last-child td{border-bottom:0}
+  td{color:var(--ink-2)}td b{color:var(--ink)}
+
+  .codeblock{position:relative;margin:18px 0 24px;background:var(--code-bg);border-radius:var(--radius);overflow:hidden}
+  .codeblock .bar{display:flex;align-items:center;justify-content:space-between;padding:9px 14px 7px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .codeblock .lang{font-size:11px;letter-spacing:.12em;color:#9aa4b2;font-weight:700}
+  .copy{background:transparent;border:1px solid rgba(255,255,255,.2);color:#c3cad4;font-size:11px;
+    padding:4px 10px;border-radius:5px;cursor:pointer;font-family:inherit}
+  .copy:hover{border-color:rgba(255,255,255,.45);color:#fff}
+  pre{margin:0;padding:15px 18px;overflow-x:auto;font-size:13px;line-height:1.75;color:#dfe4ec;tab-size:2}
+  pre .c{color:#6f7d8c}pre .k{color:#8bb8f0}pre .s{color:#a8d3a0}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:14px;margin:22px 0 26px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px;display:flex;flex-direction:column;gap:6px}
+  .card .k{font-size:11px;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase}
+  .card .n{font-weight:700;font-size:15px;color:var(--ink);line-height:1.5}
+  .card .d{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+  .card a{font-size:12.5px;align-self:flex-start;margin-top:2px}
+
+  .faq{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin-bottom:10px;overflow:hidden}
+  .faq summary{list-style:none;cursor:pointer;padding:16px 52px 16px 20px;position:relative;
+    font-weight:700;font-size:15px;color:var(--ink);line-height:1.7}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"";position:absolute;right:22px;top:25px;width:9px;height:9px;
+    border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);
+    transform:rotate(45deg);transition:transform .22s}
+  .faq[open] summary::after{transform:rotate(-135deg)}
+  .faq[open] summary{background:#f7f4ee}
+  .faq .a{padding:2px 22px 19px;font-size:14.5px;color:var(--ink-2);line-height:1.9}
+  .faq .a p{margin:0 0 10px;font-size:14.5px}.faq .a p:last-child{margin-bottom:0}
+  .q{color:var(--accent);font-family:"Noto Serif JP",serif;margin-right:6px}
+
+  /* 出典ブロック */
+  .src{margin:26px 0 6px;border-top:1px dashed var(--line-strong);padding:13px 2px 4px;font-size:13px;color:var(--ink-3)}
+  .src-t{font-weight:700;font-size:11.5px;letter-spacing:.14em;color:var(--ink-2);margin-bottom:6px}
+  .src-date{font-weight:400;letter-spacing:.02em;color:var(--ink-3)}
+  .src ul{margin:0;padding-left:1.2em}
+  .src li{margin-bottom:4px;font-size:12.8px}
+  .src a{color:var(--indigo);border-bottom:1px solid rgba(29,53,87,.25)}
+  .src a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+  .src-note{color:var(--ink-3)}
+
+  /* 関連ページカード */
+  .jump{margin:44px 0 8px}
+  .jump-hd{font-size:11.5px;letter-spacing:.18em;color:var(--ink-3);font-weight:700;margin-bottom:14px}
+  .jump-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .jump-card{display:flex;flex-direction:column;gap:5px;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);padding:16px 18px;color:var(--ink);border-bottom:1px solid var(--line);
+    transition:border-color .18s,transform .18s}
+  .jump-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .jump-card .k{font-size:10.5px;letter-spacing:.12em;color:var(--accent);font-weight:700;text-transform:uppercase}
+  .jump-card .n{font-weight:700;font-size:14.5px;line-height:1.5}
+  .jump-card .d{font-size:12.5px;color:var(--ink-2);line-height:1.65}
+  .jump-card .go{font-size:12px;color:var(--accent);margin-top:3px}
+
+  aside.toc{position:sticky;top:92px;font-size:13px}
+  aside.toc .hd{font-size:11px;letter-spacing:.18em;color:var(--ink-3);font-weight:700;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  aside.toc ol{list-style:none;margin:0;padding:0;counter-reset:t}
+  aside.toc li{counter-increment:t;margin:0}
+  aside.toc a{display:block;padding:6px 0 6px 26px;color:var(--ink-2);border:0;position:relative;line-height:1.6}
+  aside.toc a::before{content:counter(t,decimal-leading-zero);position:absolute;left:0;top:7px;font-size:10.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  aside.toc a:hover{color:var(--accent)}
+  aside.toc a.active{color:var(--accent);font-weight:700}
+  aside.toc a.active::before{color:var(--accent)}
+
+  .mobile-toc{display:none;margin:26px 0 0;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:0 18px}
+  .mobile-toc summary{list-style:none;cursor:pointer;padding:14px 0;font-size:13.5px;font-weight:700;position:relative}
+  .mobile-toc summary::-webkit-details-marker{display:none}
+  .mobile-toc summary::after{content:"＋";position:absolute;right:2px;top:13px;color:var(--ink-3)}
+  .mobile-toc[open] summary::after{content:"−"}
+  .mobile-toc ol{list-style:none;margin:0;padding:0 0 12px}
+  .mobile-toc a{display:block;padding:7px 0;border-top:1px solid var(--line);color:var(--ink-2);font-size:13.5px}
+  @media (max-width:1020px){.mobile-toc{display:block}}
+
+  /* 検索オーバーレイ */
+  .ov{position:fixed;inset:0;z-index:200;display:none}
+  .ov.open{display:block}
+  .ov-bg{position:absolute;inset:0;background:rgba(20,22,26,.45);backdrop-filter:blur(2px)}
+  .ov-panel{position:relative;max-width:640px;margin:9vh auto 0;background:var(--surface);
+    border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.28);overflow:hidden}
+  .ov-head{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+  .ov-head svg{flex:none;color:var(--ink-3)}
+  #ovq{flex:1;border:0;outline:0;font-size:15.5px;font-family:inherit;color:var(--ink);background:transparent}
+  #ovq::placeholder{color:var(--ink-3)}
+  .ov-esc{font-size:11px;border:1px solid var(--line-strong);border-radius:5px;padding:2px 7px;color:var(--ink-3);background:#f4f1ea}
+  .ov-res{max-height:52vh;overflow-y:auto;padding:8px}
+  .ov-res:empty::after{content:"一致するページが見つかりません。別のキーワードでお試しください。";
+    display:block;padding:26px 14px;color:var(--ink-3);font-size:13.5px;text-align:center}
+  .ov-item{display:block;padding:11px 12px;border-radius:9px;cursor:pointer;border:0;color:inherit}
+  .ov-item.sel,.ov-item:hover{background:#f7f4ee}
+  .ov-item .t{font-weight:700;font-size:14px;color:var(--ink);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .ov-item .t .pg{font-size:10.5px;letter-spacing:.1em;color:var(--accent);font-weight:700;text-transform:uppercase}
+  .ov-item .x{font-size:12.5px;color:var(--ink-2);line-height:1.65;margin-top:3px}
+  .ov-item mark{background:rgba(196,71,44,.18);color:inherit;padding:0 1px;border-radius:2px}
+  .ov-hint{padding:9px 16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-3);display:flex;gap:14px}
+  @media (max-width:640px){.ov-panel{margin:5vh 14px 0}}
+
+  footer.site{border-top:1px solid var(--line);padding:36px 0 60px;font-size:13px;color:var(--ink-3)}
+  footer.site .inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+  footer.site .refs{margin:0;padding-left:1.2em;max-width:46em}
+  footer.site .refs li{margin-bottom:5px;font-size:12.5px}
+  footer.site a{color:var(--ink-2);border-color:var(--line-strong)}
+  .stamp{font-size:12px;letter-spacing:.04em;margin:0}
+  @media print{.site-head,#progress,aside.toc,.ov{display:none}body{background:#fff}}
+</style>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "プログラムでCSVを読み書きする",
+   "description": "Python（csv・pandas）、Excel VBA、C# でCSVを読み書きするコード例を、公式ドキュメントの出典つきで解説。encoding指定の早見表、read_csv の実用オプション、巨大ファイルの読み方も。",
+   "inLanguage": "ja-JP",
+   "datePublished": "2026-10-30",
+   "dateModified": "2026-10-30",
+   "author": {
+    "@type": "Organization",
+    "name": "CSV GUIDE"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "python csv 読み込みで UnicodeDecodeError が出ます",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "文字コードの指定と実ファイルが違います。まず <code>utf-8</code>、次に <code>cp932</code> を試し、判別不明なら chardet で検出してください。詳細は文字化けページの<a href=\"mojibake.html\">診断手順</a>へ。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "read_csv で先頭の0が消えます",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "<code>dtype={\"コード列\": str}</code> のように列を文字列型で読み込んでください。既に読んだ後では戻せません。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "csv.reader と csv.DictReader の違いは？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "reader は下標（0,1,2…）で列にアクセス、DictReader はヘッダー名でアクセスします。列順が変わる可能性があるファイルは DictReader が安全です。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "巨大CSV（数百万行）を読むには？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "pandas は <code>chunksize</code> で分割、または DuckDB に直接読ませてSQLで集計します。Excelには上限があるため対象外です。"
+     }
+    }
+   ]
+  }
+ ]
+}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://example.com/csv/"}, {"@type": "ListItem", "position": 2, "name": "CSV完全ガイド", "item": "https://example.com/csv/index.html"}, {"@type": "ListItem", "position": 3, "name": "プログラムで読み書き", "item": "https://example.com/csv/reading.html"}]}</script>
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="site-head">
+  <div class="inner">
+    <a href="index.html" class="brand"><span class="mark">CSV</span>CSV GUIDE</a>
+    <nav class="head-nav"><a href="index.html">全体ガイド</a><a href="csv-create.html">作り方</a><a href="excel-convert.html">変換</a><a href="mojibake.html">文字化け</a><a href="reading.html" class="here">読み込み</a></nav>
+    
+<button class="search-btn" data-search type="button" aria-label="サイト内検索">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+  <span class="lbl">サイト内を検索</span>
+  <kbd>Ctrl K</kbd>
+</button>
+  </div>
+</header>
+<div class="wrap">
+  <div class="hero">
+    <div class="crumbs"><a href="index.html">ホーム</a><span class="sep">›</span><a href="index.html">CSV完全ガイド</a><span class="sep">›</span><span>プログラムで読み書き</span></div>
+    <div class="eyebrow">Detail Guide 04 · 実装</div>
+    <h1>プログラムでCSVを読み書きする</h1>
+    <p class="lead">「python csv 読み込み」「c# csv 読み込み」は、実装者に向けたCSV関連検索の中核です。このページでは各言語の定番コードと、日本語CSV特有のencoding指定を、公式ドキュメントへの出典つきでまとめました。</p>
+    <div class="meta"><span>更新日 <b>2026年10月30日</b></span><span>読了時間 <b>約12分</b></span><span>出典 <b>公式ドキュメントのみ</b></span></div>
+    <div class="answer"><div class="lbl">結論</div><p><strong>基本は「encoding を明示する」こと</strong>。Python なら <code>open(path, encoding="cp932")</code>、pandas なら <code>read_csv(encoding=...)</code>、VBA なら <code>TextFilePlatform</code>（65001＝UTF-8／932＝Shift-JIS）、C# なら <code>Encoding.GetEncoding(932)</code>。引用符で囲まれたカンマに対応するため、split ではなく各言語のCSVライブラリを使ってください。</p></div>
+  </div>
+  <div class="tools-band" aria-label="CSVツール"><div class="tools-hd"><span class="tools-badge">TOOL</span><span class="tools-title">実装を補助するツール</span><span class="tools-sub">手順ページで解説している作業を、そのままブラウザで実行できます。</span></div><div class="tools-grid"><a class="tool-card" href="https://moji-code-tool.vercel.app/" target="_blank" rel="noopener" style="--tc:#2b6cb0"><span class="tool-tag">エンコーディング</span><span class="tool-name">文字コード 判別・変換ツール</span><span class="tool-desc">UTF-8／Shift-JIS／EUC-JP を自動判別し、テキスト・ファイルをその場で相互変換。</span><span class="tool-go">ツールを開く <span aria-hidden="true">→</span></span></a><a class="tool-card" href="https://csv-editor-mu.vercel.app/" target="_blank" rel="noopener" style="--tc:#1a365d"><span class="tool-tag">編集・生成</span><span class="tool-name">CSV オンラインエディタ（日英対応）</span><span class="tool-desc">表形式でその場編集。ダミーデータ生成（マイナンバー・SSN・日付）と Excel／CSV／JSON／JSONL 書き出しに対応。</span><span class="tool-go">ツールを開く <span aria-hidden="true">→</span></span></a></div></div>
+  <details class="mobile-toc"><summary>目次</summary><ol><li><a href="#lang">言語別 早見表</a></li><li><a href="#py">Python（標準 csv）</a></li><li><a href="#pd">Python（pandas）</a></li><li><a href="#vba">Excel VBA</a></li><li><a href="#cs">C#</a></li><li><a href="#write">書き出し</a></li><li><a href="#enc">encoding 早見表</a></li><li><a href="#faq">よくある質問</a></li></ol></details>
+  <div class="layout">
+    <article>
+
+<section class="sec" id="lang">
+  <div class="sec-no"><i>01</i><span>選択</span></div>
+  <h2>言語別 早見表</h2>
+  <p>日本語CSVをプログラムで扱うときの最大の関門は文字コードです。どの言語でも「<strong>エンコーディングを明示する</strong>」が基本です。</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>言語</th><th>定番ライブラリ</th><th>文字コード指定</th><th>一次情報</th></tr></thead>
+    <tbody>
+      <tr><td><b>Python</b></td><td>csv 標準モジュール / pandas</td><td><code>encoding=</code> / <code>open(..., encoding=)</code></td><td><a href="https://docs.python.org/ja/3/library/csv.html" target="_blank" rel="noopener">csv モジュール公式</a> / <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">read_csv 公式</a></td></tr>
+      <tr><td><b>Excel VBA</b></td><td>QueryTables / OpenText</td><td><code>TextFilePlatform</code>（65001 / 932）</td><td><a href="https://learn.microsoft.com/ja-jp/office/vba/api/excel.querytables.add" target="_blank" rel="noopener">Microsoft Learn</a></td></tr>
+      <tr><td><b>C#</b></td><td>TextFieldParser / CsvHelper</td><td><code>Encoding.GetEncoding(932)</code> など</td><td><a href="https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.visualbasic.fileio.textfieldparser" target="_blank" rel="noopener">Microsoft Learn</a></td></tr>
+    </tbody>
+  </table></div>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://docs.python.org/ja/3/library/csv.html" target="_blank" rel="noopener">Python 公式 — csv モジュール</a></li><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">pandas 公式 — read_csv</a></li><li><a href="https://learn.microsoft.com/ja-jp/office/vba/api/excel.querytables.add" target="_blank" rel="noopener">Microsoft Learn — QueryTables.Add</a></li><li><a href="https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.visualbasic.fileio.textfieldparser" target="_blank" rel="noopener">Microsoft Learn — TextFieldParser</a></li></ul></div>
+</section>
+<section class="sec" id="py">
+  <div class="sec-no"><i>02</i><span>コード</span></div>
+  <h2>Python（標準ライブラリ csv）</h2>
+  <div class="codeblock"><div class="bar"><span class="lang">Python</span><button class="copy" type="button">コピー</button></div><pre>import csv<br/><br/># Shift-JIS の CSV を読む。newline=&quot;&quot; を忘れると改行が二重になる<br/>with open(&quot;sales.csv&quot;, encoding=&quot;cp932&quot;, newline=&quot;&quot;) as f:<br/>    reader = csv.DictReader(f)<br/>    for row in reader:<br/>        print(row[&quot;商品名&quot;], row[&quot;売上&quot;])</pre></div>
+  <p><a href="https://docs.python.org/ja/3/library/csv.html" target="_blank" rel="noopener">公式ドキュメントの <code>DictReader</code></a> は1行目をキーに辞書を返すため、列の順番が変わってもコードを直す必要がありません。自前で <code>split(',')</code> すると引用符で囲まれたカンマで列がずれるため、必ずcsvモジュールを使ってください。</p>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://docs.python.org/ja/3/library/csv.html" target="_blank" rel="noopener">Python 公式 — csv モジュール（DictReader / Sniffer）</a></li></ul></div>
+</section>
+<section class="sec" id="pd">
+  <div class="sec-no"><i>03</i><span>コード</span></div>
+  <h2>Python（pandas）</h2>
+  <div class="codeblock"><div class="bar"><span class="lang">Python / pandas</span><button class="copy" type="button">コピー</button></div><pre>import pandas as pd<br/><br/>df = pd.read_csv(&quot;sales.csv&quot;, encoding=&quot;cp932&quot;, dtype={&quot;商品コード&quot;: str})<br/>df.to_csv(&quot;out.csv&quot;, index=False, encoding=&quot;utf-8-sig&quot;)</pre></div>
+  <p><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">read_csv の主なオプション</a>（実務で頻出のもの）：</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>オプション</th><th>意味</th><th>使う場面</th></tr></thead>
+    <tbody>
+      <tr><td><code>encoding</code></td><td>文字コード指定</td><td>cp932 / utf-8 / utf-8-sig</td></tr>
+      <tr><td><code>dtype</code></td><td>列の型を固定</td><td>商品コード等で先頭0を守る</td></tr>
+      <tr><td><code>sep</code></td><td>区切り文字</td><td>TSVは <code>sep="\t"</code></td></tr>
+      <tr><td><code>header</code></td><td>ヘッダー行の指定</td><td>ヘッダーなしCSVは <code>header=None</code></td></tr>
+      <tr><td><code>skiprows</code></td><td>先頭行の読み飛ばし</td><td>タイトル行つきのExcel出力CSV</td></tr>
+      <tr><td><code>chunksize</code></td><td>分割読み込み</td><td>巨大ファイル（数百万行）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">pandas 公式 — read_csv</a></li><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html" target="_blank" rel="noopener">pandas 公式 — to_csv</a></li></ul></div>
+</section>
+<section class="sec" id="vba">
+  <div class="sec-no"><i>04</i><span>コード</span></div>
+  <h2>Excel VBA</h2>
+  <div class="codeblock"><div class="bar"><span class="lang">VBA</span><button class="copy" type="button">コピー</button></div><pre>Sub ReadCsv()<br/>    Dim ws As Worksheet<br/>    Set ws = ThisWorkbook.Sheets(1)<br/><br/>    With ws.QueryTables.Add(Connection:=&quot;TEXT;C:\data\sales.csv&quot;, Destination:=ws.Range(&quot;A1&quot;))<br/>        .TextFileParseType = xlDelimited<br/>        .TextFileCommaDelimiter = True<br/>        .TextFilePlatform = 65001   &#x27; UTF-8。Shift-JIS なら 932<br/>        .TextFileColumnDataTypes = Array(2, 1, 1)  &#x27; 1列目を文字列に<br/>        .Refresh<br/>    End With<br/>End Sub</pre></div>
+  <p><a href="https://learn.microsoft.com/ja-jp/office/vba/api/excel.querytables.add" target="_blank" rel="noopener">QueryTables.Add（Microsoft Learn）</a> は文字コードと列の型まで制御できるため、<code>Workbooks.OpenText</code> より確実です。<code>TextFilePlatform</code> の値は 65001＝UTF-8、932＝Shift-JIS です。</p>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://learn.microsoft.com/ja-jp/office/vba/api/excel.querytables.add" target="_blank" rel="noopener">Microsoft Learn — QueryTables.Add</a></li><li><a href="https://learn.microsoft.com/ja-jp/office/vba/api/excel.workbooks.opentext" target="_blank" rel="noopener">Microsoft Learn — Workbooks.OpenText</a></li></ul></div>
+</section>
+<section class="sec" id="cs">
+  <div class="sec-no"><i>05</i><span>コード</span></div>
+  <h2>C#</h2>
+  <div class="codeblock"><div class="bar"><span class="lang">C#</span><button class="copy" type="button">コピー</button></div><pre>// .NET Core / .NET 5+ では先に CodePages プロバイダを登録する<br/>Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);<br/><br/>using var parser = new TextFieldParser(@&quot;C:\data\sales.csv&quot;, Encoding.GetEncoding(932));<br/>parser.SetDelimiters(&quot;,&quot;);<br/>parser.HasFieldsEnclosedInQuotes = true;<br/><br/>while (!parser.EndOfData)<br/>{<br/>    string[] fields = parser.ReadFields()!;<br/>    Console.WriteLine(string.Join(&quot; / &quot;, fields));<br/>}</pre></div>
+  <p><a href="https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.visualbasic.fileio.textfieldparser" target="_blank" rel="noopener">TextFieldParser（Microsoft.VisualBasic.FileIO）</a> は引用符で囲まれたカンマを正しく解釈します。<code>Encoding.GetEncoding(932)</code> を使うには .NET Core 以降で <code>System.Text.Encoding.CodePages</code> パッケージの参照とプロバイダ登録が必要です。実務では <a href="https://joshclose.github.io/CsvHelper/" target="_blank" rel="noopener">CsvHelper（公式サイト）</a> の利用も一般的です。</p>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.visualbasic.fileio.textfieldparser" target="_blank" rel="noopener">Microsoft Learn — TextFieldParser クラス</a></li><li><a href="https://learn.microsoft.com/ja-jp/dotnet/api/system.text.codepagesencodingprovider" target="_blank" rel="noopener">Microsoft Learn — CodePagesEncodingProvider</a></li><li><a href="https://joshclose.github.io/CsvHelper/" target="_blank" rel="noopener">CsvHelper 公式ドキュメント</a></li></ul></div>
+</section>
+<section class="sec" id="write">
+  <div class="sec-no"><i>06</i><span>コード</span></div>
+  <h2>書き出し（CSV出力）</h2>
+  <ul>
+    <li><strong>pandas</strong> — <code>df.to_csv(path, index=False, encoding="utf-8-sig")</code>。<code>index=False</code> を忘れると行番号列が増えます（<a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html" target="_blank" rel="noopener">公式</a>）。</li>
+    <li><strong>Python 標準</strong> — <code>csv.writer</code> で <code>writerow()</code>。数値は文字列化して渡します（<a href="https://docs.python.org/ja/3/library/csv.html" target="_blank" rel="noopener">公式</a>）。</li>
+    <li><strong>VBA</strong> — <code>SaveAs FileFormat:=xlCSVUTF8</code> でUTF-8保存。</li>
+    <li><strong>C#</strong> — CsvHelper の <code>WriteRecords()</code> が定番。</li>
+  </ul>
+  <p>書き出し後は、必ず一度テキストエディタで開いて「列数・引用符・文字コード」を確認してから渡してください。</p>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html" target="_blank" rel="noopener">pandas 公式 — to_csv</a></li><li><a href="https://docs.python.org/ja/3/library/csv.html" target="_blank" rel="noopener">Python 公式 — csv.writer</a></li></ul></div>
+</section>
+<section class="sec" id="enc">
+  <div class="sec-no"><i>07</i><span>早見表</span></div>
+  <h2>encoding 指定 早見表</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>ファイルの出どころ</th><th>指定すべき値</th></tr></thead>
+    <tbody>
+      <tr><td>Excelの「CSV UTF-8」で保存</td><td><code>utf-8-sig</code></td></tr>
+      <tr><td>Web・クラウドサービスのエクスポート</td><td><code>utf-8</code></td></tr>
+      <tr><td>国内業務ソフト（弥生会計・基幹システム等）</td><td><code>cp932</code></td></tr>
+      <tr><td>古い官公庁データ</td><td><code>shift_jis</code>（化ける項目があれば <code>cp932</code>）</td></tr>
+      <tr><td>不明</td><td>chardet / charset-normalizer で検出してから指定</td></tr>
+    </tbody>
+  </table></div>
+  <p>詳細な修復手順は <a href="mojibake.html">文字化けの専用ページ</a> にまとめています。</p>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://developer.mozilla.org/ja/docs/Web/API/Encoding_API/Encodings" target="_blank" rel="noopener">MDN — エンコーディング</a></li><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">pandas 公式 — read_csv</a></li></ul></div>
+</section>
+<section class="sec" id="faq">
+  <div class="sec-no"><i>08</i><span>FAQ</span></div>
+  <h2>よくある質問</h2>
+  <details class="faq" open><summary><span class="q">Q.</span>python csv 読み込みで UnicodeDecodeError が出ます</summary><div class="a"><p>文字コードの指定と実ファイルが違います。まず <code>utf-8</code>、次に <code>cp932</code> を試し、判別不明なら chardet で検出してください。詳細は文字化けページの<a href="mojibake.html">診断手順</a>へ。</p></div></details><details class="faq"><summary><span class="q">Q.</span>read_csv で先頭の0が消えます</summary><div class="a"><p><code>dtype={"コード列": str}</code> のように列を文字列型で読み込んでください。既に読んだ後では戻せません。</p></div></details><details class="faq"><summary><span class="q">Q.</span>csv.reader と csv.DictReader の違いは？</summary><div class="a"><p>reader は下標（0,1,2…）で列にアクセス、DictReader はヘッダー名でアクセスします。列順が変わる可能性があるファイルは DictReader が安全です。</p></div></details><details class="faq"><summary><span class="q">Q.</span>巨大CSV（数百万行）を読むには？</summary><div class="a"><p>pandas は <code>chunksize</code> で分割、または DuckDB に直接読ませてSQLで集計します。Excelには上限があるため対象外です。</p></div></details>
+  <div class="src"><div class="src-t">出典・参照<span class="src-date">（2026年10月30日 確認）</span></div><ul><li><a href="https://docs.python.org/ja/3/library/csv.html" target="_blank" rel="noopener">Python 公式 — csv モジュール</a></li><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">pandas 公式 — read_csv</a></li></ul></div>
+</section>
+<div class="jump"><div class="jump-hd">あわせて読みたい</div><div class="jump-grid"><a class="jump-card" href="mojibake.html"><span class="k">Guide 03</span><span class="n">文字化けを直す</span><span class="d">UnicodeDecodeErrorの診断はこちら</span><span class="go">読む →</span></a><a class="jump-card" href="excel-convert.html"><span class="k">Guide 02</span><span class="n">変換のすべて</span><span class="d">Excelでの確認と合わせて</span><span class="go">読む →</span></a><a class="jump-card" href="index.html"><span class="k">全体ガイド</span><span class="n">CSVとは</span><span class="d">形式の基礎から</span><span class="go">読む →</span></a></div></div>
+    </article>
+    <aside class="toc" aria-label="目次"><div class="hd">目次</div><ol><li><a href="#lang">言語別 早見表</a></li><li><a href="#py">Python（標準 csv）</a></li><li><a href="#pd">Python（pandas）</a></li><li><a href="#vba">Excel VBA</a></li><li><a href="#cs">C#</a></li><li><a href="#write">書き出し</a></li><li><a href="#enc">encoding 早見表</a></li><li><a href="#faq">よくある質問</a></li></ol></aside>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="inner">
+    <div>
+      <p class="stamp">最終更新：2026年10月30日</p>
+      <p class="stamp" style="margin-top:6px">本サイトの各記事は、文中の出典（一次情報・公式ドキュメント）に基づいて作成しています。</p>
+    </div>
+    <ul class="refs"><li><a href="https://docs.python.org/ja/3/library/csv.html" target="_blank" rel="noopener">Python 公式 — csv モジュール</a></li><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">pandas 公式 — read_csv</a></li><li><a href="https://learn.microsoft.com/ja-jp/office/vba/api/excel.querytables.add" target="_blank" rel="noopener">Microsoft Learn — QueryTables.Add</a></li><li><a href="https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.visualbasic.fileio.textfieldparser" target="_blank" rel="noopener">Microsoft Learn — TextFieldParser</a></li></ul>
+  </div>
+</footer>
+
+<div class="ov" id="ov" role="dialog" aria-label="サイト内検索">
+  <div class="ov-bg"></div>
+  <div class="ov-panel">
+    <div class="ov-head">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      <input id="ovq" type="text" placeholder="キーワードで検索（例：文字化け・変換・pandas・郵便番号）" autocomplete="off">
+      <span class="ov-esc">Esc</span>
+    </div>
+    <div class="ov-res" id="res"></div>
+    <div class="ov-hint"><span>↑↓ 移動</span><span>Enter で開く</span><span>Esc で閉じる</span></div>
+  </div>
+</div>
+<script>
+(function(){
+  // 進捗バー
+  var bar=document.getElementById('progress');
+  function prog(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;
+    bar.style.width=(m>0?(h.scrollTop/m)*100:0)+'%';}
+  document.addEventListener('scroll',prog,{passive:true});prog();
+
+  // 目次ハイライト
+  var links=[].slice.call(document.querySelectorAll('aside.toc a'));
+  var targets=links.map(function(a){return document.querySelector(a.getAttribute('href'));}).filter(Boolean);
+  if(targets.length&&'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){links.forEach(function(l){
+        l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id);});}
+    });},{rootMargin:'-84px 0px -62% 0px',threshold:0});
+    targets.forEach(function(t){io.observe(t);});
+  }
+
+  // コードコピー
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=btn.closest('.codeblock').querySelector('pre');
+      var txt=pre.innerText;
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){btn.textContent='コピー済み';},
+          function(){btn.textContent='選択してください';});
+      }else{btn.textContent='選択してください';}
+      setTimeout(function(){btn.textContent='コピー';},1600);
+    });
+  });
+
+  // ------- サイト内検索 -------
+  var INDEX=[{"u": "reading.html#lang", "s": "読み込み", "t": "言語別 早見表（Python／VBA／C#）", "k": "csv 読み込み 言語 ライブラリ 比較", "x": "定番ライブラリと文字コード指定方法の比較表。公式ドキュメントへのリンクつき。"}, {"u": "reading.html#py", "s": "読み込み", "t": "Pythonのcsvモジュールで読み込む", "k": "python csv 読み込み csv reader dictreader", "x": "open()のencodingとnewline指定、DictReaderの使い方。"}, {"u": "reading.html#pd", "s": "読み込み", "t": "pandas の read_csv 実用オプション一覧", "k": "pandas read_csv pd read_csv 使い方 dtype encoding", "x": "encoding・dtype・sep・header・skiprows・chunksizeなど頻出オプションの解説。"}, {"u": "reading.html#vba", "s": "読み込み", "t": "VBAでCSVを読み込む（QueryTables）", "k": "vba csv 読み込み 文字化け 65001 932", "x": "TextFilePlatformで文字コード、ColumnDataTypesで列型を制御するコード例。"}, {"u": "reading.html#cs", "s": "読み込み", "t": "C# でCSVを読み込む（TextFieldParser）", "k": "c# csv 読み込み encoding 932 csvhelper", "x": "TextFieldParserとCodePagesプロバイダ登録、CsvHelperへの言及。"}, {"u": "reading.html#enc", "s": "読み込み", "t": "encoding指定 早見表", "k": "encoding cp932 utf-8-sig shift_jis 指定", "x": "ファイルの出どころ別に指定すべきencodingを一覧化。"}, {"u": "reading.html#faq", "s": "読み込み", "t": "読み込みのFAQ（4問）", "k": "unicodedecodeerror 先頭 0 巨大 csv", "x": "UnicodeDecodeError、0落ち、reader/DictReaderの違い、巨大ファイル。"}, {"u": "https://moji-code-tool.vercel.app/", "s": "TOOL", "t": "文字コード 判別・変換ツール", "k": "文字コード 変換 utf-8 shift-jis 判別", "x": "UTF-8／Shift-JIS／EUC-JP を自動判別し、テキスト・ファイルをその場で相互変換。"}, {"u": "https://csv-editor-mu.vercel.app/", "s": "TOOL", "t": "CSV オンラインエディタ（日英対応）", "k": "csv 編集 オンライン editor dummy data", "x": "表形式でその場編集。ダミーデータ生成（マイナンバー・SSN・日付）と Excel／CSV／JSON／JSONL 書き出しに対応。"}];
+  var ov=document.getElementById('ov'),q=document.getElementById('ovq'),
+      res=document.getElementById('res');
+  if(!ov)return;
+  var sel=-1,items=[];
+
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+
+  function norm(s){return s.toLowerCase().replace(/\u3000/g,' ').trim();}
+
+  function search(query){
+    var terms=norm(query).split(/\s+/).filter(Boolean);
+    if(!terms.length)return [];
+    var out=[];
+    INDEX.forEach(function(it){
+      var title=norm(it.t),keys=norm(it.k||''),body=norm(it.x||''),sec=norm(it.s||'');
+      var score=0,miss=0;
+      terms.forEach(function(t){
+        var hit=false;
+        if(title.indexOf(t)>=0){score+=10;hit=true;}
+        if(sec.indexOf(t)>=0){score+=6;hit=true;}
+        if(keys.indexOf(t)>=0){score+=5;hit=true;}
+        if(body.indexOf(t)>=0){score+=2;hit=true;}
+        if(!hit)miss++;
+      });
+      if(miss===0&&score>0){out.push({it:it,score:score});}
+    });
+    out.sort(function(a,b){return b.score-a.score;});
+    return out.slice(0,12).map(function(o){return o.it;});
+  }
+
+  function highlight(text,query){
+    var terms=norm(query).split(/\s+/).filter(Boolean).sort(function(a,b){return b.length-a.length;});
+    var safe=esc(text),html=safe;
+    terms.forEach(function(t){
+      var re=new RegExp('('+escRe(esc(t))+')','ig');
+      html=html.replace(re,'<mark>$1</mark>');
+    });
+    return html;
+  }
+
+  function render(query){
+    items=search(query);sel=-1;
+    var html='';
+    items.forEach(function(it,i){
+      html+='<a class="ov-item" data-i="'+i+'" href="'+it.u+'">'
+        +'<div class="t"><span class="pg">'+esc(it.s||'GUIDE')+'</span><span>'+highlight(it.t,query)+'</span></div>'
+        +'<div class="x">'+highlight((it.x||'').slice(0,120),query)+'</div></a>';
+    });
+    res.innerHTML=html;
+    [].slice.call(res.querySelectorAll('.ov-item')).forEach(function(el){
+      el.addEventListener('click',function(){close();});
+      el.addEventListener('mouseenter',function(){setSel(+el.dataset.i);});
+    });
+  }
+  function setSel(i){
+    sel=i;
+    [].slice.call(res.querySelectorAll('.ov-item')).forEach(function(el,j){
+      el.classList.toggle('sel',j===sel);
+    });
+    var cur=res.querySelectorAll('.ov-item')[sel];
+    if(cur)cur.scrollIntoView({block:'nearest'});
+  }
+
+  function open(){
+    ov.classList.add('open');document.body.style.overflow='hidden';
+    q.value='';render('');setTimeout(function(){q.focus();},30);
+  }
+  function close(){
+    ov.classList.remove('open');document.body.style.overflow='';
+  }
+
+  document.querySelectorAll('[data-search]').forEach(function(b){
+    b.addEventListener('click',open);
+  });
+  document.querySelector('.ov-bg').addEventListener('click',close);
+  document.querySelector('.ov-esc').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){
+    var typing=/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();ov.classList.contains('open')?close():open();return;}
+    if(e.key==='/'&&!typing){e.preventDefault();open();return;}
+    if(e.key==='Escape'&&ov.classList.contains('open')){close();return;}
+    if(!ov.classList.contains('open'))return;
+    if(e.key==='ArrowDown'){e.preventDefault();setSel(Math.min(sel+1,items.length-1));}
+    else if(e.key==='ArrowUp'){e.preventDefault();setSel(Math.max(sel-1,0));}
+    else if(e.key==='Enter'&&sel>=0&&items[sel]){location.href=items[sel].u;close();}
+  });
+  q.addEventListener('input',function(){render(q.value);});
+})();
+</script>
+</body>
+</html>
