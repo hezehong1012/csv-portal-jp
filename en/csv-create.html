@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Create a CSV File: Excel, Notepad, Google Sheets &amp; Python (2026)</title>
+<meta name="description" content="Learn how to create a CSV file four ways — Excel, a plain text editor, Google Sheets, and code — and how to open one safely. Fixes for dropped leading zeros, shifted columns, and dates that change on import.">
+<link rel="canonical" href="https://csv.format-portal.com/en/csv-create.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-create.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-create.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-create.html">
+<meta property="og:url" content="https://csv.format-portal.com/en/csv-create.html">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Create a CSV File: Excel, Notepad, Google Sheets &amp; Python">
+<meta property="og:description" content="Learn how to create a CSV file four ways — Excel, a plain text editor, Google Sheets, and code — and how to open one safely. Fixes for dropped leading zeros, shifted columns, and dates that change on import.">
+<meta property="og:locale" content="en_US">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf8f5; --surface:#ffffff; --ink:#14161a; --ink-2:#43474f; --ink-3:#7c818a;
+    --line:#e5e1d9; --line-strong:#d3cec3; --accent:#c4472c; --accent-soft:#fbeee9;
+    --indigo:#1d3557; --tip:#0d6a58; --tip-soft:#eaf5f1; --warn:#a8641b; --warn-soft:#fdf3e4;
+    --radius:10px; --maxw:1180px; --code-bg:#171b22;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic","Meiryo",system-ui,sans-serif;
+    font-size:16px;line-height:1.9;letter-spacing:.01em;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(196,71,44,.28);transition:border-color .18s}
+  a:hover{border-bottom-color:var(--accent)}
+  code,pre{font-family:"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace}
+  #progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:90}
+
+  .site-head{position:sticky;top:0;z-index:80;background:rgba(250,248,245,.88);
+    backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
+  .site-head .inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;height:60px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:.14em;color:var(--ink);border:0}
+  .brand .mark{width:26px;height:26px;border:1.5px solid var(--ink);border-radius:5px;display:grid;place-items:center;
+    font-size:10px;letter-spacing:.02em;font-family:"Noto Serif JP",serif}
+  .head-nav{display:flex;gap:20px;font-size:13.5px;color:var(--ink-2)}
+  .head-nav a{border:0;color:inherit;padding:4px 2px;border-radius:6px}
+  .head-nav a:hover{color:var(--accent)}
+  .head-nav a.here{color:var(--accent);font-weight:700}
+  .search-btn{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line-strong);
+    background:var(--surface);border-radius:8px;padding:6px 10px 6px 12px;font-size:12.5px;
+    color:var(--ink-3);cursor:pointer;font-family:inherit;white-space:nowrap}
+  .search-btn:hover{border-color:var(--accent);color:var(--ink-2)}
+  .search-btn kbd{font-family:inherit;font-size:10.5px;border:1px solid var(--line-strong);
+    border-radius:4px;padding:1px 5px;background:#f4f1ea;color:var(--ink-3)}
+  .search-btn svg{flex:none}
+  @media (max-width:900px){.head-nav{display:none}.search-btn span.lbl,.search-btn kbd{display:none}}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .hero{padding:48px 0 36px;border-bottom:1px solid var(--line)}
+  .crumbs{font-size:12.5px;color:var(--ink-3);margin-bottom:20px}
+  .crumbs a{color:var(--ink-3);border:0}.crumbs a:hover{color:var(--accent)}
+  .crumbs .sep{margin:0 8px;color:var(--line-strong)}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;letter-spacing:.18em;
+    color:var(--accent);font-weight:700;margin-bottom:16px;text-transform:uppercase}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent);display:block}
+  h1{font-family:"Noto Serif JP",serif;font-weight:700;font-size:clamp(27px,4vw,42px);
+    line-height:1.44;margin:0 0 20px;max-width:21em}
+  .lead{font-size:16px;color:var(--ink-2);max-width:44em;margin:0 0 24px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12.5px;color:var(--ink-3)}
+  .meta b{font-weight:500;color:var(--ink-2)}
+  .answer{margin:30px 0 0;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--accent);border-radius:var(--radius);padding:22px 24px;max-width:56em}
+  .answer .lbl{font-size:11px;letter-spacing:.16em;color:var(--accent);font-weight:700;margin-bottom:8px}
+  .answer p{margin:0;font-size:15.5px;color:var(--ink-2)}
+  .answer strong{color:var(--ink)}
+
+  /* Tools portal band */
+  .tools-band{margin:36px 0 0;padding:26px 28px 24px;background:var(--surface);
+    border:1px solid var(--line);border-radius:14px;position:relative;overflow:hidden}
+  .tools-band::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;
+    background:linear-gradient(180deg,#2f855a,#667eea,#2b6cb0,#ed8936,#1a365d)}
+  .tools-hd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .tools-badge{font-size:10.5px;letter-spacing:.16em;font-weight:700;color:#fff;
+    background:var(--indigo);border-radius:5px;padding:3px 9px}
+  .tools-title{font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px}
+  .tools-sub{font-size:12px;color:var(--ink-3)}
+  .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:13px}
+  .tool-card{display:flex;flex-direction:column;gap:6px;background:#fff;
+    border:1px solid var(--line);border-top:3px solid var(--tc);border-radius:10px;
+    padding:15px 15px 13px;color:var(--ink);border-bottom:1px solid var(--line);
+    text-decoration:none;transition:transform .18s,box-shadow .18s,border-color .18s}
+  .tool-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(20,22,26,.09);border-color:var(--tc)}
+  .tool-tag{font-size:10.5px;letter-spacing:.14em;font-weight:700;color:var(--tc)}
+  .tool-name{font-weight:700;font-size:14.5px;line-height:1.5}
+  .tool-desc{font-size:12.5px;color:var(--ink-2);line-height:1.75;flex:1}
+  .tool-go{font-size:12.5px;font-weight:700;color:var(--tc);margin-top:2px}
+  @media (max-width:720px){.tools-band{padding:20px 18px}.tools-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:520px){.tools-grid{grid-template-columns:1fr}}
+
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 252px;gap:72px;padding:8px 0 90px;align-items:start}
+  @media (max-width:1020px){.layout{grid-template-columns:1fr;gap:0}aside.toc{display:none}}
+  article{min-width:0}
+  section.sec{padding:50px 0 8px;border-bottom:1px solid var(--line)}
+  section.sec:last-of-type{border-bottom:0}
+  .sec-no{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;font-size:11.5px;
+    letter-spacing:.18em;color:var(--ink-3);font-weight:500}
+  .sec-no i{font-style:normal;font-family:"Noto Serif JP",serif;font-size:13px;color:var(--accent);letter-spacing:.02em}
+  .sec-no::after{content:"";flex:1;height:1px;background:var(--line);margin-bottom:4px}
+  h2{font-family:"Noto Serif JP",serif;font-weight:700;font-size:clamp(22px,2.6vw,29px);
+    line-height:1.5;margin:0 0 18px;scroll-margin-top:84px}
+  h3{font-family:"Noto Serif JP",serif;font-weight:600;font-size:18px;line-height:1.6;margin:34px 0 12px;scroll-margin-top:84px}
+  p{margin:0 0 17px;color:var(--ink-2)}
+  article p strong{color:var(--ink)}
+  .u{background:linear-gradient(transparent 62%,rgba(196,71,44,.16) 62%)}
+  ul,ol{margin:0 0 18px;padding-left:1.4em;color:var(--ink-2)}
+  li{margin:0 0 8px}li::marker{color:var(--accent)}
+  ol.steps{list-style:none;counter-reset:s;padding:0;margin:20px 0 22px}
+  ol.steps>li{counter-increment:s;position:relative;padding:0 0 0 44px;margin-bottom:15px}
+  ol.steps>li::before{content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;
+    border-radius:50%;background:var(--ink);color:var(--paper);font-size:12.5px;font-weight:700;
+    display:grid;place-items:center}
+  ol.steps>li b{display:block;color:var(--ink);margin-bottom:2px}
+
+  .box{border-radius:var(--radius);padding:17px 20px;margin:22px 0;font-size:14.5px;line-height:1.85;border:1px solid transparent}
+  .box .t{font-weight:700;font-size:13px;letter-spacing:.04em;display:flex;gap:8px;align-items:center;margin-bottom:6px}
+  .box p{margin:0;font-size:14.5px}.box p+p{margin-top:8px}
+  .box.note{background:#f1f4f9;border-color:#dfe5ef}.box.note .t{color:var(--indigo)}
+  .box.warn{background:var(--warn-soft);border-color:#f0e0c4}.box.warn .t{color:var(--warn)}
+  .box.tip{background:var(--tip-soft);border-color:#d5e9e2}.box.tip .t{color:var(--tip)}
+
+  .tbl-scroll{overflow-x:auto;margin:20px 0 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+  th,td{padding:11px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+  th{background:#f4f1ea;font-weight:700;font-size:13px;color:var(--ink);white-space:nowrap}
+  tbody tr:last-child td{border-bottom:0}
+  td{color:var(--ink-2)}td b{color:var(--ink)}
+
+  .codeblock{position:relative;margin:18px 0 24px;background:var(--code-bg);border-radius:var(--radius);overflow:hidden}
+  .codeblock .bar{display:flex;align-items:center;justify-content:space-between;padding:9px 14px 7px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .codeblock .lang{font-size:11px;letter-spacing:.12em;color:#9aa4b2;font-weight:700}
+  .copy{background:transparent;border:1px solid rgba(255,255,255,.2);color:#c3cad4;font-size:11px;
+    padding:4px 10px;border-radius:5px;cursor:pointer;font-family:inherit}
+  .copy:hover{border-color:rgba(255,255,255,.45);color:#fff}
+  pre{margin:0;padding:15px 18px;overflow-x:auto;font-size:13px;line-height:1.75;color:#dfe4ec;tab-size:2}
+  pre .c{color:#6f7d8c}pre .k{color:#8bb8f0}pre .s{color:#a8d3a0}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:14px;margin:22px 0 26px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px;display:flex;flex-direction:column;gap:6px}
+  .card .k{font-size:11px;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase}
+  .card .n{font-weight:700;font-size:15px;color:var(--ink);line-height:1.5}
+  .card .d{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+  .card a{font-size:12.5px;align-self:flex-start;margin-top:2px}
+
+  .faq{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin-bottom:10px;overflow:hidden}
+  .faq summary{list-style:none;cursor:pointer;padding:16px 52px 16px 20px;position:relative;
+    font-weight:700;font-size:15px;color:var(--ink);line-height:1.7}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"";position:absolute;right:22px;top:25px;width:9px;height:9px;
+    border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);
+    transform:rotate(45deg);transition:transform .22s}
+  .faq[open] summary::after{transform:rotate(-135deg)}
+  .faq[open] summary{background:#f7f4ee}
+  .faq .a{padding:2px 22px 19px;font-size:14.5px;color:var(--ink-2);line-height:1.9}
+  .faq .a p{margin:0 0 10px;font-size:14.5px}.faq .a p:last-child{margin-bottom:0}
+  .q{color:var(--accent);font-family:"Noto Serif JP",serif;margin-right:6px}
+
+  /* Sources block */
+  .src{margin:26px 0 6px;border-top:1px dashed var(--line-strong);padding:13px 2px 4px;font-size:13px;color:var(--ink-3)}
+  .src-t{font-weight:700;font-size:11.5px;letter-spacing:.14em;color:var(--ink-2);margin-bottom:6px}
+  .src-date{font-weight:400;letter-spacing:.02em;color:var(--ink-3)}
+  .src ul{margin:0;padding-left:1.2em}
+  .src li{margin-bottom:4px;font-size:12.8px}
+  .src a{color:var(--indigo);border-bottom:1px solid rgba(29,53,87,.25)}
+  .src a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+  .src-note{color:var(--ink-3)}
+
+  /* Related-page cards */
+  .jump{margin:44px 0 8px}
+  .jump-hd{font-size:11.5px;letter-spacing:.18em;color:var(--ink-3);font-weight:700;margin-bottom:14px}
+  .jump-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .jump-card{display:flex;flex-direction:column;gap:5px;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);padding:16px 18px;color:var(--ink);border-bottom:1px solid var(--line);
+    transition:border-color .18s,transform .18s}
+  .jump-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .jump-card .k{font-size:10.5px;letter-spacing:.12em;color:var(--accent);font-weight:700;text-transform:uppercase}
+  .jump-card .n{font-weight:700;font-size:14.5px;line-height:1.5}
+  .jump-card .d{font-size:12.5px;color:var(--ink-2);line-height:1.65}
+  .jump-card .go{font-size:12px;color:var(--accent);margin-top:3px}
+
+  aside.toc{position:sticky;top:92px;font-size:13px}
+  aside.toc .hd{font-size:11px;letter-spacing:.18em;color:var(--ink-3);font-weight:700;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  aside.toc ol{list-style:none;margin:0;padding:0;counter-reset:t}
+  aside.toc li{counter-increment:t;margin:0}
+  aside.toc a{display:block;padding:6px 0 6px 26px;color:var(--ink-2);border:0;position:relative;line-height:1.6}
+  aside.toc a::before{content:counter(t,decimal-leading-zero);position:absolute;left:0;top:7px;font-size:10.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  aside.toc a:hover{color:var(--accent)}
+  aside.toc a.active{color:var(--accent);font-weight:700}
+  aside.toc a.active::before{color:var(--accent)}
+
+  .mobile-toc{display:none;margin:26px 0 0;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:0 18px}
+  .mobile-toc summary{list-style:none;cursor:pointer;padding:14px 0;font-size:13.5px;font-weight:700;position:relative}
+  .mobile-toc summary::-webkit-details-marker{display:none}
+  .mobile-toc summary::after{content:"＋";position:absolute;right:2px;top:13px;color:var(--ink-3)}
+  .mobile-toc[open] summary::after{content:"−"}
+  .mobile-toc ol{list-style:none;margin:0;padding:0 0 12px}
+  .mobile-toc a{display:block;padding:7px 0;border-top:1px solid var(--line);color:var(--ink-2);font-size:13.5px}
+  @media (max-width:1020px){.mobile-toc{display:block}}
+
+  /* Search overlay */
+  .ov{position:fixed;inset:0;z-index:200;display:none}
+  .ov.open{display:block}
+  .ov-bg{position:absolute;inset:0;background:rgba(20,22,26,.45);backdrop-filter:blur(2px)}
+  .ov-panel{position:relative;max-width:640px;margin:9vh auto 0;background:var(--surface);
+    border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.28);overflow:hidden}
+  .ov-head{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+  .ov-head svg{flex:none;color:var(--ink-3)}
+  #ovq{flex:1;border:0;outline:0;font-size:15.5px;font-family:inherit;color:var(--ink);background:transparent}
+  #ovq::placeholder{color:var(--ink-3)}
+  .ov-esc{font-size:11px;border:1px solid var(--line-strong);border-radius:5px;padding:2px 7px;color:var(--ink-3);background:#f4f1ea}
+  .ov-res{max-height:52vh;overflow-y:auto;padding:8px}
+  .ov-res:empty::after{content:"No matching pages were found. Try a different keyword.";
+    display:block;padding:26px 14px;color:var(--ink-3);font-size:13.5px;text-align:center}
+  .ov-item{display:block;padding:11px 12px;border-radius:9px;cursor:pointer;border:0;color:inherit}
+  .ov-item.sel,.ov-item:hover{background:#f7f4ee}
+  .ov-item .t{font-weight:700;font-size:14px;color:var(--ink);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .ov-item .t .pg{font-size:10.5px;letter-spacing:.1em;color:var(--accent);font-weight:700;text-transform:uppercase}
+  .ov-item .x{font-size:12.5px;color:var(--ink-2);line-height:1.65;margin-top:3px}
+  .ov-item mark{background:rgba(196,71,44,.18);color:inherit;padding:0 1px;border-radius:2px}
+  .ov-hint{padding:9px 16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-3);display:flex;gap:14px}
+  @media (max-width:640px){.ov-panel{margin:5vh 14px 0}}
+
+  footer.site{border-top:1px solid var(--line);padding:36px 0 60px;font-size:13px;color:var(--ink-3)}
+  footer.site .inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+  footer.site .refs{margin:0;padding-left:1.2em;max-width:46em}
+  footer.site .refs li{margin-bottom:5px;font-size:12.5px}
+  footer.site a{color:var(--ink-2);border-color:var(--line-strong)}
+  .stamp{font-size:12px;letter-spacing:.04em;margin:0}
+  @media print{.site-head,#progress,aside.toc,.ov{display:none}body{background:#fff}}
+</style>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "How to Create a CSV File: Excel, Notepad, Google Sheets & Python",
+   "description": "Learn how to create a CSV file four ways — Excel, a plain text editor, Google Sheets, and code — and how to open one safely. Fixes for dropped leading zeros, shifted columns, and dates that change on import.",
+   "inLanguage": "en",
+   "datePublished": "2026-10-30",
+   "dateModified": "2026-10-30",
+   "author": {
+    "@type": "Organization",
+    "name": "CSV GUIDE"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Does a CSV file have to use the .csv extension?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It is a convention rather than a rule. Most software will open .CSV in capitals, but for system integrations stick to lowercase .csv."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Which encoding should I use when writing a CSV in Notepad?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "UTF-8 for the web and for tool integrations, Shift-JIS (shown as ANSI in Notepad) for domestic core systems. Confirm what the receiving system expects."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can a CSV contain empty cells?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Two consecutive commas — value,,value — produce an empty cell between them. Trailing empty cells are handled the same way."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Why won't other software open a CSV I made in Excel?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The encoding or the delimiter is the likely culprit. Open the file in Notepad first to see what is actually in it, then follow the steps on <a href=\"mojibake.html\">the garbled text page</a>."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How should I check the CSV I just created?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Open it in Notepad or VS Code and check the row count, column count, and quoting by eye. For large files, use Excel's status-bar count or count the lines in code."
+     }
+    }
+   ]
+  }
+ ]
+}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csv.format-portal.com/en/"}, {"@type": "ListItem", "position": 2, "name": "CSV Complete Guide", "item": "https://csv.format-portal.com/en/"}, {"@type": "ListItem", "position": 3, "name": "Creating and opening", "item": "https://csv.format-portal.com/en/csv-create.html"}]}</script>
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="site-head">
+  <div class="inner">
+    <a href="index.html" class="brand"><span class="mark">CSV</span>CSV GUIDE</a>
+    <nav class="head-nav"><a href="index.html">Full Guide</a><a href="csv-create.html" class="here">Creating</a><a href="excel-convert.html">Convert</a><a href="mojibake.html">Garbled Text</a><a href="reading.html">Reading</a><a href="/?setlang=ja">日本語</a></nav>
+    
+<button class="search-btn" data-search type="button" aria-label="Search this site">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+  <span class="lbl">Search this site</span>
+  <kbd>Ctrl K</kbd>
+</button>
+  </div>
+</header>
+<div class="wrap">
+  <div class="hero">
+    <div class="crumbs"><a href="index.html">Home</a><span class="sep">›</span><a href="index.html">CSV Complete Guide</a><span class="sep">›</span><span>Creating and opening</span></div>
+    <div class="eyebrow">Detail Guide 01 · Creating</div>
+    <h1>How to Create a CSV File — and How to Open One</h1>
+    <p class="lead">"How do I create a CSV file?" and "how do I open one?" are among the most searched CSV questions there are. This page walks through four ways to build a file and what to watch for when you open it, with every step tied to official documentation.</p>
+    <div class="meta"><span>Updated <b>October 30, 2026</b></span><span>Reading time <b>About 9 min</b></span><span>Sources <b>Official documentation only</b></span></div>
+    <div class="answer"><div class="lbl">In short</div><p><strong>Excel is the most common way to build one</strong>: File → Save As → "CSV UTF-8 (Comma delimited)". Two caveats — only one sheet is saved, and leading zeros disappear unless the column is formatted as text. Opening the result in Notepad remains the surest way to see what you actually wrote.</p></div>
+  </div>
+  <div class="tools-band" aria-label="CSV tools"><div class="tools-hd"><span class="tools-badge">TOOL</span><span class="tools-title">Build and edit CSVs without leaving the browser</span><span class="tools-sub">Every step described on this page can also be done directly in your browser.</span></div><div class="tools-grid"><a class="tool-card" href="https://csv-editor.format-portal.com/" target="_blank" rel="noopener" style="--tc:#1a365d"><span class="tool-tag">Edit &amp; generate</span><span class="tool-name">CSV Online Editor (English &amp; Japanese)</span><span class="tool-desc">Edit in a spreadsheet-style grid. Generate dummy data (national ID, SSN, dates) and export to Excel, CSV, JSON, or JSONL.</span><span class="tool-go">Open tool <span aria-hidden="true">→</span></span></a></div></div>
+  <details class="mobile-toc"><summary>Contents</summary><ol><li><a href="#choose">Choosing a method</a></li><li><a href="#excel">Creating in Excel</a></li><li><a href="#editor">Creating in a text editor</a></li><li><a href="#sheets">Creating in Google Sheets</a></li><li><a href="#program">Generating with code</a></li><li><a href="#open">How to open a CSV</a></li><li><a href="#trouble">Common mistakes and fixes</a></li><li><a href="#faq">Frequently asked questions</a></li></ol></details>
+  <div class="layout">
+    <article>
+
+<section class="sec" id="choose">
+  <div class="sec-no"><i>01</i><span>Choosing</span></div>
+  <h2>Which Method Should You Use?</h2>
+  <p>How you create the file should follow from <strong>who opens it later, and in what software</strong>. Start with the overview.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Method</th><th>Best for</th><th>Encoding</th><th>Watch out for</th></tr></thead>
+    <tbody>
+      <tr><td><b>Excel</b></td><td>Building a table quickly; you already work in Excel daily</td><td>Selectable (UTF-8 recommended)</td><td>One sheet only; leading zeros can vanish</td></tr>
+      <tr><td><b>Text editor</b></td><td>A few lines of test data; strict control over encoding</td><td>Whatever you choose</td><td>You type everything by hand</td></tr>
+      <tr><td><b>Google Sheets</b></td><td>Several people editing before you export</td><td>UTF-8 only</td><td>Cannot export Shift-JIS</td></tr>
+      <tr><td><b>Code</b></td><td>Large datasets; scheduled generation</td><td>Whatever you choose</td><td>You have to write the code</td></tr>
+    </tbody>
+  </table></div>
+  <div class="src"><div class="src-t">Sources<span class="src-date"> (checked October 30, 2026)</span></div><ul><li><a href="https://support.microsoft.com/ja-jp/office/csv-%E6%96%87%E4%BB%B6%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88" target="_blank" rel="noopener">Microsoft Support — CSV file format</a><span class="src-note"> — what Excel does when it saves as CSV</span></li><li><a href="https://support.google.com/docs/answer/49114" target="_blank" rel="noopener">Google Help — Download a file</a><span class="src-note"> — exporting from Sheets</span></li></ul></div>
+</section>
+<section class="sec" id="excel">
+  <div class="sec-no"><i>02</i><span>Steps</span></div>
+  <h2>Creating a CSV in Excel (the Most Common Route)</h2>
+  <ol class="steps"><li><b>Type the column names into row 1</b>Name, Department, Notes — whatever your fields are. Leave no blank columns and no merged cells.</li><li><b>Enter the data</b>Formulas are not saved; only the calculated values are written out.</li><li><b>Choose File → Save As</b></li><li><b>Set the file type to "CSV UTF-8 (Comma delimited)"</b>This is the default choice in Excel 2016 and later, and <a href="https://support.microsoft.com/ja-jp/office/csv-%E6%96%87%E4%BB%B6%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88" target="_blank" rel="noopener">Microsoft's own guide to save formats</a> recommends the UTF-8 variant too.</li><li><b>Pick a location and save</b>The "some features will be lost" warning is normal for CSV. Click straight through it.</li></ol>
+  <div class="box warn"><div class="t">Two accidents that happen at save time</div>
+  <p><strong>1. Only one sheet is saved.</strong> A CSV file holds exactly one sheet. Save a multi-sheet workbook as CSV and <em>only the active sheet</em> is written out.</p>
+  <p><strong>2. Leading zeros and symbols disappear.</strong> "0012" is stored as the number 12. Format the column as text, or prefix the value with an apostrophe: <code>'0012</code>.</p></div>
+  <div class="src"><div class="src-t">Sources<span class="src-date"> (checked October 30, 2026)</span></div><ul><li><a href="https://support.microsoft.com/ja-jp/office/csv-%E6%96%87%E4%BB%B6%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88" target="_blank" rel="noopener">Microsoft Support — CSV file format</a></li><li><a href="https://support.microsoft.com/ja-jp/office/%E5%90%8D%E5%89%8D%E3%82%92%E4%BB%98%E3%81%91%E3%81%A6%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B-34b0bbc1-3096-4e57-8f17-4c6e05eb5b58" target="_blank" rel="noopener">Microsoft Support — Save As</a></li></ul></div>
+</section>
+<section class="sec" id="editor">
+  <div class="sec-no"><i>03</i><span>Steps</span></div>
+  <h2>Creating a CSV in a Text Editor</h2>
+  <p>This is the right tool when the encoding has to be guaranteed, or when you only need a handful of test rows. In Windows Notepad you can choose the encoding from the dropdown when you save (see <a href="https://support.microsoft.com/en-us/windows" target="_blank" rel="noopener">Microsoft's Notepad guide</a>).</p>
+  <div class="codeblock"><div class="bar"><span class="lang">CSV (UTF-8)</span><button class="copy" type="button">Copy</button></div><pre>product_code,product_name,unit_price,stock<br/>A-001,Laptop,89800,12<br/>A-002,&quot;Mouse, wireless&quot;,2980,140<br/>A-003,27-inch monitor,32800,7</pre></div>
+  <p>Save with the <code>.csv</code> extension and UTF-8 encoding without a BOM. For web systems, that combination causes the fewest problems.</p>
+  <div class="box tip"><div class="t">If you use VS Code</div>
+  <p>The status bar in the bottom right shows the encoding (UTF-8 / Shift-JIS) and the line endings (LF / CRLF). Add the <a href="reading.html">Rainbow CSV extension</a> and each column gets its own color, so a shifted column is obvious at a glance.</p></div>
+  <div class="src"><div class="src-t">Sources<span class="src-date"> (checked October 30, 2026)</span></div><ul><li><a href="https://docs.python.org/3/library/csv.html" target="_blank" rel="noopener">Python documentation — csv module</a><span class="src-note"> — reading and writing that follows RFC 4180</span></li><li><a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener">RFC 4180</a><span class="src-note"> — how to quote a value correctly</span></li></ul></div>
+</section>
+<section class="sec" id="sheets">
+  <div class="sec-no"><i>04</i><span>Steps</span></div>
+  <h2>Creating a CSV in Google Sheets</h2>
+  <ol class="steps"><li><b>Build the table</b>The advantage is that people can edit it together.</li><li><b>File → Download → Comma-separated values (.csv)</b>Only the sheet you currently have open is exported (<a href="https://support.google.com/docs/answer/49114" target="_blank" rel="noopener">Google's official steps</a>).</li><li><b>Check the encoding</b>The export is always UTF-8. If an internal system needs Shift-JIS, use the conversion steps on the <a href="mojibake.html">garbled text page</a>.</li></ol>
+  <div class="src"><div class="src-t">Sources<span class="src-date"> (checked October 30, 2026)</span></div><ul><li><a href="https://support.google.com/docs/answer/49114" target="_blank" rel="noopener">Google Help — Download a spreadsheet</a><span class="src-note"> — the official procedure</span></li></ul></div>
+</section>
+<section class="sec" id="program">
+  <div class="sec-no"><i>05</i><span>Steps</span></div>
+  <h2>Generating a CSV with Code</h2>
+  <p>For scheduled exports or large volumes, writing the file from code is the dependable option. With pandas it takes a single call: <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html" target="_blank" rel="noopener">to_csv (official docs)</a>.</p>
+  <div class="codeblock"><div class="bar"><span class="lang">Python / pandas</span><button class="copy" type="button">Copy</button></div><pre>import pandas as pd<br/><br/>df = pd.DataFrame([<br/>    {&quot;product_code&quot;: &quot;A-001&quot;, &quot;product_name&quot;: &quot;Laptop&quot;, &quot;unit_price&quot;: 89800},<br/>    {&quot;product_code&quot;: &quot;A-002&quot;, &quot;product_name&quot;: &quot;Mouse&quot;, &quot;unit_price&quot;: 2980},<br/>])<br/># Forget index=False and you get an extra row-number column<br/># utf-8-sig (with a BOM) opens in Excel without garbled text<br/>df.to_csv(&quot;products.csv&quot;, index=False, encoding=&quot;utf-8-sig&quot;)</pre></div>
+  <div class="src"><div class="src-t">Sources<span class="src-date"> (checked October 30, 2026)</span></div><ul><li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html" target="_blank" rel="noopener">pandas documentation — DataFrame.to_csv</a></li><li><a href="https://docs.python.org/3/library/csv.html" target="_blank" rel="noopener">Python documentation — csv module</a></li></ul></div>
+</section>
+<section class="sec" id="open">
+  <div class="sec-no"><i>06</i><span>Viewing</span></div>
+  <h2>How to Open a CSV File</h2>
+  <h3>Opening in Excel (when you want to work with the data)</h3>
+  <p><strong>Don't double-click.</strong> Go through Excel's Data → From Text/CSV instead. A double-click is precisely what eats leading zeros and turns long numbers into scientific notation (<a href="excel-convert.html">covered in detail on the conversion page</a>).</p>
+  <h3>Opening in Notepad or a text editor (when you want to see the raw data)</h3>
+  <p>A CSV is plain text, so an editor shows the original characters exactly as stored. If double-clicking keeps dragging you into Excel, right-click → Open with → Notepad, then tick "Always use this app" and the editor will open it from then on.</p>
+  <div class="box note"><div class="t">An Excel icon is not a fault</div>
+  <p>Windows simply associates <code>.csv</code> with Excel. Either change the association, or use Open with each time.</p></div>
+  <div class="src"><div class="src-t">Sources<span class="src-date"> (checked October 30, 2026)</span></div><ul><li><a href="https://support.microsoft.com/ja-jp/office/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB-txt-%E3%81%BE%E3%81%9F%E3%81%AF-csv-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B-5250ac4c-663c-47ce-937b-339e391393ba" target="_blank" rel="noopener">Microsoft Support — importing text and CSV files</a><span class="src-note"> — the correct way to open a CSV in Excel</span></li></ul></div>
+</section>
+<section class="sec" id="trouble">
+  <div class="sec-no"><i>07</i><span>Troubleshooting</span></div>
+  <h2>Common Mistakes and How to Fix Them</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td><b>Columns are shifted</b></td><td>A value containing a comma was not quoted</td><td>Wrap it in <code>"…"</code>, following the quoting rules in <a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener">RFC 4180</a></td></tr>
+      <tr><td><b>Leading zeros disappear</b></td><td>The value was read as a number</td><td>Set the column to Text during import</td></tr>
+      <tr><td><b>Dates change</b></td><td>Automatic date conversion</td><td>Same as above — make the column text</td></tr>
+      <tr><td><b>Garbled text on open</b></td><td>Encoding mismatch</td><td>The three fixes on the <a href="mojibake.html">garbled text page</a></td></tr>
+      <tr><td><b>Everything lands on one line</b></td><td>Wrong line endings (classic Mac CR, for example)</td><td>Re-save with LF or CRLF</td></tr>
+    </tbody>
+  </table></div>
+  <div class="src"><div class="src-t">Sources<span class="src-date"> (checked October 30, 2026)</span></div><ul><li><a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener">RFC 4180</a><span class="src-note"> — quoting and line-break rules</span></li><li><a href="https://support.microsoft.com/ja-jp/office/%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB-txt-%E3%81%BE%E3%81%9F%E3%81%AF-csv-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B-5250ac4c-663c-47ce-937b-339e391393ba" target="_blank" rel="noopener">Microsoft Support — import procedure</a></li></ul></div>
+</section>
+<section class="sec" id="faq">
+  <div class="sec-no"><i>08</i><span>FAQ</span></div>
+  <h2>Frequently Asked Questions</h2>
+  <details class="faq" open><summary><span class="q">Q.</span>Does a CSV file have to use the .csv extension?</summary><div class="a"><p>It is a convention rather than a rule. Most software will open .CSV in capitals, but for system integrations stick to lowercase .csv.</p></div></details><details class="faq"><summary><span class="q">Q.</span>Which encoding should I use when writing a CSV in Notepad?</summary><div class="a"><p>UTF-8 for the web and for tool integrations, Shift-JIS (shown as ANSI in Notepad) for domestic core systems. Confirm what the receiving system expects.</p></div></details><details class="faq"><summary><span class="q">Q.</span>Can a CSV contain empty cells?</summary><div class="a"><p>Yes. Two consecutive commas — <code>value,,value</code> — produce an empty cell between them. Trailing empty cells are handled the same way.</p></div></details><details class="faq"><summary><span class="q">Q.</span>Why won't other software open a CSV I made in Excel?</summary><div class="a"><p>The encoding or the delimiter is the likely culprit. Open the file in Notepad first to see what is actually in it, then follow the steps on the <a href="mojibake.html">garbled text page</a>.</p></div></details><details class="faq"><summary><span class="q">Q.</span>How should I check the CSV I just created?</summary><div class="a"><p>Open it in Notepad or VS Code and check the row count, column count, and quoting by eye. For large files, use Excel's status-bar count or count the lines in code.</p></div></details>
+  <div class="src"><div class="src-t">Sources<span class="src-date"> (checked October 30, 2026)</span></div><ul><li><a href="https://support.microsoft.com/ja-jp/office/csv-%E6%96%87%E4%BB%B6%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88" target="_blank" rel="noopener">Microsoft Support — CSV file format</a></li><li><a href="https://support.google.com/docs/answer/49114" target="_blank" rel="noopener">Google Help — Downloading files</a></li></ul></div>
+</section>
+<div class="jump"><div class="jump-hd">Related guides</div><div class="jump-grid"><a class="jump-card" href="excel-convert.html"><span class="k">Guide 02</span><span class="n">Conversion, end to end</span><span class="d">Getting the CSV you just built into Excel</span><span class="go">Read →</span></a><a class="jump-card" href="mojibake.html"><span class="k">Guide 03</span><span class="n">Fixing garbled text</span><span class="d">What to do when it opens as nonsense</span><span class="go">Read →</span></a><a class="jump-card" href="reading.html"><span class="k">Guide 04</span><span class="n">Reading and writing in code</span><span class="d">When you want to automate the generation</span><span class="go">Read →</span></a></div></div>
+    </article>
+    <aside class="toc" aria-label="Contents"><div class="hd">Contents</div><ol><li><a href="#choose">Choosing a method</a></li><li><a href="#excel">Creating in Excel</a></li><li><a href="#editor">Creating in a text editor</a></li><li><a href="#sheets">Creating in Google Sheets</a></li><li><a href="#program">Generating with code</a></li><li><a href="#open">How to open a CSV</a></li><li><a href="#trouble">Common mistakes and fixes</a></li><li><a href="#faq">Frequently asked questions</a></li></ol></aside>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="inner">
+    <div>
+      <p class="stamp">Last updated: October 30, 2026</p>
+      <p class="stamp" style="margin-top:6px">Every article on this site is written against the sources cited in the text — primary sources and official documentation.</p>
+    </div>
+    <ul class="refs"><li><a href="https://support.microsoft.com/ja-jp/office/csv-%E6%96%87%E4%BB%B6%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88" target="_blank" rel="noopener">Microsoft Support — CSV file format</a></li><li><a href="https://support.google.com/docs/answer/49114" target="_blank" rel="noopener">Google Help — Download a spreadsheet</a></li><li><a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener">RFC 4180</a></li></ul>
+  </div>
+</footer>
+
+<div class="ov" id="ov" role="dialog" aria-label="Search this site">
+  <div class="ov-bg"></div>
+  <div class="ov-panel">
+    <div class="ov-head">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      <input id="ovq" type="text" placeholder="Search by keyword (e.g. garbled text, conversion, pandas, postal codes)" autocomplete="off">
+      <span class="ov-esc">Esc</span>
+    </div>
+    <div class="ov-res" id="res"></div>
+    <div class="ov-hint"><span>↑↓ to navigate</span><span>Enter to open</span><span>Esc to close</span></div>
+  </div>
+</div>
+<script>
+(function(){
+  // Reading progress bar
+  var bar=document.getElementById('progress');
+  function prog(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;
+    bar.style.width=(m>0?(h.scrollTop/m)*100:0)+'%';}
+  document.addEventListener('scroll',prog,{passive:true});prog();
+
+  // Highlight the active TOC entry
+  var links=[].slice.call(document.querySelectorAll('aside.toc a'));
+  var targets=links.map(function(a){return document.querySelector(a.getAttribute('href'));}).filter(Boolean);
+  if(targets.length&&'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){links.forEach(function(l){
+        l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id);});}
+    });},{rootMargin:'-84px 0px -62% 0px',threshold:0});
+    targets.forEach(function(t){io.observe(t);});
+  }
+
+  // Copy code
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=btn.closest('.codeblock').querySelector('pre');
+      var txt=pre.innerText;
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){btn.textContent='Copied';},
+          function(){btn.textContent='Select manually';});
+      }else{btn.textContent='Select manually';}
+      setTimeout(function(){btn.textContent='Copy';},1600);
+    });
+  });
+
+  // ------- Site search -------
+  var INDEX=[{"u": "csv-create.html#choose", "s": "Creating", "t": "Choosing how to create a CSV (four methods compared)", "k": "csv how to create method compare choose", "x": "Excel, text editor, Google Sheets, and code-generation compared on encoding and pitfalls."}, {"u": "csv-create.html#excel", "s": "Creating", "t": "Creating a CSV file in Excel", "k": "csv file how to create excel save as", "x": "Five steps: Save As, then choose CSV UTF-8. Watch out for the one-sheet limit and dropped leading zeros."}, {"u": "csv-create.html#editor", "s": "Creating", "t": "Creating a CSV in a text editor (Notepad)", "k": "notepad csv create text editor utf-8", "x": "Writing the file by hand in Notepad or VS Code, and saving it as UTF-8."}, {"u": "csv-create.html#sheets", "s": "Creating", "t": "Exporting a CSV from Google Sheets", "k": "google sheets csv download export", "x": "File → Download → Comma-separated values. Note that the output is always UTF-8."}, {"u": "csv-create.html#open", "s": "Creating", "t": "Opening a CSV file (Excel or Notepad)", "k": "csv how to open double click association icon", "x": "Skip the double-click and import through Excel instead; use Notepad to inspect the raw data. Changing the file association, too."}, {"u": "csv-create.html#trouble", "s": "Creating", "t": "Common CSV creation mistakes and fixes", "k": "csv shifted columns leading zeros date changed fix", "x": "The five classic failures — shifted columns, dropped zeros, date conversion, garbled text, everything on one line — with causes and fixes."}, {"u": "csv-create.html#faq", "s": "Creating", "t": "CSV creation FAQ (5 questions)", "k": "csv faq extension empty cell check", "x": "Answers on extensions, empty cells, and files that other software refuses to open."}, {"u": "https://csv-editor.format-portal.com/", "s": "TOOL", "t": "CSV Online Editor (English & Japanese)", "k": "csv edit online editor dummy data", "x": "Edit in a spreadsheet-style grid. Generate dummy data (national ID, SSN, dates) and export to Excel, CSV, JSON, or JSONL."}];
+  var ov=document.getElementById('ov'),q=document.getElementById('ovq'),
+      res=document.getElementById('res');
+  if(!ov)return;
+  var sel=-1,items=[];
+
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+
+  function norm(s){return s.toLowerCase().replace(/\u3000/g,' ').trim();}
+
+  function search(query){
+    var terms=norm(query).split(/\s+/).filter(Boolean);
+    if(!terms.length)return [];
+    var out=[];
+    INDEX.forEach(function(it){
+      var title=norm(it.t),keys=norm(it.k||''),body=norm(it.x||''),sec=norm(it.s||'');
+      var score=0,miss=0;
+      terms.forEach(function(t){
+        var hit=false;
+        if(title.indexOf(t)>=0){score+=10;hit=true;}
+        if(sec.indexOf(t)>=0){score+=6;hit=true;}
+        if(keys.indexOf(t)>=0){score+=5;hit=true;}
+        if(body.indexOf(t)>=0){score+=2;hit=true;}
+        if(!hit)miss++;
+      });
+      if(miss===0&&score>0){out.push({it:it,score:score});}
+    });
+    out.sort(function(a,b){return b.score-a.score;});
+    return out.slice(0,12).map(function(o){return o.it;});
+  }
+
+  function highlight(text,query){
+    var terms=norm(query).split(/\s+/).filter(Boolean).sort(function(a,b){return b.length-a.length;});
+    var safe=esc(text),html=safe;
+    terms.forEach(function(t){
+      var re=new RegExp('('+escRe(esc(t))+')','ig');
+      html=html.replace(re,'<mark>$1</mark>');
+    });
+    return html;
+  }
+
+  function render(query){
+    items=search(query);sel=-1;
+    var html='';
+    items.forEach(function(it,i){
+      html+='<a class="ov-item" data-i="'+i+'" href="'+it.u+'">'
+        +'<div class="t"><span class="pg">'+esc(it.s||'GUIDE')+'</span><span>'+highlight(it.t,query)+'</span></div>'
+        +'<div class="x">'+highlight((it.x||'').slice(0,120),query)+'</div></a>';
+    });
+    res.innerHTML=html;
+    [].slice.call(res.querySelectorAll('.ov-item')).forEach(function(el){
+      el.addEventListener('click',function(){close();});
+      el.addEventListener('mouseenter',function(){setSel(+el.dataset.i);});
+    });
+  }
+  function setSel(i){
+    sel=i;
+    [].slice.call(res.querySelectorAll('.ov-item')).forEach(function(el,j){
+      el.classList.toggle('sel',j===sel);
+    });
+    var cur=res.querySelectorAll('.ov-item')[sel];
+    if(cur)cur.scrollIntoView({block:'nearest'});
+  }
+
+  function open(){
+    ov.classList.add('open');document.body.style.overflow='hidden';
+    q.value='';render('');setTimeout(function(){q.focus();},30);
+  }
+  function close(){
+    ov.classList.remove('open');document.body.style.overflow='';
+  }
+
+  document.querySelectorAll('[data-search]').forEach(function(b){
+    b.addEventListener('click',open);
+  });
+  document.querySelector('.ov-bg').addEventListener('click',close);
+  document.querySelector('.ov-esc').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){
+    var typing=/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();ov.classList.contains('open')?close():open();return;}
+    if(e.key==='/'&&!typing){e.preventDefault();open();return;}
+    if(e.key==='Escape'&&ov.classList.contains('open')){close();return;}
+    if(!ov.classList.contains('open'))return;
+    if(e.key==='ArrowDown'){e.preventDefault();setSel(Math.min(sel+1,items.length-1));}
+    else if(e.key==='ArrowUp'){e.preventDefault();setSel(Math.max(sel-1,0));}
+    else if(e.key==='Enter'&&sel>=0&&items[sel]){location.href=items[sel].u;close();}
+  });
+  q.addEventListener('input',function(){render(q.value);});
+})();
+</script>
+</body>
+</html>
