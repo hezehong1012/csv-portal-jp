@@ -7,6 +7,11 @@
 // the browser-only rule engine.
 
 const MAX_INPUT = 60000;
+// The model rewrites the whole table and we cap the output at 8000 tokens, which
+// is roughly 250 rows of ordinary CSV. Reject above that instead of silently
+// returning a truncated file.
+const MAX_ROWS = 200;
+const LLM_TIMEOUT_MS = 55000;
 
 const RATE_WINDOW_MS = 60000;
 const RATE_MAX = 10;
@@ -81,8 +86,13 @@ export default async function handler(req, res) {
 
   if (!csv.trim()) return res.status(400).json({ error: 'csv is required' });
   if (!instruction) return res.status(400).json({ error: 'instruction is required' });
-  if (csv.length > MAX_INPUT) {
-    return res.status(413).json({ error: 'CSV is too large for the AI mode (limit ' + MAX_INPUT + ' characters).' });
+
+  const rowCount = csv.split(/\r\n|\n|\r/).filter(function (l) { return l.length; }).length;
+  if (csv.length > MAX_INPUT || rowCount > MAX_ROWS) {
+    return res.status(413).json({
+      error: 'TOO_MANY_ROWS',
+      detail: 'AI mode accepts up to ' + MAX_ROWS + ' rows / ' + MAX_INPUT + ' characters.'
+    });
   }
 
   const userPrompt = '<instruction>\n' + instruction + '\n</instruction>\n\n<csv>\n' + csv + '\n</csv>';
@@ -104,9 +114,10 @@ export default async function handler(req, res) {
           { role: 'user', content: userPrompt }
         ],
         temperature: 0.1,
-        max_tokens: 4000,
+        max_tokens: 8000,
         response_format: { type: 'json_object' }
-      })
+      }),
+      signal: typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? AbortSignal.timeout(LLM_TIMEOUT_MS) : undefined
     });
 
     if (!r.ok) {
@@ -114,7 +125,12 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: 'LLM_HTTP_' + r.status, detail: detail.slice(0, 300) });
     }
     const data = await r.json();
-    const raw = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+    const choice = data.choices && data.choices[0];
+    // finish_reason "length" means the CSV was cut mid-way — never hand that back.
+    if (choice && choice.finish_reason === 'length') {
+      return res.status(413).json({ error: 'LLM_TRUNCATED' });
+    }
+    const raw = choice && choice.message && choice.message.content;
     if (!raw) return res.status(502).json({ error: 'LLM_EMPTY' });
 
     const parsed = extractJson(raw);
@@ -123,6 +139,10 @@ export default async function handler(req, res) {
     }
     return res.status(200).json({ csv: parsed.csv, notes: parsed.notes || '' });
   } catch (e) {
-    return res.status(500).json({ error: 'REPAIR_FAILED', detail: String(e && e.message || e).slice(0, 200) });
+    const msg = String(e && e.message || e);
+    if (e && (e.name === 'TimeoutError' || e.name === 'AbortError' || /aborted|timeout/i.test(msg))) {
+      return res.status(504).json({ error: 'AI_TIMEOUT' });
+    }
+    return res.status(500).json({ error: 'REPAIR_FAILED', detail: msg.slice(0, 200) });
   }
 }

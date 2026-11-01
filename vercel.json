@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/repair.js": {
+      "maxDuration": 60
+    }
+  }
+}

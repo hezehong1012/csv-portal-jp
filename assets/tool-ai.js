@@ -5,6 +5,13 @@
   'use strict';
 
   var LANG = /^\/en(\/|$)/.test(location.pathname) ? 'en' : 'ja';
+
+  /* Hard limits for the AI mode. The model rewrites the whole table, so both the
+     input size and the output length have to stay bounded — otherwise rows are
+     silently dropped. Anything bigger goes through the in-browser rule engine. */
+  var AI_MAX_CHARS = 60000;
+  var AI_MAX_ROWS = 200;
+  var AI_TIMEOUT_MS = 58000;
   var M = {
     ja: {
       empty: 'CSVが空です。貼り付けるか、ファイルを選んでください。',
@@ -28,7 +35,15 @@
       aiErr: 'AIの呼び出しに失敗しました。時間をおいて再度お試しください。',
       aiOk: 'AIによる修復が完了しました',
       aiNotes: 'AIのメモ',
-      noInstr: 'やってほしいことを入力してください。'
+      noInstr: 'やってほしいことを入力してください。',
+      aiTooBig: function (rows, chars) {
+        return 'AIモードは 1 回あたり <b>' + AI_MAX_ROWS + ' 行 / ' + AI_MAX_CHARS.toLocaleString() + ' 文字</b>までです。' +
+          'このCSVは <b>' + rows.toLocaleString() + ' 行 / ' + chars.toLocaleString() + ' 文字</b>あります。<br>' +
+          '上の「一括修復」は行数制限なし・通信なしで使えます。AIで仕上げたい場合は、ファイルを分割してから実行してください。';
+      },
+      aiTimeout: 'AIの応答が時間内に返りませんでした。行数を減らすか、いくつかに分割してお試しください。',
+      aiTruncated: 'AIの出力が途中で切れました（行数が多すぎます）。分割してからお試しください。',
+      aiElapsed: function (s) { return 'AIが修復しています… ' + s + '秒'; }
     },
     en: {
       empty: 'The CSV is empty. Paste something or choose a file.',
@@ -52,7 +67,15 @@
       aiErr: 'The AI call failed. Please try again in a moment.',
       aiOk: 'AI repair finished',
       aiNotes: 'AI notes',
-      noInstr: 'Describe what you want done.'
+      noInstr: 'Describe what you want done.',
+      aiTooBig: function (rows, chars) {
+        return 'The AI mode handles up to <b>' + AI_MAX_ROWS + ' rows / ' + AI_MAX_CHARS.toLocaleString() + ' characters</b> per run. ' +
+          'This CSV has <b>' + rows.toLocaleString() + ' rows / ' + chars.toLocaleString() + ' characters</b>.<br>' +
+          'The repair button above has no row limit and sends nothing over the network. To finish with AI, split the file first.';
+      },
+      aiTimeout: 'The AI did not answer in time. Try fewer rows, or split the file into parts.',
+      aiTruncated: 'The AI output was cut off (too many rows). Please split the file and try again.',
+      aiElapsed: function (s) { return 'Asking the AI to repair it… ' + s + 's'; }
     }
   }[LANG];
 
@@ -319,28 +342,80 @@
   }
 
   /* ---------------- AI ---------------- */
+  function countRows(text) {
+    var lines = String(text).split(/\r\n|\n|\r/);
+    var n = 0;
+    for (var i = 0; i < lines.length; i++) if (lines[i].length) n++;
+    return n;
+  }
+
   function runAi() {
     var instruction = $('aiInstruction').value.trim();
     var box = $('repAiLlm');
     if (!instruction) { box.className = 'report err'; box.innerHTML = M.noInstr; box.classList.remove('hidden'); return; }
-    box.className = 'report'; box.innerHTML = M.aiWait; box.classList.remove('hidden');
-    var btn = $('btnAiRun'); btn.disabled = true;
+
+    var csv = $('aiIn').value;
+    if (!csv.trim()) { box.className = 'report err'; box.innerHTML = M.empty; box.classList.remove('hidden'); return; }
+
+    var rowCount = countRows(csv);
+    if (csv.length > AI_MAX_CHARS || rowCount > AI_MAX_ROWS) {
+      box.className = 'report warn';
+      box.innerHTML = M.aiTooBig(rowCount, csv.length);
+      box.classList.remove('hidden');
+      return;
+    }
+
+    var btn = $('btnAiRun');
+    btn.disabled = true;
+    box.className = 'report';
+    box.classList.remove('hidden');
+    box.innerHTML = M.aiWait;
+
+    var started = Date.now();
+    var ticker = setInterval(function () {
+      box.innerHTML = M.aiElapsed(Math.round((Date.now() - started) / 1000));
+    }, 1000);
+
+    var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, AI_TIMEOUT_MS) : null;
+
+    function stop() {
+      clearInterval(ticker);
+      if (timer) clearTimeout(timer);
+      btn.disabled = false;
+    }
 
     fetch('/api/repair', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        csv: $('aiIn').value.slice(0, 60000),
+        csv: csv,
         instruction: instruction,
         lang: LANG
-      })
+      }),
+      signal: ctrl ? ctrl.signal : undefined
     }).then(function (r) {
-      return r.json().then(function (j) { return { ok: r.ok, status: r.status, body: j }; });
+      return r.json().then(function (j) {
+        return { ok: r.ok, status: r.status, body: j };
+      }).catch(function () {
+        return { ok: false, status: r.status, body: null };
+      });
     }).then(function (res) {
-      btn.disabled = false;
+      stop();
       if (!res.ok) {
-        var msg = res.status === 501 ? M.aiNoKey : (res.body && res.body.error) || M.aiErr;
-        box.className = 'report warn'; box.innerHTML = esc(msg); return;
+        var code = res.body && res.body.error;
+        if (code === 'TOO_MANY_ROWS') {
+          box.className = 'report warn';
+          box.innerHTML = M.aiTooBig(rowCount, csv.length);
+          return;
+        }
+        var msg = res.status === 501 ? M.aiNoKey
+          : (res.status === 504 || code === 'AI_TIMEOUT') ? M.aiTimeout
+          : code === 'LLM_TRUNCATED' ? M.aiTruncated
+          : code || M.aiErr;
+        box.className = 'report warn';
+        box.innerHTML = esc(msg);
+        return;
       }
       if (res.body.csv) {
         $('aiIn').value = res.body.csv;
@@ -351,9 +426,10 @@
       box.className = 'report';
       box.innerHTML = '<b>' + esc(M.aiOk) + '</b>' +
         (res.body.notes ? '<div style="margin-top:6px;white-space:pre-wrap">' + esc(res.body.notes) + '</div>' : '');
-    }).catch(function () {
-      btn.disabled = false;
-      box.className = 'report err'; box.innerHTML = M.aiErr;
+    }).catch(function (e) {
+      stop();
+      box.className = 'report warn';
+      box.innerHTML = esc((e && e.name === 'AbortError') ? M.aiTimeout : M.aiErr);
     });
   }
 
