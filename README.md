@@ -30,6 +30,20 @@ GitHub Pages の場合：
 Settings → Pages → Branch: main / (root) → Save
 ```
 
+## AI 機能の環境変数
+
+`/api/repair`（`ai.html` の AI 修復）は、キーを **Vercel の環境変数からのみ** 読み込みます。コード・リポジトリ・ビルド成果物には一切保存しません。
+
+| 変数名 | 用途 | 必須 |
+|---|---|---|
+| `LLM_API_KEY` | 推論 API のキー | 必須 |
+| `LLM_API_URL` | チャット補完エンドポイント | 任意（既定：`https://api.deepseek.com/v1/chat/completions`） |
+| `LLM_MODEL` | モデル名 | 任意（既定：`deepseek-chat`） |
+
+未設定の場合 `/api/repair` は `501 AI_UNAVAILABLE` を返し、UI はブラウザ内のルール修復（通信なし）に自動フォールバックします。
+
+設定後の確認：`GET /api/repair` が `{"ok":true,"configured":true}` を返せば有効です（環境変数の変更後は Redeploy が必要）。
+
 ## 更新履歴
 
 - 2026-10-30: 初版公開（5 ページ + ツールポータル + サイト内検索）
