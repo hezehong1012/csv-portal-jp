@@ -68,5 +68,11 @@ export const config = {
     '/en/mojibake.html',
     '/reading.html',
     '/en/reading.html',
+    '/json.html',
+    '/en/json.html',
+    '/pdf.html',
+    '/en/pdf.html',
+    '/ai.html',
+    '/en/ai.html',
   ],
 };
