@@ -47,7 +47,7 @@
     </div>
     <div class="chips" id="chips">
       <button class="chip on" data-fam="all" type="button">すべて <b>17</b></button>
-<button class="chip" data-fam="edit" type="button">編集処理 <b>2</b></button><button class="chip" data-fam="combo" type="button">分割・結合 <b>2</b></button><button class="chip" data-fam="verify" type="button">検証・比較 <b>2</b></button><button class="chip" data-fam="fmt" type="button">形式処理 <b>2</b></button><button class="chip" data-fam="conv" type="button">形式変換 <b>3</b></button><button class="chip" data-fam="clean" type="button">クレンジング <b>2</b></button><button class="chip" data-fam="col" type="button">列と表頭 <b>1</b></button><button class="chip" data-fam="stats" type="button">集計・分析 <b>1</b></button><button class="chip" data-fam="sql" type="button">DB・SQL <b>1</b></button><button class="chip" data-fam="gen" type="button">生成支援 <b>1</b></button>
+<button class="chip" data-fam="edit" type="button">編集・行と列 <b>4</b></button><button class="chip" data-fam="combo" type="button">分割・結合・比較 <b>4</b></button><button class="chip" data-fam="conv" type="button">形式変換 <b>5</b></button><button class="chip" data-fam="clean" type="button">クレンジング <b>2</b></button><button class="chip" data-fam="gen" type="button">抽出・生成 <b>2</b></button>
     </div>
   </div>
 </section>
@@ -56,44 +56,24 @@
   <div class="wrap">
     <div class="feature-row"><div class="feature-card"><div class="fc-tag">Editor</div><div class="fc-title">表のまま、その場で編集して保存</div><div class="fc-desc">セル編集・行の追加削除・ダミーデータ生成。Excel / CSV / JSON で書き出せます。</div><a class="btn btn-primary btn-sm" href="https://csv-editor.format-portal.com/" target="_blank" rel="noopener">エディタを開く</a></div><div class="feature-card"><div class="fc-tag">AI</div><div class="fc-title">区切りズレ・文字化け・表記ゆれをまとめて直す</div><div class="fc-desc">「電話番号を11桁に揃えて」のように日本語で指示するだけ。</div><a class="btn btn-primary btn-sm" href="/ai.html">開く</a></div></div>
     <div class="fam" data-fam="edit">
-      <div class="fam-head"><h2>編集処理</h2><span class="fam-n">2</span></div>
-      <div class="grid-t"><a class="tcard" href="https://csv-editor.format-portal.com/" target="_blank" rel="noopener"><span class="tn">オンラインエディタ</span><span class="td">その場で編集・保存</span></a><a class="tcard" href="/csv-row-clean.html"><span class="tn">空白行の整理</span><span class="td">空白行・空列の削除</span></a></div>
+      <div class="fam-head"><h2>編集・行と列</h2><span class="fam-n">4</span></div>
+      <div class="grid-t"><a class="tcard" href="https://csv-editor.format-portal.com/" target="_blank" rel="noopener"><span class="tn">オンラインエディタ</span><span class="td">その場で編集・保存</span></a><a class="tcard" href="/csv-row-clean.html"><span class="tn">空白行の整理</span><span class="td">空白行・空列の削除</span></a><a class="tcard" href="/csv-column.html"><span class="tn">列の抽出・削除</span><span class="td">必要な列だけ残す</span></a><a class="tcard" href="/csv-sort.html"><span class="tn">複数列ソート</span><span class="td">数値・日付も正しく</span></a></div>
     </div>
     <div class="fam" data-fam="combo">
-      <div class="fam-head"><h2>分割・結合</h2><span class="fam-n">2</span></div>
-      <div class="grid-t"><a class="tcard" href="/csv-split.html"><span class="tn">大容量分割</span><span class="td">行数・ファイル数で分割</span></a><a class="tcard" href="/csv-merge.html"><span class="tn">CSV 結合</span><span class="td">複数ファイルを縦に連結</span></a></div>
-    </div>
-    <div class="fam" data-fam="verify">
-      <div class="fam-head"><h2>検証・比較</h2><span class="fam-n">2</span></div>
-      <div class="grid-t"><a class="tcard" href="/csv-dedup.html"><span class="tn">重複行削除</span><span class="td">重複の抽出も</span></a><a class="tcard" href="/csv-diff.html"><span class="tn">差分比較</span><span class="td">2ファイルの違いを抽出</span></a></div>
-    </div>
-    <div class="fam" data-fam="fmt">
-      <div class="fam-head"><h2>形式処理</h2><span class="fam-n">2</span></div>
-      <div class="grid-t"><a class="tcard" href="/csv-shift-jis.html"><span class="tn">文字コード変換</span><span class="td">Shift_JIS → UTF-8</span></a><a class="tcard" href="/csv-newline.html"><span class="tn">改行コード変換</span><span class="td">CRLF ⇄ LF</span></a></div>
+      <div class="fam-head"><h2>分割・結合・比較</h2><span class="fam-n">4</span></div>
+      <div class="grid-t"><a class="tcard" href="/csv-split.html"><span class="tn">大容量分割</span><span class="td">行数・ファイル数で分割</span></a><a class="tcard" href="/csv-merge.html"><span class="tn">CSV 結合</span><span class="td">複数ファイルを縦に連結</span></a><a class="tcard" href="/csv-dedup.html"><span class="tn">重複行削除</span><span class="td">重複の抽出も</span></a><a class="tcard" href="/csv-diff.html"><span class="tn">差分比較</span><span class="td">2ファイルの違いを抽出</span></a></div>
     </div>
     <div class="fam" data-fam="conv">
-      <div class="fam-head"><h2>形式変換</h2><span class="fam-n">3</span></div>
-      <div class="grid-t"><a class="tcard" href="/csv-delimiter.html"><span class="tn">区切り文字変換</span><span class="td">カンマ ⇄ タブ ⇄ ;</span></a><a class="tcard" href="/json.html"><span class="tn">CSV ⇄ JSON</span><span class="td">相互変換・JSON Lines</span></a><a class="tcard" href="/pdf.html"><span class="tn">CSV → PDF</span><span class="td">表をそのまま印刷</span></a></div>
+      <div class="fam-head"><h2>形式変換</h2><span class="fam-n">5</span></div>
+      <div class="grid-t"><a class="tcard" href="/csv-shift-jis.html"><span class="tn">文字コード変換</span><span class="td">Shift_JIS → UTF-8</span></a><a class="tcard" href="/csv-newline.html"><span class="tn">改行コード変換</span><span class="td">CRLF ⇄ LF</span></a><a class="tcard" href="/csv-delimiter.html"><span class="tn">区切り文字変換</span><span class="td">カンマ ⇄ タブ ⇄ ;</span></a><a class="tcard" href="/json.html"><span class="tn">CSV ⇄ JSON</span><span class="td">相互変換・JSON Lines</span></a><a class="tcard" href="/pdf.html"><span class="tn">CSV → PDF</span><span class="td">表をそのまま印刷</span></a></div>
     </div>
     <div class="fam" data-fam="clean">
       <div class="fam-head"><h2>クレンジング</h2><span class="fam-n">2</span></div>
       <div class="grid-t"><a class="tcard" href="/csv-clean.html"><span class="tn">クレンジング</span><span class="td">空白・記号・空セル</span></a><a class="tcard" href="/csv-normalize.html"><span class="tn">形式統一</span><span class="td">全角半角・日付・電話</span></a></div>
     </div>
-    <div class="fam" data-fam="col">
-      <div class="fam-head"><h2>列と表頭</h2><span class="fam-n">1</span></div>
-      <div class="grid-t"><a class="tcard" href="/csv-column.html"><span class="tn">列の抽出・削除</span><span class="td">必要な列だけ残す</span></a></div>
-    </div>
-    <div class="fam" data-fam="stats">
-      <div class="fam-head"><h2>集計・分析</h2><span class="fam-n">1</span></div>
-      <div class="grid-t"><a class="tcard" href="/csv-sort.html"><span class="tn">複数列ソート</span><span class="td">数値・日付も正しく</span></a></div>
-    </div>
-    <div class="fam" data-fam="sql">
-      <div class="fam-head"><h2>DB・SQL</h2><span class="fam-n">1</span></div>
-      <div class="grid-t"><a class="tcard" href="/csv-sql.html"><span class="tn">SQL INSERT 生成</span><span class="td">INSERT + CREATE TABLE</span></a></div>
-    </div>
     <div class="fam" data-fam="gen">
-      <div class="fam-head"><h2>生成支援</h2><span class="fam-n">1</span></div>
-      <div class="grid-t"><a class="tcard" href="/csv-extract.html"><span class="tn">正規表現で抽出</span><span class="td">メール・URL・電話番号</span></a></div>
+      <div class="fam-head"><h2>抽出・生成</h2><span class="fam-n">2</span></div>
+      <div class="grid-t"><a class="tcard" href="/csv-sql.html"><span class="tn">SQL INSERT 生成</span><span class="td">INSERT + CREATE TABLE</span></a><a class="tcard" href="/csv-extract.html"><span class="tn">正規表現で抽出</span><span class="td">メール・URL・電話番号</span></a></div>
     </div>
   </div>
 </section>

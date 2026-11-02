@@ -47,7 +47,7 @@
     </div>
     <div class="chips" id="chips">
       <button class="chip on" data-fam="all" type="button">All <b>17</b></button>
-<button class="chip" data-fam="edit" type="button">Edit <b>2</b></button><button class="chip" data-fam="conv" type="button">Convert <b>3</b></button><button class="chip" data-fam="combo" type="button">Split &amp; merge <b>2</b></button><button class="chip" data-fam="verify" type="button">Verify <b>2</b></button><button class="chip" data-fam="sql" type="button">Database <b>1</b></button><button class="chip" data-fam="clean" type="button">Clean <b>2</b></button><button class="chip" data-fam="col" type="button">Columns <b>1</b></button><button class="chip" data-fam="fmt" type="button">Format <b>2</b></button><button class="chip" data-fam="stats" type="button">Analyze <b>1</b></button><button class="chip" data-fam="gen" type="button">Generate <b>1</b></button>
+<button class="chip" data-fam="edit" type="button">Edit &amp; columns <b>4</b></button><button class="chip" data-fam="conv" type="button">Convert <b>5</b></button><button class="chip" data-fam="combo" type="button">Split, merge &amp; compare <b>4</b></button><button class="chip" data-fam="gen" type="button">Extract &amp; generate <b>2</b></button><button class="chip" data-fam="clean" type="button">Cleanse <b>2</b></button>
     </div>
   </div>
 </section>
@@ -56,44 +56,24 @@
   <div class="wrap">
     <div class="feature-row"><div class="feature-card"><div class="fc-tag">Editor</div><div class="fc-title">Edit the table in place, then save</div><div class="fc-desc">Cell editing, add or remove rows, generate sample data. Export to Excel, CSV or JSON.</div><a class="btn btn-primary btn-sm" href="https://csv-editor.format-portal.com/en/" target="_blank" rel="noopener">Open the editor</a></div><div class="feature-card"><div class="fc-tag">AI</div><div class="fc-title">Fix broken delimiters, mojibake and inconsistent values at once</div><div class="fc-desc">Just describe it in plain language — “make phone numbers 11 digits”.</div><a class="btn btn-primary btn-sm" href="/en/ai.html">Open</a></div></div>
     <div class="fam" data-fam="edit">
-      <div class="fam-head"><h2>Edit</h2><span class="fam-n">2</span></div>
-      <div class="grid-t"><a class="tcard" href="https://csv-editor.format-portal.com/en/" target="_blank" rel="noopener"><span class="tn">Online editor</span><span class="td">Edit and save in place</span></a><a class="tcard" href="/en/csv-row-clean.html"><span class="tn">Clean blank rows</span><span class="td">Blank rows and columns</span></a></div>
+      <div class="fam-head"><h2>Edit &amp; columns</h2><span class="fam-n">4</span></div>
+      <div class="grid-t"><a class="tcard" href="https://csv-editor.format-portal.com/en/" target="_blank" rel="noopener"><span class="tn">Online editor</span><span class="td">Edit and save in place</span></a><a class="tcard" href="/en/csv-row-clean.html"><span class="tn">Clean blank rows</span><span class="td">Blank rows and columns</span></a><a class="tcard" href="/en/csv-column.html"><span class="tn">Pick or drop columns</span><span class="td">Keep only what you need</span></a><a class="tcard" href="/en/csv-sort.html"><span class="tn">Sort by multiple columns</span><span class="td">Numbers and dates too</span></a></div>
     </div>
     <div class="fam" data-fam="conv">
-      <div class="fam-head"><h2>Convert</h2><span class="fam-n">3</span></div>
-      <div class="grid-t"><a class="tcard" href="/en/csv-delimiter.html"><span class="tn">Delimiter converter</span><span class="td">Comma, tab, semicolon</span></a><a class="tcard" href="/en/json.html"><span class="tn">CSV ⇄ JSON</span><span class="td">Convert both ways</span></a><a class="tcard" href="/en/pdf.html"><span class="tn">CSV → PDF</span><span class="td">Print the table as-is</span></a></div>
+      <div class="fam-head"><h2>Convert</h2><span class="fam-n">5</span></div>
+      <div class="grid-t"><a class="tcard" href="/en/csv-shift-jis.html"><span class="tn">Encoding converter</span><span class="td">Shift_JIS to UTF-8</span></a><a class="tcard" href="/en/csv-newline.html"><span class="tn">Line endings</span><span class="td">CRLF to LF</span></a><a class="tcard" href="/en/csv-delimiter.html"><span class="tn">Delimiter converter</span><span class="td">Comma, tab, semicolon</span></a><a class="tcard" href="/en/json.html"><span class="tn">CSV ⇄ JSON</span><span class="td">Convert both ways</span></a><a class="tcard" href="/en/pdf.html"><span class="tn">CSV → PDF</span><span class="td">Print the table as-is</span></a></div>
     </div>
     <div class="fam" data-fam="combo">
-      <div class="fam-head"><h2>Split &amp; merge</h2><span class="fam-n">2</span></div>
-      <div class="grid-t"><a class="tcard" href="/en/csv-split.html"><span class="tn">Split large files</span><span class="td">Split by rows or count</span></a><a class="tcard" href="/en/csv-merge.html"><span class="tn">Merge CSV files</span><span class="td">Stack files into one</span></a></div>
-    </div>
-    <div class="fam" data-fam="verify">
-      <div class="fam-head"><h2>Verify</h2><span class="fam-n">2</span></div>
-      <div class="grid-t"><a class="tcard" href="/en/csv-dedup.html"><span class="tn">Remove duplicates</span><span class="td">Drop or extract duplicates</span></a><a class="tcard" href="/en/csv-diff.html"><span class="tn">Compare two files</span><span class="td">Added / removed / changed</span></a></div>
-    </div>
-    <div class="fam" data-fam="sql">
-      <div class="fam-head"><h2>Database</h2><span class="fam-n">1</span></div>
-      <div class="grid-t"><a class="tcard" href="/en/csv-sql.html"><span class="tn">SQL INSERT</span><span class="td">INSERT + CREATE TABLE</span></a></div>
-    </div>
-    <div class="fam" data-fam="clean">
-      <div class="fam-head"><h2>Clean</h2><span class="fam-n">2</span></div>
-      <div class="grid-t"><a class="tcard" href="/en/csv-clean.html"><span class="tn">Cleanse values</span><span class="td">Spaces, symbols, blanks</span></a><a class="tcard" href="/en/csv-normalize.html"><span class="tn">Normalize formats</span><span class="td">Width, dates, phones</span></a></div>
-    </div>
-    <div class="fam" data-fam="col">
-      <div class="fam-head"><h2>Columns</h2><span class="fam-n">1</span></div>
-      <div class="grid-t"><a class="tcard" href="/en/csv-column.html"><span class="tn">Pick or drop columns</span><span class="td">Keep only what you need</span></a></div>
-    </div>
-    <div class="fam" data-fam="fmt">
-      <div class="fam-head"><h2>Format</h2><span class="fam-n">2</span></div>
-      <div class="grid-t"><a class="tcard" href="/en/csv-shift-jis.html"><span class="tn">Encoding converter</span><span class="td">Shift_JIS to UTF-8</span></a><a class="tcard" href="/en/csv-newline.html"><span class="tn">Line endings</span><span class="td">CRLF to LF</span></a></div>
-    </div>
-    <div class="fam" data-fam="stats">
-      <div class="fam-head"><h2>Analyze</h2><span class="fam-n">1</span></div>
-      <div class="grid-t"><a class="tcard" href="/en/csv-sort.html"><span class="tn">Sort by multiple columns</span><span class="td">Numbers and dates too</span></a></div>
+      <div class="fam-head"><h2>Split, merge &amp; compare</h2><span class="fam-n">4</span></div>
+      <div class="grid-t"><a class="tcard" href="/en/csv-split.html"><span class="tn">Split large files</span><span class="td">Split by rows or count</span></a><a class="tcard" href="/en/csv-merge.html"><span class="tn">Merge CSV files</span><span class="td">Stack files into one</span></a><a class="tcard" href="/en/csv-dedup.html"><span class="tn">Remove duplicates</span><span class="td">Drop or extract duplicates</span></a><a class="tcard" href="/en/csv-diff.html"><span class="tn">Compare two files</span><span class="td">Added / removed / changed</span></a></div>
     </div>
     <div class="fam" data-fam="gen">
-      <div class="fam-head"><h2>Generate</h2><span class="fam-n">1</span></div>
-      <div class="grid-t"><a class="tcard" href="/en/csv-extract.html"><span class="tn">Regex extract</span><span class="td">Email, URL, phone</span></a></div>
+      <div class="fam-head"><h2>Extract &amp; generate</h2><span class="fam-n">2</span></div>
+      <div class="grid-t"><a class="tcard" href="/en/csv-sql.html"><span class="tn">SQL INSERT</span><span class="td">INSERT + CREATE TABLE</span></a><a class="tcard" href="/en/csv-extract.html"><span class="tn">Regex extract</span><span class="td">Email, URL, phone</span></a></div>
+    </div>
+    <div class="fam" data-fam="clean">
+      <div class="fam-head"><h2>Cleanse</h2><span class="fam-n">2</span></div>
+      <div class="grid-t"><a class="tcard" href="/en/csv-clean.html"><span class="tn">Cleanse values</span><span class="td">Spaces, symbols, blanks</span></a><a class="tcard" href="/en/csv-normalize.html"><span class="tn">Normalize formats</span><span class="td">Width, dates, phones</span></a></div>
     </div>
   </div>
 </section>

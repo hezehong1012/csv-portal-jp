@@ -16,23 +16,17 @@ def esc(s):
 
 # ------------------------------------------------------------------ taxonomy
 FAM = {
-    "edit":   ("編集処理", "Edit", "行の整理・その場編集"),
-    "combo":  ("分割・結合", "Split & merge", "複数ファイルの出し入れ"),
-    "verify": ("検証・比較", "Verify", "重複・差分のチェック"),
-    "fmt":    ("形式処理", "Format", "文字コード・改行"),
-    "conv":   ("形式変換", "Convert", "区切り・JSON・PDF"),
-    "clean":  ("クレンジング", "Clean", "表記ゆれ・形式統一"),
-    "col":    ("列と表頭", "Columns", "抽出・削除・並べ替え"),
-    "stats":  ("集計・分析", "Analyze", "並べ替え・集計"),
-    "sql":    ("DB・SQL", "Database", "INSERT 文の生成"),
-    "gen":    ("生成支援", "Generate", "正規表現で抽出"),
+    "edit":  ("編集・行と列", "Edit & columns", "編集・列の整理・並べ替え"),
+    "combo": ("分割・結合・比較", "Split, merge & compare", "複数ファイルの出し入れ"),
+    "conv":  ("形式変換", "Convert", "文字コード・区切り・JSON・PDF"),
+    "clean": ("クレンジング", "Cleanse", "表記ゆれ・形式統一"),
+    "gen":   ("抽出・生成", "Extract & generate", "正規表現・SQL"),
 }
 
-# 編集処理（エディタ）は両言語とも先頭。以降は日本語＝実務の帳票処理、
-# 英語＝開発者寄りの変換・DB を前に置く。
+# 5 族。編集（エディタ）は両言語とも先頭。
 FAM_ORDER = {
-    "ja": ["edit", "combo", "verify", "fmt", "conv", "clean", "col", "stats", "sql", "gen"],
-    "en": ["edit", "conv", "combo", "verify", "sql", "clean", "col", "fmt", "stats", "gen"],
+    "ja": ["edit", "combo", "conv", "clean", "gen"],
+    "en": ["edit", "conv", "combo", "gen", "clean"],
 }
 
 TOOLS = [
@@ -48,7 +42,7 @@ TOOLS = [
     dict(slug="normalize", path="csv-normalize", fam="clean", live=True,
          ja="形式統一", en="Normalize formats",
          dja="全角半角・日付・電話", den="Width, dates, phones"),
-    dict(slug="column", path="csv-column", fam="col", live=True,
+    dict(slug="column", path="csv-column", fam="edit", live=True,
          ja="列の抽出・削除", en="Pick or drop columns",
          dja="必要な列だけ残す", den="Keep only what you need"),
     dict(slug="split", path="csv-split", fam="combo", live=True,
@@ -57,10 +51,10 @@ TOOLS = [
     dict(slug="merge", path="csv-merge", fam="combo", live=True,
          ja="CSV 結合", en="Merge CSV files",
          dja="複数ファイルを縦に連結", den="Stack files into one"),
-    dict(slug="shift-jis", path="csv-shift-jis", fam="fmt", live=True,
+    dict(slug="shift-jis", path="csv-shift-jis", fam="conv", live=True,
          ja="文字コード変換", en="Encoding converter",
          dja="Shift_JIS → UTF-8", den="Shift_JIS to UTF-8"),
-    dict(slug="newline", path="csv-newline", fam="fmt", live=True,
+    dict(slug="newline", path="csv-newline", fam="conv", live=True,
          ja="改行コード変換", en="Line endings",
          dja="CRLF ⇄ LF", den="CRLF to LF"),
     dict(slug="delimiter", path="csv-delimiter", fam="conv", live=True,
@@ -72,16 +66,16 @@ TOOLS = [
     dict(slug="pdf", fam="conv", live=True, href="/pdf.html",
          ja="CSV → PDF", en="CSV → PDF",
          dja="表をそのまま印刷", den="Print the table as-is"),
-    dict(slug="sql", path="csv-sql", fam="sql", live=True,
+    dict(slug="sql", path="csv-sql", fam="gen", live=True,
          ja="SQL INSERT 生成", en="SQL INSERT",
          dja="INSERT + CREATE TABLE", den="INSERT + CREATE TABLE"),
-    dict(slug="sort", path="csv-sort", fam="stats", live=True,
+    dict(slug="sort", path="csv-sort", fam="edit", live=True,
          ja="複数列ソート", en="Sort by multiple columns",
          dja="数値・日付も正しく", den="Numbers and dates too"),
-    dict(slug="dedup", path="csv-dedup", fam="verify", live=True,
+    dict(slug="dedup", path="csv-dedup", fam="combo", live=True,
          ja="重複行削除", en="Remove duplicates",
          dja="重複の抽出も", den="Drop or extract duplicates"),
-    dict(slug="diff", path="csv-diff", fam="verify", live=True,
+    dict(slug="diff", path="csv-diff", fam="combo", live=True,
          ja="差分比較", en="Compare two files",
          dja="2ファイルの違いを抽出", den="Added / removed / changed"),
     dict(slug="extract", path="csv-extract", fam="gen", live=True,
