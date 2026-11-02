@@ -309,12 +309,16 @@ def head(t, lang, url):
 """
 
 
-def header(lang, here=""):
+def header(lang, here="", switch=""):
     home = "/" if lang == "ja" else "/en/"
     guide = "/guide/what-is-csv.html" if lang == "ja" else "/en/guide/what-is-csv.html"
-    other = "/en/" if lang == "ja" else "/"
     t_tools = "ツール" if lang == "ja" else "Tools"
     t_guide = "ガイド" if lang == "ja" else "Guides"
+    t_lang = "EN" if lang == "ja" else "日本語"
+    if not switch:
+        # fallback: other-language home; ?setlang makes middleware remember the
+        # choice via cookie, otherwise geo routing bounces non-JP IPs back
+        switch = "/en/?setlang=en" if lang == "ja" else "/?setlang=ja"
     brand = '<a class="brand" href="%s"><span class="mark">CSV</span>Format Portal</a>' % home
     return f"""<header class="site-head">
   <div class="inner">
@@ -322,7 +326,7 @@ def header(lang, here=""):
     <nav class="head-nav">
       <a href="{home}#tools" class="{'here' if here == 'tools' else ''}">{t_tools}</a>
       <a href="{guide}" class="{'here' if here == 'guide' else ''}">{t_guide}</a>
-      <a href="{other}" hreflang="{'en' if lang == 'ja' else 'ja'}">{'EN' if lang == 'ja' else '日本語'}</a>
+      <a class="lang" href="{switch}" hreflang="{'en' if lang == 'ja' else 'ja'}">{t_lang}</a>
     </nav>
   </div>
 </header>
@@ -532,7 +536,8 @@ def build_page(t, lang):
                                "登録不要" if ja else "No sign-up", badge))
 
     page = head(t, lang, url)
-    page += header(lang, "tools")
+    switch = (t["url_en"] if ja else t["url_ja"]) + ("?setlang=en" if ja else "?setlang=ja")
+    page += header(lang, "tools", switch)
     page += f"""<section class="hero">
   <div class="wrap">
     <div class="crumbs"><a href="{home}">{'ホーム' if ja else 'Home'}</a><span class="sep">/</span><a href="{home}#tools">{'ツール' if ja else 'Tools'}</a><span class="sep">/</span>{esc(h1)}</div>
@@ -574,7 +579,7 @@ def build_hub(lang):
     total = len(TOOLS)
 
     page = head(t, lang, home)
-    page += header(lang, "tools")
+    page += header(lang, "tools", "/en/?setlang=en" if ja else "/?setlang=ja")
 
     fam_html = ""
     for key in FAM_ORDER[lang]:

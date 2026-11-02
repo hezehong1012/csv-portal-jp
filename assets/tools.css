@@ -31,7 +31,10 @@ code,pre,kbd{font-family:"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monos
 .head-nav a{border:0;color:inherit;padding:4px 2px}
 .head-nav a:hover{color:var(--accent)}
 .head-nav a.here{color:var(--accent);font-weight:700}
-@media (max-width:900px){.head-nav{display:none}}
+@media (max-width:900px){
+  .head-nav{gap:14px}
+  .head-nav a:not(.lang){display:none}
+}
 
 /* ---------- hero ---------- */
 .hero{padding:44px 0 34px;border-bottom:1px solid var(--line)}
