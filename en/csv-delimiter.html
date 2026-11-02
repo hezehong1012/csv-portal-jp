@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convert CSV delimiters — comma, tab and semicolon</title>
+<meta name="description" content="Turn comma-separated data into TSV or semicolon-separated CSV — and read the semicolon files European Excel produces. Delimiters are auto-detected and quoted values stay intact.">
+<link rel="canonical" href="https://csv.format-portal.com/en/csv-delimiter.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-delimiter.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-delimiter.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-delimiter.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Convert CSV delimiters — comma, tab and semicolon">
+<meta property="og:description" content="Turn comma-separated data into TSV or semicolon-separated CSV — and read the semicolon files European Excel produces. Delimiters are auto-detected and quoted values stay intact.">
+<meta property="og:url" content="https://csv.format-portal.com/en/csv-delimiter.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Convert CSV delimiters — comma, tab and semicolon", "url": "https://csv.format-portal.com/en/csv-delimiter.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "en", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "Turn comma-separated data into TSV or semicolon-separated CSV — and read the semicolon files European Excel produces. Delimiters are auto-detected and quoted values stay intact."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Can it produce TSV?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — choose tab as the output delimiter and the file is saved as .tsv."}}, {"@type": "Question", "name": "Can it read semicolon CSVs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, including what European Excel writes. Leave the input on auto-detect."}}, {"@type": "Question", "name": "How does auto-detection work?", "acceptedAnswer": {"@type": "Answer", "text": "The first six lines are parsed with each candidate delimiter and the one giving a consistent column count wins. Set it manually if it guesses wrong."}}, {"@type": "Question", "name": "What if a value contains a comma?", "acceptedAnswer": {"@type": "Answer", "text": "It gets quoted automatically, so the columns still line up in Excel."}}, {"@type": "Question", "name": "Is my data uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No, the conversion is local."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csv.format-portal.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://csv.format-portal.com/en/#tools"}, {"@type": "ListItem", "position": 3, "name": "Convert the delimiter", "item": "https://csv.format-portal.com/en/csv-delimiter.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/en/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/en/#tools" class="here">Tools</a>
+      <a href="/en/guide/what-is-csv.html" class="">Guides</a>
+      <a href="/" hreflang="ja">日本語</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a><span class="sep">/</span><a href="/en/#tools">Tools</a><span class="sep">/</span>Convert the delimiter</div>
+    <h1>Convert the delimiter</h1>
+    <p class="lead">Some systems demand tabs, addresses contain commas, and European exports arrive semicolon-separated. Fix the delimiter mismatch here before the import fails.</p>
+    <div class="badges"><span class="badge">No upload</span><span class="badge">No sign-up</span><span class="badge">Comma, tab and semicolon</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">Process your CSV</span>
+        <span class="tc-badge">Runs on your device</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">File</button>
+        <button class="tab" id="tabPaste" type="button">Paste</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">Drop a CSV here</div>
+          <div class="drop-s">or click to choose · Shift_JIS / UTF-8 detected</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label>Input delimiter
+          <select id="dlIn"><option value="auto">auto-detect</option><option value=",">comma (,)</option><option value="&#9;">tab</option><option value=";">semicolon (;)</option><option value="|">pipe (|)</option></select>
+        </label>
+        <label>Output delimiter
+          <select id="dlOut"><option value=",">comma (,)</option><option value="&#9;">tab (TSV)</option><option value=";">semicolon (;)</option><option value="|">pipe (|)</option></select>
+        </label>
+        <label class="chk"><input type="checkbox" id="dlBom"> add a BOM</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">Run</button> <button class="btn btn-sm" id="sample" type="button">Try a sample</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>How to use</h2>
+    <ol class="steps"><li>Drop a CSV / TSV or paste the table.</li><li>Pick the input and output delimiters (leave the input on auto in most cases).</li><li>Press Run, check the column count, then download.</li></ol>
+    <h3>What this tool does not do</h3>
+    <p>Values containing the delimiter are quoted automatically, but broken quoting in the source is not repaired. Rows with a different column count are passed through unchanged.</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <div class="faq"><details class="faq-item"><summary>Can it produce TSV?</summary><div class="faq-body">Yes — choose tab as the output delimiter and the file is saved as .tsv.</div></details><details class="faq-item"><summary>Can it read semicolon CSVs?</summary><div class="faq-body">Yes, including what European Excel writes. Leave the input on auto-detect.</div></details><details class="faq-item"><summary>How does auto-detection work?</summary><div class="faq-body">The first six lines are parsed with each candidate delimiter and the one giving a consistent column count wins. Set it manually if it guesses wrong.</div></details><details class="faq-item"><summary>What if a value contains a comma?</summary><div class="faq-body">It gets quoted automatically, so the columns still line up in Excel.</div></details><details class="faq-item"><summary>Is my data uploaded?</summary><div class="faq-body">No, the conversion is local.</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>Related tools</h2>
+    <div class="related"><a class="rel" href="/en/json.html"><span class="t">CSV ⇄ JSON</span><span class="d">Convert both ways</span></a><a class="rel" href="/en/csv-newline.html"><span class="t">Line endings</span><span class="d">CRLF to LF</span></a><a class="rel" href="/en/csv-shift-jis.html"><span class="t">Encoding converter</span><span class="d">Shift_JIS to UTF-8</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/en/">All tools</a>
+      <a href="/en/guide/what-is-csv.html">CSV guides</a>
+      <a href="/en/#privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/delimiter.js"></script>
+</body>
+</html>

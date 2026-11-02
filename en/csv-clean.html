@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clean up CSV values — spaces, symbols and empty cells</title>
+<meta name="description" content="Trim spaces, drop full-width blanks and stray symbols, and strip thousands separators across the whole file. You can also fill empty cells with a fixed value — nothing is uploaded.">
+<link rel="canonical" href="https://csv.format-portal.com/en/csv-clean.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-clean.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-clean.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-clean.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Clean up CSV values — spaces, symbols and empty cells">
+<meta property="og:description" content="Trim spaces, drop full-width blanks and stray symbols, and strip thousands separators across the whole file. You can also fill empty cells with a fixed value — nothing is uploaded.">
+<meta property="og:url" content="https://csv.format-portal.com/en/csv-clean.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Clean up CSV values — spaces, symbols and empty cells", "url": "https://csv.format-portal.com/en/csv-clean.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "en", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "Trim spaces, drop full-width blanks and stray symbols, and strip thousands separators across the whole file. You can also fill empty cells with a fixed value — nothing is uploaded."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "What exactly does symbol removal delete?", "acceptedAnswer": {"@type": "Answer", "text": "“Hyphens and brackets” is for phone and postal codes; “all symbols” strips punctuation down to letters and digits. Check the preview before exporting."}}, {"@type": "Question", "name": "Can I fill every empty cell at once?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — put a value in “fill empty cells” and blanks become 0, “n/a”, or whatever you need."}}, {"@type": "Question", "name": "Can it strip thousands separators?", "acceptedAnswer": {"@type": "Answer", "text": "Turn on that option and 1,200 becomes 1200. Values that are not numeric are left alone."}}, {"@type": "Question", "name": "What about line breaks inside cells?", "acceptedAnswer": {"@type": "Answer", "text": "The option converts in-cell newlines and tabs to spaces so every record stays on one line."}}, {"@type": "Question", "name": "Is anything uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No, everything runs locally."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csv.format-portal.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://csv.format-portal.com/en/#tools"}, {"@type": "ListItem", "position": 3, "name": "Cleanse cell values", "item": "https://csv.format-portal.com/en/csv-clean.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/en/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/en/#tools" class="here">Tools</a>
+      <a href="/en/guide/what-is-csv.html" class="">Guides</a>
+      <a href="/" hreflang="ja">日本語</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a><span class="sep">/</span><a href="/en/#tools">Tools</a><span class="sep">/</span>Cleanse cell values</div>
+    <h1>Cleanse cell values</h1>
+    <p class="lead">Tables copied out of mail or PDFs carry trailing spaces, full-width blanks and stray brackets. Strip them in one pass so the file is ready for lookups and joins.</p>
+    <div class="badges"><span class="badge">No upload</span><span class="badge">No sign-up</span><span class="badge">Spaces, symbols, empty cells</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">Process your CSV</span>
+        <span class="tc-badge">Runs on your device</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">File</button>
+        <button class="tab" id="tabPaste" type="button">Paste</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">Drop a CSV here</div>
+          <div class="drop-s">or click to choose · Shift_JIS / UTF-8 detected</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label class="chk"><input type="checkbox" id="clTrim" checked> trim surrounding spaces</label>
+        <label class="chk"><input type="checkbox" id="clSqueeze"> collapse repeated spaces</label>
+        <label class="chk"><input type="checkbox" id="clZenkaku"> remove full-width spaces</label>
+        <label class="chk"><input type="checkbox" id="clBreak"> turn in-cell newlines into spaces</label>
+        <label class="chk"><input type="checkbox" id="clComma"> strip thousands separators</label>
+        <label>Symbols
+          <select id="clSymbols"><option value="none">keep</option><option value="basic">drop hyphens and brackets</option><option value="all">drop all symbols</option></select>
+        </label>
+        <label>Fill empty cells <input type="text" id="clFill" placeholder="e.g. n/a" style="width:110px"></label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">Run</button> <button class="btn btn-sm" id="sample" type="button">Try a sample</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>How to use</h2>
+    <ol class="steps"><li>Drop a CSV or paste the table.</li><li>Tick what should be cleaned — spaces, symbols, empty cells.</li><li>Press Run, check how many cells changed, then download.</li></ol>
+    <h3>What this tool does not do</h3>
+    <p>This tool does not split names or addresses, and it does not fuzzy-match similar entries. Symbol removal only touches the character set you choose.</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <div class="faq"><details class="faq-item"><summary>What exactly does symbol removal delete?</summary><div class="faq-body">“Hyphens and brackets” is for phone and postal codes; “all symbols” strips punctuation down to letters and digits. Check the preview before exporting.</div></details><details class="faq-item"><summary>Can I fill every empty cell at once?</summary><div class="faq-body">Yes — put a value in “fill empty cells” and blanks become 0, “n/a”, or whatever you need.</div></details><details class="faq-item"><summary>Can it strip thousands separators?</summary><div class="faq-body">Turn on that option and 1,200 becomes 1200. Values that are not numeric are left alone.</div></details><details class="faq-item"><summary>What about line breaks inside cells?</summary><div class="faq-body">The option converts in-cell newlines and tabs to spaces so every record stays on one line.</div></details><details class="faq-item"><summary>Is anything uploaded?</summary><div class="faq-body">No, everything runs locally.</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>Related tools</h2>
+    <div class="related"><a class="rel" href="/en/csv-normalize.html"><span class="t">Normalize formats</span><span class="d">Width, dates, phones</span></a><a class="rel" href="/en/csv-column.html"><span class="t">Pick or drop columns</span><span class="d">Keep only what you need</span></a><a class="rel" href="/en/csv-dedup.html"><span class="t">Remove duplicates</span><span class="d">Drop or extract duplicates</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/en/">All tools</a>
+      <a href="/en/guide/what-is-csv.html">CSV guides</a>
+      <a href="/en/#privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/clean.js"></script>
+</body>
+</html>

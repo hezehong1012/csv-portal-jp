@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV 区切り文字変換｜カンマ ⇄ タブ ⇄ セミコロン【無料】</title>
+<meta name="description" content="カンマ区切りをタブ（TSV）やセミコロン区切りに変換。ヨーロッパ式のセミコロン CSV も読み込めます。区切りは自動判定し、引用符の中の区切りは壊しません。">
+<link rel="canonical" href="https://csv.format-portal.com/csv-delimiter.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-delimiter.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-delimiter.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-delimiter.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV 区切り文字変換｜カンマ ⇄ タブ ⇄ セミコロン【無料】">
+<meta property="og:description" content="カンマ区切りをタブ（TSV）やセミコロン区切りに変換。ヨーロッパ式のセミコロン CSV も読み込めます。区切りは自動判定し、引用符の中の区切りは壊しません。">
+<meta property="og:url" content="https://csv.format-portal.com/csv-delimiter.html">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSV 区切り文字変換｜カンマ ⇄ タブ ⇄ セミコロン【無料】", "url": "https://csv.format-portal.com/csv-delimiter.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "カンマ区切りをタブ（TSV）やセミコロン区切りに変換。ヨーロッパ式のセミコロン CSV も読み込めます。区切りは自動判定し、引用符の中の区切りは壊しません。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "TSV に変換できますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。出力の区切りで「タブ」を選ぶと .tsv として保存できます。"}}, {"@type": "Question", "name": "セミコロン区切りの CSV を読めますか？", "acceptedAnswer": {"@type": "Answer", "text": "読めます。ヨーロッパ版 Excel が出力するセミコロン区切りに対応しています。入力は「自動判定」のままで構いません。"}}, {"@type": "Question", "name": "自動判定は何を基準にしていますか？", "acceptedAnswer": {"@type": "Answer", "text": "先頭 6 行を各候補で解析し、列数がそろっている区切りを優先します。誤判定する場合は手動で指定してください。"}}, {"@type": "Question", "name": "値の中にカンマがある場合は？", "acceptedAnswer": {"@type": "Answer", "text": "自動で引用符で囲みます。Excel で開き直しても列がずれません。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。変換はブラウザ内で完結します。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://csv.format-portal.com/"}, {"@type": "ListItem", "position": 2, "name": "ツール", "item": "https://csv.format-portal.com/#tools"}, {"@type": "ListItem", "position": 3, "name": "CSV の区切り文字を変換", "item": "https://csv.format-portal.com/csv-delimiter.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/#tools" class="here">ツール</a>
+      <a href="/guide/what-is-csv.html" class="">ガイド</a>
+      <a href="/en/" hreflang="en">EN</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">ホーム</a><span class="sep">/</span><a href="/#tools">ツール</a><span class="sep">/</span>CSV の区切り文字を変換</div>
+    <h1>CSV の区切り文字を変換</h1>
+    <p class="lead">タブ区切りを求められるシステム、カンマを含む住所データ、ヨーロッパから届くセミコロン CSV。区切り文字の違いで起きる取り込みエラーを、ブラウザだけで解消します。</p>
+    <div class="badges"><span class="badge">アップロード不要</span><span class="badge">登録不要</span><span class="badge">カンマ・タブ・セミコロン対応</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">CSV を処理</span>
+        <span class="tc-badge">処理は端末内で完結</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">ファイル</button>
+        <button class="tab" id="tabPaste" type="button">貼り付け</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">CSV をここにドロップ</div>
+          <div class="drop-s">または クリックして選択 ・ Shift_JIS / UTF-8 自動判定</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label>入力の区切り
+          <select id="dlIn"><option value="auto">自動判定</option><option value=",">カンマ (,)</option><option value="&#9;">タブ</option><option value=";">セミコロン (;)</option><option value="|">パイプ (|)</option></select>
+        </label>
+        <label>出力の区切り
+          <select id="dlOut"><option value=",">カンマ (,)</option><option value="&#9;">タブ（TSV）</option><option value=";">セミコロン (;)</option><option value="|">パイプ (|)</option></select>
+        </label>
+        <label class="chk"><input type="checkbox" id="dlBom"> BOM を付ける</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">実行する</button> <button class="btn btn-sm" id="sample" type="button">サンプルで試す</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>使い方</h2>
+    <ol class="steps"><li>CSV / TSV をドロップするか、表を貼り付けます。</li><li>入力と出力の区切り文字を選びます（通常は入力は「自動判定」のままで構いません）。</li><li>「実行する」を押して列数を確認し、保存します。</li></ol>
+    <h3>このツールでできないこと</h3>
+    <p>区切り文字そのものを含む値は自動で引用符で囲みますが、もとの引用符の使い方が壊れている場合は修復しません。列数が合わない行は、そのまま出力されます。</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div class="faq"><details class="faq-item"><summary>TSV に変換できますか？</summary><div class="faq-body">はい。出力の区切りで「タブ」を選ぶと .tsv として保存できます。</div></details><details class="faq-item"><summary>セミコロン区切りの CSV を読めますか？</summary><div class="faq-body">読めます。ヨーロッパ版 Excel が出力するセミコロン区切りに対応しています。入力は「自動判定」のままで構いません。</div></details><details class="faq-item"><summary>自動判定は何を基準にしていますか？</summary><div class="faq-body">先頭 6 行を各候補で解析し、列数がそろっている区切りを優先します。誤判定する場合は手動で指定してください。</div></details><details class="faq-item"><summary>値の中にカンマがある場合は？</summary><div class="faq-body">自動で引用符で囲みます。Excel で開き直しても列がずれません。</div></details><details class="faq-item"><summary>データは送信されますか？</summary><div class="faq-body">いいえ。変換はブラウザ内で完結します。</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>関連ツール</h2>
+    <div class="related"><a class="rel" href="/json.html"><span class="t">CSV ⇄ JSON</span><span class="d">相互変換・JSON Lines</span></a><a class="rel" href="/csv-newline.html"><span class="t">改行コード変換</span><span class="d">CRLF ⇄ LF</span></a><a class="rel" href="/csv-shift-jis.html"><span class="t">文字コード変換</span><span class="d">Shift_JIS → UTF-8</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/">ツール一覧</a>
+      <a href="/guide/what-is-csv.html">CSV ガイド</a>
+      <a href="/#privacy">プライバシー</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/delimiter.js"></script>
+</body>
+</html>

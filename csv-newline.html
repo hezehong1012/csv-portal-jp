@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV 改行コード変換ツール｜CRLF ⇄ LF をブラウザで【無料】</title>
+<meta name="description" content="CRLF・LF・CR の改行コードを相互変換。現在の改行コードを自動判定して表示し、BOM の有無や末尾改行の扱いも選べます。ファイルはアップロードされません。">
+<link rel="canonical" href="https://csv.format-portal.com/csv-newline.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-newline.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-newline.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-newline.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV 改行コード変換ツール｜CRLF ⇄ LF をブラウザで【無料】">
+<meta property="og:description" content="CRLF・LF・CR の改行コードを相互変換。現在の改行コードを自動判定して表示し、BOM の有無や末尾改行の扱いも選べます。ファイルはアップロードされません。">
+<meta property="og:url" content="https://csv.format-portal.com/csv-newline.html">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSV 改行コード変換ツール｜CRLF ⇄ LF をブラウザで【無料】", "url": "https://csv.format-portal.com/csv-newline.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "CRLF・LF・CR の改行コードを相互変換。現在の改行コードを自動判定して表示し、BOM の有無や末尾改行の扱いも選べます。ファイルはアップロードされません。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "CRLF と LF はどちらを選べばいいですか？", "acceptedAnswer": {"@type": "Answer", "text": "Windows の Excel やメモ帳で開くなら CRLF、Linux・macOS・Git・Web サーバー向けなら LF を選んでください。"}}, {"@type": "Question", "name": "今の改行コードは分かりますか？", "acceptedAnswer": {"@type": "Answer", "text": "実行後に「入力」として判定結果を表示します。混在している場合もその旨を出します。"}}, {"@type": "Question", "name": "セル内の改行は壊れませんか？", "acceptedAnswer": {"@type": "Answer", "text": "引用符で囲まれた改行は保持します。CSV の規格どおりの扱いです。"}}, {"@type": "Question", "name": "末尾の改行は消せますか？", "acceptedAnswer": {"@type": "Answer", "text": "「末尾の改行を入れない」をオンにすると、最終行の後ろに改行を付けません。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。変換はブラウザ内で完結します。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://csv.format-portal.com/"}, {"@type": "ListItem", "position": 2, "name": "ツール", "item": "https://csv.format-portal.com/#tools"}, {"@type": "ListItem", "position": 3, "name": "CSV の改行コード変換（CRLF / LF）", "item": "https://csv.format-portal.com/csv-newline.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/#tools" class="here">ツール</a>
+      <a href="/guide/what-is-csv.html" class="">ガイド</a>
+      <a href="/en/" hreflang="en">EN</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">ホーム</a><span class="sep">/</span><a href="/#tools">ツール</a><span class="sep">/</span>CSV の改行コード変換（CRLF / LF）</div>
+    <h1>CSV の改行コード変換（CRLF / LF）</h1>
+    <p class="lead">Windows で作った CSV を Linux のツールに渡すと、改行コードの違いで 1 行として読まれることがあります。ここで CRLF ⇄ LF を変換しておけば、そうした事故を防げます。</p>
+    <div class="badges"><span class="badge">アップロード不要</span><span class="badge">登録不要</span><span class="badge">改行コードを自動判定</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">CSV を処理</span>
+        <span class="tc-badge">処理は端末内で完結</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">ファイル</button>
+        <button class="tab" id="tabPaste" type="button">貼り付け</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">CSV をここにドロップ</div>
+          <div class="drop-s">または クリックして選択 ・ Shift_JIS / UTF-8 自動判定</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label>出力の改行コード
+          <select id="nlOut"><option value="CRLF">CRLF（Windows）</option><option value="LF">LF（Mac / Linux）</option><option value="CR">CR（旧 Mac）</option></select>
+        </label>
+        <label class="chk"><input type="checkbox" id="nlNoTrail"> 末尾の改行を入れない</label>
+        <label class="chk"><input type="checkbox" id="nlBom"> BOM を付ける</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">実行する</button> <button class="btn btn-sm" id="sample" type="button">サンプルで試す</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>使い方</h2>
+    <ol class="steps"><li>CSV をドロップするか、表を貼り付けます。</li><li>出力したい改行コード（CRLF / LF / CR）を選びます。</li><li>「実行する」を押し、判定結果を確認して保存します。</li></ol>
+    <h3>このツールでできないこと</h3>
+    <p>セル内の改行（引用符で囲まれた改行）はそのまま保持し、レコード区切りだけを変換します。改行コードの混在したファイルは、多数決で判定します。</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div class="faq"><details class="faq-item"><summary>CRLF と LF はどちらを選べばいいですか？</summary><div class="faq-body">Windows の Excel やメモ帳で開くなら CRLF、Linux・macOS・Git・Web サーバー向けなら LF を選んでください。</div></details><details class="faq-item"><summary>今の改行コードは分かりますか？</summary><div class="faq-body">実行後に「入力」として判定結果を表示します。混在している場合もその旨を出します。</div></details><details class="faq-item"><summary>セル内の改行は壊れませんか？</summary><div class="faq-body">引用符で囲まれた改行は保持します。CSV の規格どおりの扱いです。</div></details><details class="faq-item"><summary>末尾の改行は消せますか？</summary><div class="faq-body">「末尾の改行を入れない」をオンにすると、最終行の後ろに改行を付けません。</div></details><details class="faq-item"><summary>データは送信されますか？</summary><div class="faq-body">いいえ。変換はブラウザ内で完結します。</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>関連ツール</h2>
+    <div class="related"><a class="rel" href="/csv-shift-jis.html"><span class="t">文字コード変換</span><span class="d">Shift_JIS → UTF-8</span></a><a class="rel" href="/csv-delimiter.html"><span class="t">区切り文字変換</span><span class="d">カンマ ⇄ タブ ⇄ ;</span></a><a class="rel" href="/csv-row-clean.html"><span class="t">空白行の整理</span><span class="d">空白行・空列の削除</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/">ツール一覧</a>
+      <a href="/guide/what-is-csv.html">CSV ガイド</a>
+      <a href="/#privacy">プライバシー</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/newline.js"></script>
+</body>
+</html>

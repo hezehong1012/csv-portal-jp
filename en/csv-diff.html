@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compare two CSV files and list the differences — free</title>
+<meta name="description" content="Match two CSVs on a key column and list added, removed and changed rows. Changes are shown cell by cell (before → after) and the diff exports as CSV.">
+<link rel="canonical" href="https://csv.format-portal.com/en/csv-diff.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-diff.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-diff.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-diff.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compare two CSV files and list the differences — free">
+<meta property="og:description" content="Match two CSVs on a key column and list added, removed and changed rows. Changes are shown cell by cell (before → after) and the diff exports as CSV.">
+<meta property="og:url" content="https://csv.format-portal.com/en/csv-diff.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Compare two CSV files and list the differences — free", "url": "https://csv.format-portal.com/en/csv-diff.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "en", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "Match two CSVs on a key column and list added, removed and changed rows. Changes are shown cell by cell (before → after) and the diff exports as CSV."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Is the key column required?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — rows need a key to be matched. If there is no ID, use email, or name plus company."}}, {"@type": "Question", "name": "What if the column sets differ?", "acceptedAnswer": {"@type": "Answer", "text": "The comparison uses the union of column names, so a column present in only one file still shows up as a difference."}}, {"@type": "Question", "name": "What about a different row order?", "acceptedAnswer": {"@type": "Answer", "text": "It is not treated as a difference — rows are matched on the key."}}, {"@type": "Question", "name": "How do I save the result?", "acceptedAnswer": {"@type": "Answer", "text": "“Download the diff as CSV” exports five columns: type (added / removed / changed), key, column, before, after."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csv.format-portal.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://csv.format-portal.com/en/#tools"}, {"@type": "ListItem", "position": 3, "name": "Compare two CSV files", "item": "https://csv.format-portal.com/en/csv-diff.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/en/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/en/#tools" class="here">Tools</a>
+      <a href="/en/guide/what-is-csv.html" class="">Guides</a>
+      <a href="/" hreflang="ja">日本語</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a><span class="sep">/</span><a href="/en/#tools">Tools</a><span class="sep">/</span>Compare two CSV files</div>
+    <h1>Compare two CSV files</h1>
+    <p class="lead">Match a before/after pair on a key column and see what was added, removed or changed — down to the individual cell.</p>
+    <div class="badges"><span class="badge">No upload</span><span class="badge">No sign-up</span><span class="badge">Cell-level diff</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">Process your CSV</span>
+        <span class="tc-badge">Runs on your device</span>
+      </div>
+      <div class="tc-body">
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">Drop a CSV here</div>
+          <div class="drop-s">Select multiple files (two or more)</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" multiple class="hidden">
+      </div>
+      <div class="opts">
+        <label>Key column <select id="keyCol"></select></label>
+        <span class="hint">first file = before, second = after</span>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">Run</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>How to use</h2>
+    <ol class="steps"><li>Pick the “before” CSV first, then the “after” file.</li><li>Choose the key column to match rows on (customer ID, email, …).</li><li>Review added / removed / changed, then export the diff as CSV.</li></ol>
+    <h3>What this tool does not do</h3>
+    <p>When a key appears more than once, only the first row is compared. Row order alone is not reported as a difference.</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <div class="faq"><details class="faq-item"><summary>Is the key column required?</summary><div class="faq-body">Yes — rows need a key to be matched. If there is no ID, use email, or name plus company.</div></details><details class="faq-item"><summary>What if the column sets differ?</summary><div class="faq-body">The comparison uses the union of column names, so a column present in only one file still shows up as a difference.</div></details><details class="faq-item"><summary>What about a different row order?</summary><div class="faq-body">It is not treated as a difference — rows are matched on the key.</div></details><details class="faq-item"><summary>How do I save the result?</summary><div class="faq-body">“Download the diff as CSV” exports five columns: type (added / removed / changed), key, column, before, after.</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>Related tools</h2>
+    <div class="related"><a class="rel" href="/en/csv-dedup.html"><span class="t">Remove duplicates</span><span class="d">Drop or extract duplicates</span></a><a class="rel" href="/en/csv-merge.html"><span class="t">Merge CSV files</span><span class="d">Stack files into one</span></a><a class="rel" href="/en/csv-split.html"><span class="t">Split large files</span><span class="d">Split by rows or count</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/en/">All tools</a>
+      <a href="/en/guide/what-is-csv.html">CSV guides</a>
+      <a href="/en/#privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/diff.js"></script>
+</body>
+</html>

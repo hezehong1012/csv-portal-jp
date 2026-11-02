@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convert Shift_JIS CSV to UTF-8 in your browser — fix mojibake</title>
+<meta name="description" content="Turn a Shift_JIS or EUC-JP CSV into UTF-8 and clear up the mojibake. Encoding is detected automatically, can be forced by hand, and BOM output is supported.">
+<link rel="canonical" href="https://csv.format-portal.com/en/csv-shift-jis.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-shift-jis.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-shift-jis.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-shift-jis.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Convert Shift_JIS CSV to UTF-8 in your browser — fix mojibake">
+<meta property="og:description" content="Turn a Shift_JIS or EUC-JP CSV into UTF-8 and clear up the mojibake. Encoding is detected automatically, can be forced by hand, and BOM output is supported.">
+<meta property="og:url" content="https://csv.format-portal.com/en/csv-shift-jis.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Convert Shift_JIS CSV to UTF-8 in your browser — fix mojibake", "url": "https://csv.format-portal.com/en/csv-shift-jis.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "en", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "Turn a Shift_JIS or EUC-JP CSV into UTF-8 and clear up the mojibake. Encoding is detected automatically, can be forced by hand, and BOM output is supported."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "The text is still garbled", "acceptedAnswer": {"@type": "Answer", "text": "Force the input encoding to Shift_JIS or EUC-JP and run again — that fixes a wrong auto-detection."}}, {"@type": "Question", "name": "Should I add a BOM?", "acceptedAnswer": {"@type": "Answer", "text": "Yes if you want Excel to open it cleanly. Leave it off when a script will read the file."}}, {"@type": "Question", "name": "Excel shows mojibake for my UTF-8 file", "acceptedAnswer": {"@type": "Answer", "text": "Excel guesses Shift_JIS. Re-save with the BOM option on and it opens correctly."}}, {"@type": "Question", "name": "Is EUC-JP supported?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, both for auto-detection and as a manual choice."}}, {"@type": "Question", "name": "Is anything uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No — decoding happens in your browser with TextDecoder."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csv.format-portal.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://csv.format-portal.com/en/#tools"}, {"@type": "ListItem", "position": 3, "name": "Convert CSV encoding", "item": "https://csv.format-portal.com/en/csv-shift-jis.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/en/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/en/#tools" class="here">Tools</a>
+      <a href="/en/guide/what-is-csv.html" class="">Guides</a>
+      <a href="/" hreflang="ja">日本語</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a><span class="sep">/</span><a href="/en/#tools">Tools</a><span class="sep">/</span>Convert CSV encoding</div>
+    <h1>Convert CSV encoding</h1>
+    <p class="lead">Takes the Shift_JIS CSV your version of Excel wrote and returns clean UTF-8. Encoding is detected automatically and garbled cells are counted so you know whether it worked.</p>
+    <div class="badges"><span class="badge">No upload</span><span class="badge">No sign-up</span><span class="badge">Encoding auto-detected</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">Process your CSV</span>
+        <span class="tc-badge">Runs on your device</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">File</button>
+        <button class="tab" id="tabPaste" type="button">Paste</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">Drop a CSV here</div>
+          <div class="drop-s">or click to choose · Shift_JIS / UTF-8 detected</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label>Input encoding
+          <select id="encForce"><option value="auto">auto-detect</option><option value="shift_jis">force Shift_JIS</option><option value="euc-jp">force EUC-JP</option><option value="utf-8">force UTF-8</option></select>
+        </label>
+        <label>Output line endings <select id="encNl"><option value="CRLF">CRLF</option><option value="LF">LF</option></select></label>
+        <label class="chk"><input type="checkbox" id="encBom" checked> add a BOM (for Excel)</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">Run</button> <button class="btn btn-sm" id="sample" type="button">Try a sample</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>How to use</h2>
+    <ol class="steps"><li>Drop the CSV (pasting works too).</li><li>If needed, force the input encoding to Shift_JIS or EUC-JP.</li><li>Press Run, confirm the mojibake count is 0, then download.</li></ol>
+    <h3>What this tool does not do</h3>
+    <p>Writing Shift_JIS is not possible — browsers can only encode UTF-8, so conversion is one-way. If a system insists on Shift_JIS, save the UTF-8 file and re-export it from Excel as CSV.</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <div class="faq"><details class="faq-item"><summary>The text is still garbled</summary><div class="faq-body">Force the input encoding to Shift_JIS or EUC-JP and run again — that fixes a wrong auto-detection.</div></details><details class="faq-item"><summary>Should I add a BOM?</summary><div class="faq-body">Yes if you want Excel to open it cleanly. Leave it off when a script will read the file.</div></details><details class="faq-item"><summary>Excel shows mojibake for my UTF-8 file</summary><div class="faq-body">Excel guesses Shift_JIS. Re-save with the BOM option on and it opens correctly.</div></details><details class="faq-item"><summary>Is EUC-JP supported?</summary><div class="faq-body">Yes, both for auto-detection and as a manual choice.</div></details><details class="faq-item"><summary>Is anything uploaded?</summary><div class="faq-body">No — decoding happens in your browser with TextDecoder.</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>Related tools</h2>
+    <div class="related"><a class="rel" href="/en/csv-newline.html"><span class="t">Line endings</span><span class="d">CRLF to LF</span></a><a class="rel" href="/en/csv-delimiter.html"><span class="t">Delimiter converter</span><span class="d">Comma, tab, semicolon</span></a><a class="rel" href="/en/csv-clean.html"><span class="t">Cleanse values</span><span class="d">Spaces, symbols, blanks</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/en/">All tools</a>
+      <a href="/en/guide/what-is-csv.html">CSV guides</a>
+      <a href="/en/#privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/shift-jis.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extract emails, URLs and phone numbers from CSV with regex</title>
+<meta name="description" content="Pull emails, URLs or phone numbers out of CSV cells with a regular expression. Keep only matching rows, add the match as a new column, or produce a unique list of values.">
+<link rel="canonical" href="https://csv.format-portal.com/en/csv-extract.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-extract.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-extract.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-extract.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Extract emails, URLs and phone numbers from CSV with regex">
+<meta property="og:description" content="Pull emails, URLs or phone numbers out of CSV cells with a regular expression. Keep only matching rows, add the match as a new column, or produce a unique list of values.">
+<meta property="og:url" content="https://csv.format-portal.com/en/csv-extract.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Extract emails, URLs and phone numbers from CSV with regex", "url": "https://csv.format-portal.com/en/csv-extract.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "en", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "Pull emails, URLs or phone numbers out of CSV cells with a regular expression. Keep only matching rows, add the match as a new column, or produce a unique list of values."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Any ready-made patterns?", "acceptedAnswer": {"@type": "Answer", "text": "Email: [\\w.+-]+@[\\w-]+\\.[\\w.-]+ · URL: https?://[^\\s]+ · Japanese phone: 0\\d{1,4}-?\\d{1,4}-?\\d{3,4}."}}, {"@type": "Question", "name": "What does the list mode do?", "acceptedAnswer": {"@type": "Answer", "text": "It drops the rows and returns just the matched values as a one-column CSV; enable dedupe for a unique list."}}, {"@type": "Question", "name": "Can I keep only matching rows?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — choose the filter mode and the output contains only rows with at least one match."}}, {"@type": "Question", "name": "Is the search case-sensitive?", "acceptedAnswer": {"@type": "Answer", "text": "By default yes; turn on “ignore case” to relax it."}}, {"@type": "Question", "name": "Is my data uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No, extraction is local."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csv.format-portal.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://csv.format-portal.com/en/#tools"}, {"@type": "ListItem", "position": 3, "name": "Extract values with regex", "item": "https://csv.format-portal.com/en/csv-extract.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/en/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/en/#tools" class="here">Tools</a>
+      <a href="/en/guide/what-is-csv.html" class="">Guides</a>
+      <a href="/" hreflang="ja">日本語</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a><span class="sep">/</span><a href="/en/#tools">Tools</a><span class="sep">/</span>Extract values with regex</div>
+    <h1>Extract values with regex</h1>
+    <p class="lead">Pull just the email addresses out of an enquiry list, or the URLs out of a log export. One pattern, applied to every row, in your browser.</p>
+    <div class="badges"><span class="badge">No upload</span><span class="badge">No sign-up</span><span class="badge">Email, URL and phone</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">Process your CSV</span>
+        <span class="tc-badge">Runs on your device</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">File</button>
+        <button class="tab" id="tabPaste" type="button">Paste</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">Drop a CSV here</div>
+          <div class="drop-s">or click to choose · Shift_JIS / UTF-8 detected</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="field">
+        <label>Regular expression <span class="hint">(email by default)</span></label>
+        <input type="text" id="exPat" value="[\w.+-]+@[\w-]+\.[\w.-]+">
+      </div>
+      <div class="opts">
+        <label>Target column <select id="exCol"></select></label>
+        <label>Mode
+          <select id="exMode">
+            <option value="column">add the match as a column</option>
+            <option value="filter">keep only matching rows</option>
+            <option value="list">build a list of matches</option>
+          </select>
+        </label>
+        <label class="chk"><input type="checkbox" id="exUniq"> drop duplicates</label>
+        <label class="chk"><input type="checkbox" id="exCase"> ignore case</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">Run</button> <button class="btn btn-sm" id="sample" type="button">Try a sample</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>How to use</h2>
+    <ol class="steps"><li>Drop a CSV or paste the table.</li><li>Set the pattern, the target column and the mode (filter rows / add a column / build a list).</li><li>Press Run, review the matches, then download.</li></ol>
+    <h3>What this tool does not do</h3>
+    <p>Matches must fit inside a single cell. Lookbehind patterns do not work in some older browsers. An invalid pattern shows an error instead of guessing.</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <div class="faq"><details class="faq-item"><summary>Any ready-made patterns?</summary><div class="faq-body">Email: [\w.+-]+@[\w-]+\.[\w.-]+ · URL: https?://[^\s]+ · Japanese phone: 0\d{1,4}-?\d{1,4}-?\d{3,4}.</div></details><details class="faq-item"><summary>What does the list mode do?</summary><div class="faq-body">It drops the rows and returns just the matched values as a one-column CSV; enable dedupe for a unique list.</div></details><details class="faq-item"><summary>Can I keep only matching rows?</summary><div class="faq-body">Yes — choose the filter mode and the output contains only rows with at least one match.</div></details><details class="faq-item"><summary>Is the search case-sensitive?</summary><div class="faq-body">By default yes; turn on “ignore case” to relax it.</div></details><details class="faq-item"><summary>Is my data uploaded?</summary><div class="faq-body">No, extraction is local.</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>Related tools</h2>
+    <div class="related"><a class="rel" href="/en/csv-dedup.html"><span class="t">Remove duplicates</span><span class="d">Drop or extract duplicates</span></a><a class="rel" href="/en/csv-clean.html"><span class="t">Cleanse values</span><span class="d">Spaces, symbols, blanks</span></a><a class="rel" href="/en/csv-column.html"><span class="t">Pick or drop columns</span><span class="d">Keep only what you need</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/en/">All tools</a>
+      <a href="/en/guide/what-is-csv.html">CSV guides</a>
+      <a href="/en/#privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/extract.js"></script>
+</body>
+</html>

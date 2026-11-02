@@ -3,5 +3,119 @@
     "api/repair.js": {
       "maxDuration": 60
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/csv-dedup",
+      "destination": "/csv-dedup.html"
+    },
+    {
+      "source": "/csv-split",
+      "destination": "/csv-split.html"
+    },
+    {
+      "source": "/csv-merge",
+      "destination": "/csv-merge.html"
+    },
+    {
+      "source": "/csv-diff",
+      "destination": "/csv-diff.html"
+    },
+    {
+      "source": "/en/csv-dedup",
+      "destination": "/en/csv-dedup.html"
+    },
+    {
+      "source": "/en/csv-split",
+      "destination": "/en/csv-split.html"
+    },
+    {
+      "source": "/en/csv-merge",
+      "destination": "/en/csv-merge.html"
+    },
+    {
+      "source": "/en/csv-diff",
+      "destination": "/en/csv-diff.html"
+    },
+    {
+      "source": "/csv-column",
+      "destination": "/csv-column.html"
+    },
+    {
+      "source": "/en/csv-column",
+      "destination": "/en/csv-column.html"
+    },
+    {
+      "source": "/csv-row-clean",
+      "destination": "/csv-row-clean.html"
+    },
+    {
+      "source": "/en/csv-row-clean",
+      "destination": "/en/csv-row-clean.html"
+    },
+    {
+      "source": "/csv-sort",
+      "destination": "/csv-sort.html"
+    },
+    {
+      "source": "/en/csv-sort",
+      "destination": "/en/csv-sort.html"
+    },
+    {
+      "source": "/csv-clean",
+      "destination": "/csv-clean.html"
+    },
+    {
+      "source": "/en/csv-clean",
+      "destination": "/en/csv-clean.html"
+    },
+    {
+      "source": "/csv-normalize",
+      "destination": "/csv-normalize.html"
+    },
+    {
+      "source": "/en/csv-normalize",
+      "destination": "/en/csv-normalize.html"
+    },
+    {
+      "source": "/csv-shift-jis",
+      "destination": "/csv-shift-jis.html"
+    },
+    {
+      "source": "/en/csv-shift-jis",
+      "destination": "/en/csv-shift-jis.html"
+    },
+    {
+      "source": "/csv-newline",
+      "destination": "/csv-newline.html"
+    },
+    {
+      "source": "/en/csv-newline",
+      "destination": "/en/csv-newline.html"
+    },
+    {
+      "source": "/csv-delimiter",
+      "destination": "/csv-delimiter.html"
+    },
+    {
+      "source": "/en/csv-delimiter",
+      "destination": "/en/csv-delimiter.html"
+    },
+    {
+      "source": "/csv-sql",
+      "destination": "/csv-sql.html"
+    },
+    {
+      "source": "/en/csv-sql",
+      "destination": "/en/csv-sql.html"
+    },
+    {
+      "source": "/csv-extract",
+      "destination": "/csv-extract.html"
+    },
+    {
+      "source": "/en/csv-extract",
+      "destination": "/en/csv-extract.html"
+    }
+  ]
 }

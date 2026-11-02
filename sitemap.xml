@@ -5,7 +5,7 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/"/>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -14,7 +14,7 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/"/>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -23,8 +23,8 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-create.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-create.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-create.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
@@ -32,17 +32,17 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-create.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-create.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-create.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://csv.format-portal.com/excel-convert.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/excel-convert.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/excel-convert.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/excel-convert.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
@@ -50,17 +50,17 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/excel-convert.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/excel-convert.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/excel-convert.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://csv.format-portal.com/mojibake.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/mojibake.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/mojibake.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/mojibake.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
@@ -68,17 +68,17 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/mojibake.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/mojibake.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/mojibake.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://csv.format-portal.com/reading.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/reading.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/reading.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/reading.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
@@ -86,62 +86,332 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/reading.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/reading.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/reading.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://csv.format-portal.com/json.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/json.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/json.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/json.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://csv.format-portal.com/en/json.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/json.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/json.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/json.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://csv.format-portal.com/pdf.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/pdf.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/pdf.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/pdf.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://csv.format-portal.com/en/pdf.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/pdf.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/pdf.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/pdf.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://csv.format-portal.com/ai.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/ai.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/ai.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/ai.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://csv.format-portal.com/en/ai.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/ai.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/ai.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/ai.html"/>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/guide/what-is-csv.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/guide/what-is-csv.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/guide/what-is-csv.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/guide/what-is-csv.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/guide/what-is-csv.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/guide/what-is-csv.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/guide/what-is-csv.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/guide/what-is-csv.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-dedup.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-dedup.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-dedup.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-dedup.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-dedup.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-dedup.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-dedup.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-dedup.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-split.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-split.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-split.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-split.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-split.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-split.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-split.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-split.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-merge.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-merge.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-merge.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-merge.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-merge.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-merge.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-merge.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-merge.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-diff.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-diff.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-diff.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-diff.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-diff.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-diff.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-diff.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-diff.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-column.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-column.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-column.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-column.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-column.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-column.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-column.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-column.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-row-clean.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-row-clean.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-row-clean.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-row-clean.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-row-clean.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-row-clean.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-row-clean.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-row-clean.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-sort.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-sort.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-sort.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-sort.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-sort.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-sort.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-sort.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-sort.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-clean.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-clean.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-clean.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-clean.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-clean.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-clean.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-clean.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-clean.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-normalize.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-normalize.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-normalize.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-normalize.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-normalize.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-normalize.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-normalize.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-normalize.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-shift-jis.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-shift-jis.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-shift-jis.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-shift-jis.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-shift-jis.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-shift-jis.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-shift-jis.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-shift-jis.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-newline.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-newline.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-newline.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-newline.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-newline.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-newline.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-newline.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-newline.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-delimiter.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-delimiter.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-delimiter.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-delimiter.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-delimiter.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-delimiter.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-delimiter.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-delimiter.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-sql.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-sql.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-sql.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-sql.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-sql.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-sql.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-sql.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-sql.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/csv-extract.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-extract.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-extract.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-extract.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://csv.format-portal.com/en/csv-extract.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-extract.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-extract.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-extract.html"/>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

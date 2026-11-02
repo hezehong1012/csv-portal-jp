@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Normalize CSV values — full-width, dates, phone numbers</title>
+<meta name="description" content="Convert full-width letters and digits to half-width, half-width kana to full-width, and unify dates to YYYY-MM-DD. Hyphens in phone numbers and letter case can be normalized too.">
+<link rel="canonical" href="https://csv.format-portal.com/en/csv-normalize.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-normalize.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-normalize.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-normalize.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Normalize CSV values — full-width, dates, phone numbers">
+<meta property="og:description" content="Convert full-width letters and digits to half-width, half-width kana to full-width, and unify dates to YYYY-MM-DD. Hyphens in phone numbers and letter case can be normalized too.">
+<meta property="og:url" content="https://csv.format-portal.com/en/csv-normalize.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Normalize CSV values — full-width, dates, phone numbers", "url": "https://csv.format-portal.com/en/csv-normalize.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "en", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "Convert full-width letters and digits to half-width, half-width kana to full-width, and unify dates to YYYY-MM-DD. Hyphens in phone numbers and letter case can be normalized too."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Which date formats are supported?", "acceptedAnswer": {"@type": "Answer", "text": "2026/1/5, 2026-01-05, 2026.1.5, 2026年1月5日 and 20260105 all become YYYY-MM-DD; anything unrecognised is left untouched."}}, {"@type": "Question", "name": "Does it convert half-width kana?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — with that option on, ﾃﾞｰﾀ becomes データ, including combined voicing marks."}}, {"@type": "Question", "name": "Can hyphens be removed from phone numbers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, 03-1234-0001 becomes 0312340001."}}, {"@type": "Question", "name": "What about currency symbols?", "acceptedAnswer": {"@type": "Answer", "text": "The numeric option turns ¥1,200 into 1200."}}, {"@type": "Question", "name": "Is my data sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No, it stays in the browser."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csv.format-portal.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://csv.format-portal.com/en/#tools"}, {"@type": "ListItem", "position": 3, "name": "Normalize formatting", "item": "https://csv.format-portal.com/en/csv-normalize.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/en/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/en/#tools" class="here">Tools</a>
+      <a href="/en/guide/what-is-csv.html" class="">Guides</a>
+      <a href="/" hreflang="ja">日本語</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a><span class="sep">/</span><a href="/en/#tools">Tools</a><span class="sep">/</span>Normalize formatting</div>
+    <h1>Normalize formatting</h1>
+    <p class="lead">Turns a column mixing “ＴＡＮＡＫＡ”, “ﾀﾅｶ”, “2021/4/1” and “2021年4月1日” into one consistent format — exactly what you need before a join or a system import.</p>
+    <div class="badges"><span class="badge">No upload</span><span class="badge">No sign-up</span><span class="badge">Width, dates and phones</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">Process your CSV</span>
+        <span class="tc-badge">Runs on your device</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">File</button>
+        <button class="tab" id="tabPaste" type="button">Paste</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">Drop a CSV here</div>
+          <div class="drop-s">or click to choose · Shift_JIS / UTF-8 detected</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label class="chk"><input type="checkbox" id="nmHalf" checked> full-width to half-width</label>
+        <label class="chk"><input type="checkbox" id="nmKana" checked> half-width kana to full-width</label>
+        <label class="chk"><input type="checkbox" id="nmDate" checked> dates to YYYY-MM-DD</label>
+        <label class="chk"><input type="checkbox" id="nmNum"> strip currency symbols and separators</label>
+        <label class="chk"><input type="checkbox" id="nmPhone"> remove hyphens from phone numbers</label>
+        <label>Letters
+          <select id="nmCase"><option value="keep">leave as is</option><option value="upper">upper case</option><option value="lower">lower case</option></select>
+        </label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">Run</button> <button class="btn btn-sm" id="sample" type="button">Try a sample</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>How to use</h2>
+    <ol class="steps"><li>Drop a CSV or paste the table.</li><li>Tick the normalizations you want.</li><li>Press Run, review the changed-cell count, then download.</li></ol>
+    <h3>What this tool does not do</h3>
+    <p>Japanese era dates are not converted to Western years, and addresses are not normalized. Hyphen removal applies to cells made up only of digits and hyphens.</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <div class="faq"><details class="faq-item"><summary>Which date formats are supported?</summary><div class="faq-body">2026/1/5, 2026-01-05, 2026.1.5, 2026年1月5日 and 20260105 all become YYYY-MM-DD; anything unrecognised is left untouched.</div></details><details class="faq-item"><summary>Does it convert half-width kana?</summary><div class="faq-body">Yes — with that option on, ﾃﾞｰﾀ becomes データ, including combined voicing marks.</div></details><details class="faq-item"><summary>Can hyphens be removed from phone numbers?</summary><div class="faq-body">Yes, 03-1234-0001 becomes 0312340001.</div></details><details class="faq-item"><summary>What about currency symbols?</summary><div class="faq-body">The numeric option turns ¥1,200 into 1200.</div></details><details class="faq-item"><summary>Is my data sent anywhere?</summary><div class="faq-body">No, it stays in the browser.</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>Related tools</h2>
+    <div class="related"><a class="rel" href="/en/csv-clean.html"><span class="t">Cleanse values</span><span class="d">Spaces, symbols, blanks</span></a><a class="rel" href="/en/csv-column.html"><span class="t">Pick or drop columns</span><span class="d">Keep only what you need</span></a><a class="rel" href="/en/csv-shift-jis.html"><span class="t">Encoding converter</span><span class="d">Shift_JIS to UTF-8</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/en/">All tools</a>
+      <a href="/en/guide/what-is-csv.html">CSV guides</a>
+      <a href="/en/#privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/normalize.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV クレンジングツール｜空白・記号・空セルを一括整理【無料】</title>
+<meta name="description" content="セルの前後空白、全角スペース、余分な記号、桁区切りカンマをまとめて整理。空セルを指定した値で埋めることもでき、元ファイルはアップロードされません。">
+<link rel="canonical" href="https://csv.format-portal.com/csv-clean.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-clean.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-clean.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-clean.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV クレンジングツール｜空白・記号・空セルを一括整理【無料】">
+<meta property="og:description" content="セルの前後空白、全角スペース、余分な記号、桁区切りカンマをまとめて整理。空セルを指定した値で埋めることもでき、元ファイルはアップロードされません。">
+<meta property="og:url" content="https://csv.format-portal.com/csv-clean.html">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSV クレンジングツール｜空白・記号・空セルを一括整理【無料】", "url": "https://csv.format-portal.com/csv-clean.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "セルの前後空白、全角スペース、余分な記号、桁区切りカンマをまとめて整理。空セルを指定した値で埋めることもでき、元ファイルはアップロードされません。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "記号削除はどの範囲ですか？", "acceptedAnswer": {"@type": "Answer", "text": "「ハイフン・括弧」は電話番号や郵便番号の区切りを消す用途、「すべての記号」は句読点まで落として英数字だけにしたい用途です。実行前にプレビューで確認してください。"}}, {"@type": "Question", "name": "空セルをまとめて埋められますか？", "acceptedAnswer": {"@type": "Answer", "text": "「空セルを埋める」に値を入れてください。0 や「未設定」などで一括補完できます。"}}, {"@type": "Question", "name": "数値のカンマは消せますか？", "acceptedAnswer": {"@type": "Answer", "text": "「数値の桁区切りを削除」をオンにすると、1,200 が 1200 になります。数値として解釈できない値は変更しません。"}}, {"@type": "Question", "name": "セル内の改行はどうなりますか？", "acceptedAnswer": {"@type": "Answer", "text": "「セル内の改行・タブを空白に」をオンにすると、1 行 1 レコードの扱いやすい CSV になります。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。すべてブラウザ内で処理されます。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://csv.format-portal.com/"}, {"@type": "ListItem", "position": 2, "name": "ツール", "item": "https://csv.format-portal.com/#tools"}, {"@type": "ListItem", "position": 3, "name": "CSV のクレンジング（値の整理）", "item": "https://csv.format-portal.com/csv-clean.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/#tools" class="here">ツール</a>
+      <a href="/guide/what-is-csv.html" class="">ガイド</a>
+      <a href="/en/" hreflang="en">EN</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">ホーム</a><span class="sep">/</span><a href="/#tools">ツール</a><span class="sep">/</span>CSV のクレンジング（値の整理）</div>
+    <h1>CSV のクレンジング（値の整理）</h1>
+    <p class="lead">コピー＆ペーストで崩れた表は、前後の空白や全角スペース、全角の記号が混ざりがちです。まとめて整えてから、検索や突合に使える状態にします。</p>
+    <div class="badges"><span class="badge">アップロード不要</span><span class="badge">登録不要</span><span class="badge">空白・記号・空セルを整理</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">CSV を処理</span>
+        <span class="tc-badge">処理は端末内で完結</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">ファイル</button>
+        <button class="tab" id="tabPaste" type="button">貼り付け</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">CSV をここにドロップ</div>
+          <div class="drop-s">または クリックして選択 ・ Shift_JIS / UTF-8 自動判定</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label class="chk"><input type="checkbox" id="clTrim" checked> 前後の空白を削除</label>
+        <label class="chk"><input type="checkbox" id="clSqueeze"> 連続する空白を 1 つに</label>
+        <label class="chk"><input type="checkbox" id="clZenkaku"> 全角スペースを削除</label>
+        <label class="chk"><input type="checkbox" id="clBreak"> セル内の改行・タブを空白に</label>
+        <label class="chk"><input type="checkbox" id="clComma"> 数値の桁区切りを削除</label>
+        <label>記号
+          <select id="clSymbols"><option value="none">削除しない</option><option value="basic">ハイフン・括弧を削除</option><option value="all">すべての記号を削除</option></select>
+        </label>
+        <label>空セルを埋める <input type="text" id="clFill" placeholder="例: 未設定" style="width:110px"></label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">実行する</button> <button class="btn btn-sm" id="sample" type="button">サンプルで試す</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>使い方</h2>
+    <ol class="steps"><li>CSV をドロップするか、表を貼り付けます。</li><li>整えたい項目（前後の空白・記号・空セルなど）にチェックを入れます。</li><li>「実行する」を押し、変更セル数を確認して保存します。</li></ol>
+    <h3>このツールでできないこと</h3>
+    <p>氏名の姓名分割や住所の分解はしません。あいまいな名寄せ（「株式会社A」と「A株式会社」を同一とみなす）も行いません。記号の削除は選んだ範囲の文字だけを対象にします。</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div class="faq"><details class="faq-item"><summary>記号削除はどの範囲ですか？</summary><div class="faq-body">「ハイフン・括弧」は電話番号や郵便番号の区切りを消す用途、「すべての記号」は句読点まで落として英数字だけにしたい用途です。実行前にプレビューで確認してください。</div></details><details class="faq-item"><summary>空セルをまとめて埋められますか？</summary><div class="faq-body">「空セルを埋める」に値を入れてください。0 や「未設定」などで一括補完できます。</div></details><details class="faq-item"><summary>数値のカンマは消せますか？</summary><div class="faq-body">「数値の桁区切りを削除」をオンにすると、1,200 が 1200 になります。数値として解釈できない値は変更しません。</div></details><details class="faq-item"><summary>セル内の改行はどうなりますか？</summary><div class="faq-body">「セル内の改行・タブを空白に」をオンにすると、1 行 1 レコードの扱いやすい CSV になります。</div></details><details class="faq-item"><summary>データは送信されますか？</summary><div class="faq-body">いいえ。すべてブラウザ内で処理されます。</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>関連ツール</h2>
+    <div class="related"><a class="rel" href="/csv-normalize.html"><span class="t">形式統一</span><span class="d">全角半角・日付・電話</span></a><a class="rel" href="/csv-column.html"><span class="t">列の抽出・削除</span><span class="d">必要な列だけ残す</span></a><a class="rel" href="/csv-dedup.html"><span class="t">重複行削除</span><span class="d">重複の抽出も</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/">ツール一覧</a>
+      <a href="/guide/what-is-csv.html">CSV ガイド</a>
+      <a href="/#privacy">プライバシー</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/clean.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV → SQL INSERT 生成ツール｜CREATE TABLE も同時に【無料】</title>
+<meta name="description" content="CSV から MySQL / PostgreSQL / SQLite 用の INSERT 文を生成。列名から型を推定して CREATE TABLE も作れます。値はエスケープ済みで、データは送信されません。">
+<link rel="canonical" href="https://csv.format-portal.com/csv-sql.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-sql.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-sql.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-sql.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV → SQL INSERT 生成ツール｜CREATE TABLE も同時に【無料】">
+<meta property="og:description" content="CSV から MySQL / PostgreSQL / SQLite 用の INSERT 文を生成。列名から型を推定して CREATE TABLE も作れます。値はエスケープ済みで、データは送信されません。">
+<meta property="og:url" content="https://csv.format-portal.com/csv-sql.html">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSV → SQL INSERT 生成ツール｜CREATE TABLE も同時に【無料】", "url": "https://csv.format-portal.com/csv-sql.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "CSV から MySQL / PostgreSQL / SQLite 用の INSERT 文を生成。列名から型を推定して CREATE TABLE も作れます。値はエスケープ済みで、データは送信されません。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "対応しているデータベースは？", "acceptedAnswer": {"@type": "Answer", "text": "MySQL / MariaDB、PostgreSQL、SQLite に対応しています。識別子の引用符とデータ型を方言に合わせて出力します。"}}, {"@type": "Question", "name": "型はどう決まりますか？", "acceptedAnswer": {"@type": "Answer", "text": "すべて整数なら INT/BIGINT、小数を含めば DECIMAL/NUMERIC、日付形式なら DATE、それ以外は VARCHAR（最大長から算出）です。"}}, {"@type": "Question", "name": "大量の行でも大丈夫ですか？", "acceptedAnswer": {"@type": "Answer", "text": "100 行ずつまとめた複数行 INSERT を出力します。数千行でも 1 ファイルに収まります。"}}, {"@type": "Question", "name": "空のセルはどうなりますか？", "acceptedAnswer": {"@type": "Answer", "text": "既定では空文字として出力します。「空セルを NULL にする」をオンにすると NULL になります。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。生成はブラウザ内で完結し、CSV は送信されません。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://csv.format-portal.com/"}, {"@type": "ListItem", "position": 2, "name": "ツール", "item": "https://csv.format-portal.com/#tools"}, {"@type": "ListItem", "position": 3, "name": "CSV から SQL INSERT 文を生成", "item": "https://csv.format-portal.com/csv-sql.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/#tools" class="here">ツール</a>
+      <a href="/guide/what-is-csv.html" class="">ガイド</a>
+      <a href="/en/" hreflang="en">EN</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">ホーム</a><span class="sep">/</span><a href="/#tools">ツール</a><span class="sep">/</span>CSV から SQL INSERT 文を生成</div>
+    <h1>CSV から SQL INSERT 文を生成</h1>
+    <p class="lead">テストデータの投入や、Excel で管理していたマスタの移行に。列名と値から型を推定し、CREATE TABLE と INSERT をまとめて出力します。</p>
+    <div class="badges"><span class="badge">アップロード不要</span><span class="badge">登録不要</span><span class="badge">型を自動推定</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">CSV を処理</span>
+        <span class="tc-badge">処理は端末内で完結</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">ファイル</button>
+        <button class="tab" id="tabPaste" type="button">貼り付け</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">CSV をここにドロップ</div>
+          <div class="drop-s">または クリックして選択 ・ Shift_JIS / UTF-8 自動判定</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label>テーブル名 <input type="text" id="sqlTable" value="my_table" style="width:140px"></label>
+        <label>データベース
+          <select id="sqlDialect"><option value="mysql">MySQL / MariaDB</option><option value="postgres">PostgreSQL</option><option value="sqlite">SQLite</option></select>
+        </label>
+        <label class="chk"><input type="checkbox" id="sqlCreate" checked> CREATE TABLE を含める</label>
+        <label class="chk"><input type="checkbox" id="sqlNull"> 空セルを NULL にする</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">実行する</button> <button class="btn btn-sm" id="sample" type="button">サンプルで試す</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>使い方</h2>
+    <ol class="steps"><li>CSV をドロップするか、表を貼り付けます。</li><li>テーブル名とデータベースの種類を指定します。</li><li>「実行する」を押し、.sql をダウンロードして実行します。</li></ol>
+    <h3>このツールでできないこと</h3>
+    <p>外部キー・インデックス・既定値は生成しません。型は値から推定するため、必要に応じて生成後に調整してください。既存テーブルへの追記を想定している場合は CREATE TABLE を外してください。</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div class="faq"><details class="faq-item"><summary>対応しているデータベースは？</summary><div class="faq-body">MySQL / MariaDB、PostgreSQL、SQLite に対応しています。識別子の引用符とデータ型を方言に合わせて出力します。</div></details><details class="faq-item"><summary>型はどう決まりますか？</summary><div class="faq-body">すべて整数なら INT/BIGINT、小数を含めば DECIMAL/NUMERIC、日付形式なら DATE、それ以外は VARCHAR（最大長から算出）です。</div></details><details class="faq-item"><summary>大量の行でも大丈夫ですか？</summary><div class="faq-body">100 行ずつまとめた複数行 INSERT を出力します。数千行でも 1 ファイルに収まります。</div></details><details class="faq-item"><summary>空のセルはどうなりますか？</summary><div class="faq-body">既定では空文字として出力します。「空セルを NULL にする」をオンにすると NULL になります。</div></details><details class="faq-item"><summary>データは送信されますか？</summary><div class="faq-body">いいえ。生成はブラウザ内で完結し、CSV は送信されません。</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>関連ツール</h2>
+    <div class="related"><a class="rel" href="/csv-column.html"><span class="t">列の抽出・削除</span><span class="d">必要な列だけ残す</span></a><a class="rel" href="/json.html"><span class="t">CSV ⇄ JSON</span><span class="d">相互変換・JSON Lines</span></a><a class="rel" href="/csv-sort.html"><span class="t">複数列ソート</span><span class="d">数値・日付も正しく</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/">ツール一覧</a>
+      <a href="/guide/what-is-csv.html">CSV ガイド</a>
+      <a href="/#privacy">プライバシー</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/sql.js"></script>
+</body>
+</html>

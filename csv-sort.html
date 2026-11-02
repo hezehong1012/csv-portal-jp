@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV ソートツール｜複数列・数値・日付で並べ替え【無料】</title>
+<meta name="description" content="CSV を指定した列で並べ替え。数値は桁数に関係なく数値として、日付は日付として比較します。第 2 キーも指定でき、Excel を開かずにブラウザだけで完結します。">
+<link rel="canonical" href="https://csv.format-portal.com/csv-sort.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-sort.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-sort.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-sort.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV ソートツール｜複数列・数値・日付で並べ替え【無料】">
+<meta property="og:description" content="CSV を指定した列で並べ替え。数値は桁数に関係なく数値として、日付は日付として比較します。第 2 キーも指定でき、Excel を開かずにブラウザだけで完結します。">
+<meta property="og:url" content="https://csv.format-portal.com/csv-sort.html">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSV ソートツール｜複数列・数値・日付で並べ替え【無料】", "url": "https://csv.format-portal.com/csv-sort.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "CSV を指定した列で並べ替え。数値は桁数に関係なく数値として、日付は日付として比較します。第 2 キーも指定でき、Excel を開かずにブラウザだけで完結します。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "「1,200」が「320」より前に来てしまいます", "acceptedAnswer": {"@type": "Answer", "text": "「数値として比較」をオンにしてください。桁区切りのカンマや前後の空白は無視して数値として比較します。"}}, {"@type": "Question", "name": "第 2 キーは何に使いますか？", "acceptedAnswer": {"@type": "Answer", "text": "1 つ目の列が同じ値だった行を、2 つ目の列で並べ替えます。部署ごとに社員を並べる、といった使い方ができます。"}}, {"@type": "Question", "name": "日付はどう並びますか？", "acceptedAnswer": {"@type": "Answer", "text": "YYYY-MM-DD 形式だけでなく、2026/1/5 や 2026年1月5日も日付として解釈して並べ替えます。"}}, {"@type": "Question", "name": "空白セルはどこに入りますか？", "acceptedAnswer": {"@type": "Answer", "text": "昇順・降順どちらでも末尾にまとまります。空欄だらけの行が先頭に来ることはありません。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。並べ替えはブラウザ内で完結し、ファイルは送信されません。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://csv.format-portal.com/"}, {"@type": "ListItem", "position": 2, "name": "ツール", "item": "https://csv.format-portal.com/#tools"}, {"@type": "ListItem", "position": 3, "name": "CSV の並べ替え（複数列ソート）", "item": "https://csv.format-portal.com/csv-sort.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/#tools" class="here">ツール</a>
+      <a href="/guide/what-is-csv.html" class="">ガイド</a>
+      <a href="/en/" hreflang="en">EN</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">ホーム</a><span class="sep">/</span><a href="/#tools">ツール</a><span class="sep">/</span>CSV の並べ替え（複数列ソート）</div>
+    <h1>CSV の並べ替え（複数列ソート）</h1>
+    <p class="lead">「1,200」と「320」が文字列として並んでしまう問題を解消します。数値比較をオンにすれば数値として、日付なら日付として正しく並びます。第 2 キーで同点の行も整います。</p>
+    <div class="badges"><span class="badge">アップロード不要</span><span class="badge">登録不要</span><span class="badge">数値・日付も正しく並ぶ</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">CSV を処理</span>
+        <span class="tc-badge">処理は端末内で完結</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">ファイル</button>
+        <button class="tab" id="tabPaste" type="button">貼り付け</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">CSV をここにドロップ</div>
+          <div class="drop-s">または クリックして選択 ・ Shift_JIS / UTF-8 自動判定</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label>1 つ目の列 <select id="sortA"></select></label>
+        <label>順序 <select id="sortDirA"><option value="asc">昇順</option><option value="desc">降順</option></select></label>
+        <label>2 つ目の列 <select id="sortB"></select></label>
+        <label>順序 <select id="sortDirB"><option value="asc">昇順</option><option value="desc">降順</option></select></label>
+        <label class="chk"><input type="checkbox" id="sortNum" checked> 数値として比較</label>
+        <label class="chk"><input type="checkbox" id="sortCase"> 大文字小文字を無視</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">実行する</button> <button class="btn btn-sm" id="sample" type="button">サンプルで試す</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>使い方</h2>
+    <ol class="steps"><li>CSV をドロップするか、表を貼り付けます。</li><li>並べ替えたい列と昇順・降順を選びます（必要なら第 2 キーも）。</li><li>「実行する」を押して結果を確認し、CSV を保存します。</li></ol>
+    <h3>このツールでできないこと</h3>
+    <p>日本語の五十音順はブラウザの照合順序に従うため、ひらがな・カタカナの区別や濁点の扱いが環境によってわずかに異なります。数値と判定できない値（「約1,200」など）は文字列として比較します。</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div class="faq"><details class="faq-item"><summary>「1,200」が「320」より前に来てしまいます</summary><div class="faq-body">「数値として比較」をオンにしてください。桁区切りのカンマや前後の空白は無視して数値として比較します。</div></details><details class="faq-item"><summary>第 2 キーは何に使いますか？</summary><div class="faq-body">1 つ目の列が同じ値だった行を、2 つ目の列で並べ替えます。部署ごとに社員を並べる、といった使い方ができます。</div></details><details class="faq-item"><summary>日付はどう並びますか？</summary><div class="faq-body">YYYY-MM-DD 形式だけでなく、2026/1/5 や 2026年1月5日も日付として解釈して並べ替えます。</div></details><details class="faq-item"><summary>空白セルはどこに入りますか？</summary><div class="faq-body">昇順・降順どちらでも末尾にまとまります。空欄だらけの行が先頭に来ることはありません。</div></details><details class="faq-item"><summary>データは送信されますか？</summary><div class="faq-body">いいえ。並べ替えはブラウザ内で完結し、ファイルは送信されません。</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>関連ツール</h2>
+    <div class="related"><a class="rel" href="/csv-dedup.html"><span class="t">重複行削除</span><span class="d">重複の抽出も</span></a><a class="rel" href="/csv-column.html"><span class="t">列の抽出・削除</span><span class="d">必要な列だけ残す</span></a><a class="rel" href="/csv-extract.html"><span class="t">正規表現で抽出</span><span class="d">メール・URL・電話番号</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/">ツール一覧</a>
+      <a href="/guide/what-is-csv.html">CSV ガイド</a>
+      <a href="/#privacy">プライバシー</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/sort.js"></script>
+</body>
+</html>

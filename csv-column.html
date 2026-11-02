@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV 列の抽出・削除ツール｜必要な列だけ残す【無料・登録不要】</title>
+<meta name="description" content="必要な列だけを残す、不要な列を削除する、連番を振る。列名は読み込むだけで自動表示され、チェックするだけで列を絞り込めます。元の CSV はアップロードされません。">
+<link rel="canonical" href="https://csv.format-portal.com/csv-column.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-column.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-column.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-column.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV 列の抽出・削除ツール｜必要な列だけ残す【無料・登録不要】">
+<meta property="og:description" content="必要な列だけを残す、不要な列を削除する、連番を振る。列名は読み込むだけで自動表示され、チェックするだけで列を絞り込めます。元の CSV はアップロードされません。">
+<meta property="og:url" content="https://csv.format-portal.com/csv-column.html">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSV 列の抽出・削除ツール｜必要な列だけ残す【無料・登録不要】", "url": "https://csv.format-portal.com/csv-column.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "必要な列だけを残す、不要な列を削除する、連番を振る。列名は読み込むだけで自動表示され、チェックするだけで列を絞り込めます。元の CSV はアップロードされません。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "列の順番を変えられますか？", "acceptedAnswer": {"@type": "Answer", "text": "このページでは元の並び順のまま出力します。順番を変えたい場合は、関連ツールのオンラインエディタで列をドラッグしてから保存してください。"}}, {"@type": "Question", "name": "ヘッダーのない CSV でも使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "1 行目を列名として読み込むため、データ行が 1 行失われます。先に「空白行の整理」でヘッダーを付けるか、エディタで 1 行目を追加してください。"}}, {"@type": "Question", "name": "削除した列だけを別ファイルにできますか？", "acceptedAnswer": {"@type": "Answer", "text": "モードを「選んだ列を削除」に切り替えて実行すると、削除される側だけの CSV が得られます。"}}, {"@type": "Question", "name": "何列まで扱えますか？", "acceptedAnswer": {"@type": "Answer", "text": "列数の上限は設けていません。ブラウザのメモリの範囲で動作し、数百列の表でも問題ありません。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。読み込み・列の絞り込み・書き出しはすべてブラウザ内で行われ、サーバーには送信されません。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://csv.format-portal.com/"}, {"@type": "ListItem", "position": 2, "name": "ツール", "item": "https://csv.format-portal.com/#tools"}, {"@type": "ListItem", "position": 3, "name": "CSV の列を抽出・削除", "item": "https://csv.format-portal.com/csv-column.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/#tools" class="here">ツール</a>
+      <a href="/guide/what-is-csv.html" class="">ガイド</a>
+      <a href="/en/" hreflang="en">EN</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">ホーム</a><span class="sep">/</span><a href="/#tools">ツール</a><span class="sep">/</span>CSV の列を抽出・削除</div>
+    <h1>CSV の列を抽出・削除</h1>
+    <p class="lead">列名をチェックするだけで、必要な列だけを残せます。不要な列を落とす、先頭に連番を付ける、列名の前後の空白を削るといった下ごしらえが、すべてブラウザ内で完結します。</p>
+    <div class="badges"><span class="badge">アップロード不要</span><span class="badge">登録不要</span><span class="badge">列名は自動で読み込み</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">CSV を処理</span>
+        <span class="tc-badge">処理は端末内で完結</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">ファイル</button>
+        <button class="tab" id="tabPaste" type="button">貼り付け</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">CSV をここにドロップ</div>
+          <div class="drop-s">または クリックして選択 ・ Shift_JIS / UTF-8 自動判定</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="field">
+        <label>残す列 <span class="hint">（CSV を読み込むと列名が表示されます）</span></label>
+        <div class="colbox" id="colbox"><span class="drophint">CSV を読み込むと列が表示されます</span></div>
+      </div>
+      <div class="opts">
+        <label>動作
+          <select id="colMode"><option value="keep">選んだ列だけ残す</option><option value="drop">選んだ列を削除</option></select>
+        </label>
+        <label class="chk"><input type="checkbox" id="colSerial"> 先頭に連番列を追加</label>
+        <label class="chk"><input type="checkbox" id="colTrim"> 列名の前後の空白を削除</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">実行する</button> <button class="btn btn-sm" id="sample" type="button">サンプルで試す</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>使い方</h2>
+    <ol class="steps"><li>CSV をドロップするか、表を貼り付けます。</li><li>残したい列にチェックを入れます（「削除する」に切り替えれば逆になります）。</li><li>「実行する」を押して結果を確認し、CSV を保存します。</li></ol>
+    <h3>このツールでできないこと</h3>
+    <p>列の順番を入れ替えることはできません（元の並び順のまま出力します）。順番を変えたい場合はオンラインエディタで列をドラッグしてください。ヘッダー行のない CSV は 1 行目が列名として扱われます。</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div class="faq"><details class="faq-item"><summary>列の順番を変えられますか？</summary><div class="faq-body">このページでは元の並び順のまま出力します。順番を変えたい場合は、関連ツールのオンラインエディタで列をドラッグしてから保存してください。</div></details><details class="faq-item"><summary>ヘッダーのない CSV でも使えますか？</summary><div class="faq-body">1 行目を列名として読み込むため、データ行が 1 行失われます。先に「空白行の整理」でヘッダーを付けるか、エディタで 1 行目を追加してください。</div></details><details class="faq-item"><summary>削除した列だけを別ファイルにできますか？</summary><div class="faq-body">モードを「選んだ列を削除」に切り替えて実行すると、削除される側だけの CSV が得られます。</div></details><details class="faq-item"><summary>何列まで扱えますか？</summary><div class="faq-body">列数の上限は設けていません。ブラウザのメモリの範囲で動作し、数百列の表でも問題ありません。</div></details><details class="faq-item"><summary>データは送信されますか？</summary><div class="faq-body">いいえ。読み込み・列の絞り込み・書き出しはすべてブラウザ内で行われ、サーバーには送信されません。</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>関連ツール</h2>
+    <div class="related"><a class="rel" href="/csv-row-clean.html"><span class="t">空白行の整理</span><span class="d">空白行・空列の削除</span></a><a class="rel" href="/csv-clean.html"><span class="t">クレンジング</span><span class="d">空白・記号・空セル</span></a><a class="rel" href="https://csv-editor.format-portal.com/"><span class="t">オンラインエディタ</span><span class="d">その場で編集・保存</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/">ツール一覧</a>
+      <a href="/guide/what-is-csv.html">CSV ガイド</a>
+      <a href="/#privacy">プライバシー</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/column.js"></script>
+</body>
+</html>

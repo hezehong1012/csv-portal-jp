@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Split a large CSV by row count — free, in your browser</title>
+<meta name="description" content="Split an oversized CSV by row count or into a fixed number of files. Keep the header in every part so each file still imports cleanly. No upload, no sign-up.">
+<link rel="canonical" href="https://csv.format-portal.com/en/csv-split.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-split.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-split.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-split.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Split a large CSV by row count — free, in your browser">
+<meta property="og:description" content="Split an oversized CSV by row count or into a fixed number of files. Keep the header in every part so each file still imports cleanly. No upload, no sign-up.">
+<meta property="og:url" content="https://csv.format-portal.com/en/csv-split.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Split a large CSV by row count — free, in your browser", "url": "https://csv.format-portal.com/en/csv-split.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "en", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "Split an oversized CSV by row count or into a fixed number of files. Keep the header in every part so each file still imports cleanly. No upload, no sign-up."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Can I choose the number of rows per file?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. A 100,000-row CSV split into 30,000-row parts produces four files."}}, {"@type": "Question", "name": "Does each part keep the header?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, on by default. Turn it off and parts after the first contain data rows only."}}, {"@type": "Question", "name": "Does the encoding change?", "acceptedAnswer": {"@type": "Answer", "text": "The input encoding is detected and the output is written as UTF-8, which current Excel versions read correctly."}}, {"@type": "Question", "name": "Is my data uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. The split runs entirely in your browser."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csv.format-portal.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://csv.format-portal.com/en/#tools"}, {"@type": "ListItem", "position": 3, "name": "Split a CSV file", "item": "https://csv.format-portal.com/en/csv-split.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/en/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/en/#tools" class="here">Tools</a>
+      <a href="/en/guide/what-is-csv.html" class="">Guides</a>
+      <a href="/" hreflang="ja">日本語</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a><span class="sep">/</span><a href="/en/#tools">Tools</a><span class="sep">/</span>Split a CSV file</div>
+    <h1>Split a CSV file</h1>
+    <p class="lead">Cut a CSV that exceeds an upload or email limit into parts — by row count, or into a fixed number of files — keeping the header row in each part.</p>
+    <div class="badges"><span class="badge">No upload</span><span class="badge">No sign-up</span><span class="badge">Header kept in every part</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">Process your CSV</span>
+        <span class="tc-badge">Runs on your device</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">File</button>
+        <button class="tab" id="tabPaste" type="button">Paste</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">Drop a CSV here</div>
+          <div class="drop-s">or click to choose · Shift_JIS / UTF-8 detected</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label>Split by
+          <select id="splitMode"><option value="rows">row count</option><option value="parts">number of files</option></select>
+        </label>
+        <label><input type="number" id="splitSize" value="1000" min="1" step="100" style="width:110px"> per file</label>
+        <label class="chk"><input type="checkbox" id="keepHead" checked> keep the header row in every part</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">Run</button> <button class="btn btn-sm" id="sample" type="button">Try a sample</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>How to use</h2>
+    <ol class="steps"><li>Choose the CSV you want to split.</li><li>Pick “by row count” or “by number of files” and enter the value.</li><li>Download each generated part.</li></ol>
+    <h3>What this tool does not do</h3>
+    <p>Splitting is row-based and never cuts a row in half. Files are not zipped — each part downloads separately.</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <div class="faq"><details class="faq-item"><summary>Can I choose the number of rows per file?</summary><div class="faq-body">Yes. A 100,000-row CSV split into 30,000-row parts produces four files.</div></details><details class="faq-item"><summary>Does each part keep the header?</summary><div class="faq-body">Yes, on by default. Turn it off and parts after the first contain data rows only.</div></details><details class="faq-item"><summary>Does the encoding change?</summary><div class="faq-body">The input encoding is detected and the output is written as UTF-8, which current Excel versions read correctly.</div></details><details class="faq-item"><summary>Is my data uploaded?</summary><div class="faq-body">No. The split runs entirely in your browser.</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>Related tools</h2>
+    <div class="related"><a class="rel" href="/en/csv-merge.html"><span class="t">Merge CSV files</span><span class="d">Stack files into one</span></a><a class="rel" href="/en/csv-dedup.html"><span class="t">Remove duplicates</span><span class="d">Drop or extract duplicates</span></a><a class="rel" href="/en/json.html"><span class="t">CSV ⇄ JSON</span><span class="d">Convert both ways</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/en/">All tools</a>
+      <a href="/en/guide/what-is-csv.html">CSV guides</a>
+      <a href="/en/#privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/split.js"></script>
+</body>
+</html>

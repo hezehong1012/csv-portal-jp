@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extract or drop CSV columns in your browser — free, no sign-up</title>
+<meta name="description" content="Keep only the columns you need, drop the rest, or add a row number. Column names are read automatically, so you just tick what you want — and the file never leaves your browser.">
+<link rel="canonical" href="https://csv.format-portal.com/en/csv-column.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-column.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-column.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-column.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Extract or drop CSV columns in your browser — free, no sign-up">
+<meta property="og:description" content="Keep only the columns you need, drop the rest, or add a row number. Column names are read automatically, so you just tick what you want — and the file never leaves your browser.">
+<meta property="og:url" content="https://csv.format-portal.com/en/csv-column.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Extract or drop CSV columns in your browser — free, no sign-up", "url": "https://csv.format-portal.com/en/csv-column.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "en", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "Keep only the columns you need, drop the rest, or add a row number. Column names are read automatically, so you just tick what you want — and the file never leaves your browser."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Can I reorder the columns?", "acceptedAnswer": {"@type": "Answer", "text": "Not here — the original order is kept. Use the online editor (linked below) to drag columns, then save."}}, {"@type": "Question", "name": "What about a CSV without a header row?", "acceptedAnswer": {"@type": "Answer", "text": "The first line is treated as the header, so you lose one data row. Add a header first (the row-cleaning tool can help) or use the editor."}}, {"@type": "Question", "name": "Can I export only the dropped columns?", "acceptedAnswer": {"@type": "Answer", "text": "Switch the mode to “drop the ticked columns” and run again — the output is then the other side of the split."}}, {"@type": "Question", "name": "How many columns can it handle?", "acceptedAnswer": {"@type": "Answer", "text": "There is no column limit; it runs within your browser's memory and handles tables with hundreds of columns."}}, {"@type": "Question", "name": "Is my data uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Reading, filtering and exporting all happen locally in the browser."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csv.format-portal.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://csv.format-portal.com/en/#tools"}, {"@type": "ListItem", "position": 3, "name": "Extract or drop columns", "item": "https://csv.format-portal.com/en/csv-column.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/en/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/en/#tools" class="here">Tools</a>
+      <a href="/en/guide/what-is-csv.html" class="">Guides</a>
+      <a href="/" hreflang="ja">日本語</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a><span class="sep">/</span><a href="/en/#tools">Tools</a><span class="sep">/</span>Extract or drop columns</div>
+    <h1>Extract or drop columns</h1>
+    <p class="lead">Tick the column names you want to keep. Dropping columns, adding a row number and trimming header spaces all happen inside your browser.</p>
+    <div class="badges"><span class="badge">No upload</span><span class="badge">No sign-up</span><span class="badge">Column names auto-detected</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">Process your CSV</span>
+        <span class="tc-badge">Runs on your device</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">File</button>
+        <button class="tab" id="tabPaste" type="button">Paste</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">Drop a CSV here</div>
+          <div class="drop-s">or click to choose · Shift_JIS / UTF-8 detected</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="field">
+        <label>Columns <span class="hint">(names appear once you load a CSV)</span></label>
+        <div class="colbox" id="colbox"><span class="drophint">Load a CSV to see its columns.</span></div>
+      </div>
+      <div class="opts">
+        <label>Action
+          <select id="colMode"><option value="keep">keep ticked columns</option><option value="drop">drop ticked columns</option></select>
+        </label>
+        <label class="chk"><input type="checkbox" id="colSerial"> add a row-number column</label>
+        <label class="chk"><input type="checkbox" id="colTrim"> trim spaces around column names</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">Run</button> <button class="btn btn-sm" id="sample" type="button">Try a sample</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>How to use</h2>
+    <ol class="steps"><li>Drop a CSV or paste the table.</li><li>Tick the columns you want to keep (switch the mode to drop them instead).</li><li>Press Run, check the preview, then download the CSV.</li></ol>
+    <h3>What this tool does not do</h3>
+    <p>Column order is preserved as-is — this tool does not reorder. Use the online editor if you need to drag columns around. A CSV without a header row will lose its first line as the header.</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <div class="faq"><details class="faq-item"><summary>Can I reorder the columns?</summary><div class="faq-body">Not here — the original order is kept. Use the online editor (linked below) to drag columns, then save.</div></details><details class="faq-item"><summary>What about a CSV without a header row?</summary><div class="faq-body">The first line is treated as the header, so you lose one data row. Add a header first (the row-cleaning tool can help) or use the editor.</div></details><details class="faq-item"><summary>Can I export only the dropped columns?</summary><div class="faq-body">Switch the mode to “drop the ticked columns” and run again — the output is then the other side of the split.</div></details><details class="faq-item"><summary>How many columns can it handle?</summary><div class="faq-body">There is no column limit; it runs within your browser&#x27;s memory and handles tables with hundreds of columns.</div></details><details class="faq-item"><summary>Is my data uploaded?</summary><div class="faq-body">No. Reading, filtering and exporting all happen locally in the browser.</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>Related tools</h2>
+    <div class="related"><a class="rel" href="/en/csv-row-clean.html"><span class="t">Clean blank rows</span><span class="d">Blank rows and columns</span></a><a class="rel" href="/en/csv-clean.html"><span class="t">Cleanse values</span><span class="d">Spaces, symbols, blanks</span></a><a class="rel" href="https://csv-editor.format-portal.com/en/"><span class="t">Online editor</span><span class="d">Edit and save in place</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/en/">All tools</a>
+      <a href="/en/guide/what-is-csv.html">CSV guides</a>
+      <a href="/en/#privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/column.js"></script>
+</body>
+</html>

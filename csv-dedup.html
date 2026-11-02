@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV 重複行削除ツール｜重複の抽出もブラウザだけで【無料・登録不要】</title>
+<meta name="description" content="重複した行を一括で削除。比較する列を選べるので、同じ会社の複数担当者を残したまま重複だけ消せます。削除した行の書き出し、大文字小文字や前後空白の無視、空白行の除去にも対応。データは送信されません。">
+<link rel="canonical" href="https://csv.format-portal.com/csv-dedup.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-dedup.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-dedup.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-dedup.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV 重複行削除ツール｜重複の抽出もブラウザだけで【無料・登録不要】">
+<meta property="og:description" content="重複した行を一括で削除。比較する列を選べるので、同じ会社の複数担当者を残したまま重複だけ消せます。削除した行の書き出し、大文字小文字や前後空白の無視、空白行の除去にも対応。データは送信されません。">
+<meta property="og:url" content="https://csv.format-portal.com/csv-dedup.html">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSV 重複行削除ツール｜重複の抽出もブラウザだけで【無料・登録不要】", "url": "https://csv.format-portal.com/csv-dedup.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "重複した行を一括で削除。比較する列を選べるので、同じ会社の複数担当者を残したまま重複だけ消せます。削除した行の書き出し、大文字小文字や前後空白の無視、空白行の除去にも対応。データは送信されません。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "重複の判定は完全一致ですか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。選択した列の値を完全一致で比較します。「前後の空白を無視」「大文字小文字を区別しない」をオンにすると、その範囲で正規化してから比較します。"}}, {"@type": "Question", "name": "削除した行だけを別ファイルにできますか？", "acceptedAnswer": {"@type": "Answer", "text": "できます。実行後に表示される「削除した行をダウンロード」から、重複として除外された行だけを CSV で保存できます。"}}, {"@type": "Question", "name": "どの行が残りますか？", "acceptedAnswer": {"@type": "Answer", "text": "既定では最初に出現した行を残します。オプションで「最後の1行を残す」に切り替えると、後から出てきた行が採用されます。"}}, {"@type": "Question", "name": "何行まで処理できますか？", "acceptedAnswer": {"@type": "Answer", "text": "ブラウザのメモリの範囲内で動作します。数十万行までは通常の PC で扱えますが、プレビューは先頭 60 行のみ表示します。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。読み込み・比較・書き出しのすべてがブラウザ内で行われ、サーバーには一切送信されません。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://csv.format-portal.com/"}, {"@type": "ListItem", "position": 2, "name": "ツール", "item": "https://csv.format-portal.com/#tools"}, {"@type": "ListItem", "position": 3, "name": "CSV 重複行削除ツール", "item": "https://csv.format-portal.com/csv-dedup.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/#tools" class="here">ツール</a>
+      <a href="/guide/what-is-csv.html" class="">ガイド</a>
+      <a href="/en/" hreflang="en">EN</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">ホーム</a><span class="sep">/</span><a href="/#tools">ツール</a><span class="sep">/</span>CSV 重複行削除ツール</div>
+    <h1>CSV 重複行削除ツール</h1>
+    <p class="lead">重複した行を一括で削除します。比較する列を選べるので、「同じ会社の複数担当者」を残したまま重複だけ消す、といった使い方もできます。処理はすべてブラウザ内で完結します。</p>
+    <div class="badges"><span class="badge">アップロード不要</span><span class="badge">登録不要</span><span class="badge">重複の抽出も可能</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">CSV を処理</span>
+        <span class="tc-badge">処理は端末内で完結</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">ファイル</button>
+        <button class="tab" id="tabPaste" type="button">貼り付け</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">CSV をここにドロップ</div>
+          <div class="drop-s">または クリックして選択 ・ Shift_JIS / UTF-8 自動判定</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="field">
+        <label>比較する列 <span class="hint">（未選択ならすべての列で判定）</span></label>
+        <div class="colbox" id="colbox"><span class="drophint">CSV を読み込むと列が表示されます</span></div>
+      </div>
+      <div class="opts">
+        <label>残す行
+          <select id="keepMode"><option value="first">最初の 1 行</option><option value="last">最後の 1 行</option></select>
+        </label>
+        <label class="chk"><input type="checkbox" id="ignoreCase"> 大文字小文字を区別しない</label>
+        <label class="chk"><input type="checkbox" id="trimSpaces" checked> 前後の空白を無視</label>
+        <label class="chk"><input type="checkbox" id="dropBlank" checked> 空白行も削除</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">実行する</button> <button class="btn btn-sm" id="sample" type="button">サンプルで試す</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>使い方</h2>
+    <ol class="steps"><li>CSV をドロップ、または表を貼り付けます。</li><li>比較する列にチェックを入れます（未選択なら全列で判定）。</li><li>「実行する」を押し、結果を確認して CSV を保存します。</li></ol>
+    <h3>このツールでできないこと</h3>
+    <p>あいまいな類似判定はしません（「株式会社A」と「A株式会社」は別物として扱います）。表記ゆれを吸収したい場合は、先にクレンジングで統一してください。</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div class="faq"><details class="faq-item"><summary>重複の判定は完全一致ですか？</summary><div class="faq-body">はい。選択した列の値を完全一致で比較します。「前後の空白を無視」「大文字小文字を区別しない」をオンにすると、その範囲で正規化してから比較します。</div></details><details class="faq-item"><summary>削除した行だけを別ファイルにできますか？</summary><div class="faq-body">できます。実行後に表示される「削除した行をダウンロード」から、重複として除外された行だけを CSV で保存できます。</div></details><details class="faq-item"><summary>どの行が残りますか？</summary><div class="faq-body">既定では最初に出現した行を残します。オプションで「最後の1行を残す」に切り替えると、後から出てきた行が採用されます。</div></details><details class="faq-item"><summary>何行まで処理できますか？</summary><div class="faq-body">ブラウザのメモリの範囲内で動作します。数十万行までは通常の PC で扱えますが、プレビューは先頭 60 行のみ表示します。</div></details><details class="faq-item"><summary>データは送信されますか？</summary><div class="faq-body">いいえ。読み込み・比較・書き出しのすべてがブラウザ内で行われ、サーバーには一切送信されません。</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>関連ツール</h2>
+    <div class="related"><a class="rel" href="/csv-diff.html"><span class="t">差分比較</span><span class="d">2ファイルの違いを抽出</span></a><a class="rel" href="/csv-merge.html"><span class="t">CSV 結合</span><span class="d">複数ファイルを縦に連結</span></a><a class="rel" href="/json.html"><span class="t">CSV ⇄ JSON</span><span class="d">相互変換・JSON Lines</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/">ツール一覧</a>
+      <a href="/guide/what-is-csv.html">CSV ガイド</a>
+      <a href="/#privacy">プライバシー</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/dedup.js"></script>
+</body>
+</html>

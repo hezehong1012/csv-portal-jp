@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV 空白行削除ツール｜空の列・不要な行の整理も【無料】</title>
+<meta name="description" content="CSV の空白行と空の列をまとめて削除。先頭の説明行を飛ばす、ヘッダーなしとして扱う、行をシャッフルするといった下ごしらえがブラウザだけで完結します。">
+<link rel="canonical" href="https://csv.format-portal.com/csv-row-clean.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-row-clean.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-row-clean.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-row-clean.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV 空白行削除ツール｜空の列・不要な行の整理も【無料】">
+<meta property="og:description" content="CSV の空白行と空の列をまとめて削除。先頭の説明行を飛ばす、ヘッダーなしとして扱う、行をシャッフルするといった下ごしらえがブラウザだけで完結します。">
+<meta property="og:url" content="https://csv.format-portal.com/csv-row-clean.html">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSV 空白行削除ツール｜空の列・不要な行の整理も【無料】", "url": "https://csv.format-portal.com/csv-row-clean.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "CSV の空白行と空の列をまとめて削除。先頭の説明行を飛ばす、ヘッダーなしとして扱う、行をシャッフルするといった下ごしらえがブラウザだけで完結します。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "空白行の判定基準は？", "acceptedAnswer": {"@type": "Answer", "text": "すべてのセルが空、または半角・全角スペースだけの行を空白行として削除します。1 つでも値が入っていれば残ります。"}}, {"@type": "Question", "name": "先頭の説明行を飛ばせますか？", "acceptedAnswer": {"@type": "Answer", "text": "「先頭 N 行をスキップ」に数値を入れてください。タイトル行や出力日時が入った CSV をそのまま表にできます。"}}, {"@type": "Question", "name": "ヘッダーのない CSV はどう扱われますか？", "acceptedAnswer": {"@type": "Answer", "text": "「1 行目もデータとして扱う」をオンにすると、1 行目を列名にせずデータとして出力します。"}}, {"@type": "Question", "name": "行のシャッフルは何に使いますか？", "acceptedAnswer": {"@type": "Answer", "text": "テストデータの並びを崩したいときや、機械学習用にデータを分割する前の並べ替えに向いています。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。すべてブラウザ内で処理され、サーバーには送信されません。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://csv.format-portal.com/"}, {"@type": "ListItem", "position": 2, "name": "ツール", "item": "https://csv.format-portal.com/#tools"}, {"@type": "ListItem", "position": 3, "name": "CSV の空白行・不要な行を整理", "item": "https://csv.format-portal.com/csv-row-clean.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/#tools" class="here">ツール</a>
+      <a href="/guide/what-is-csv.html" class="">ガイド</a>
+      <a href="/en/" hreflang="en">EN</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">ホーム</a><span class="sep">/</span><a href="/#tools">ツール</a><span class="sep">/</span>CSV の空白行・不要な行を整理</div>
+    <h1>CSV の空白行・不要な行を整理</h1>
+    <p class="lead">Excel から書き出した CSV に混ざる空行や、途中で増えた空の列をまとめて削除します。先頭の説明行をスキップしたり、1 行目をデータとして扱ったりと、読み込み前の下ごしらえに向いています。</p>
+    <div class="badges"><span class="badge">アップロード不要</span><span class="badge">登録不要</span><span class="badge">空行・空列を一括削除</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">CSV を処理</span>
+        <span class="tc-badge">処理は端末内で完結</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">ファイル</button>
+        <button class="tab" id="tabPaste" type="button">貼り付け</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">CSV をここにドロップ</div>
+          <div class="drop-s">または クリックして選択 ・ Shift_JIS / UTF-8 自動判定</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label class="chk"><input type="checkbox" id="rcBlank" checked> 空白行を削除</label>
+        <label class="chk"><input type="checkbox" id="rcEmptyCol"> 完全に空の列を削除</label>
+        <label class="chk"><input type="checkbox" id="rcNoHead"> 1 行目もデータとして扱う</label>
+        <label class="chk"><input type="checkbox" id="rcShuffle"> 行をランダムに並べ替え</label>
+        <label>先頭 <input type="number" id="rcSkip" value="0" min="0" max="100" style="width:70px"> 行をスキップ</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">実行する</button> <button class="btn btn-sm" id="sample" type="button">サンプルで試す</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>使い方</h2>
+    <ol class="steps"><li>CSV をドロップするか、表を貼り付けます。</li><li>削除したいもの（空白行・空の列）にチェックを入れます。</li><li>「実行する」を押し、削除行数を確認して保存します。</li></ol>
+    <h3>このツールでできないこと</h3>
+    <p>セルの値そのものは書き換えません。表記ゆれを直したい場合は「表記ゆれの統一」を使ってください。空白行の判定は「すべてのセルが空、または空白だけ」の行です。</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div class="faq"><details class="faq-item"><summary>空白行の判定基準は？</summary><div class="faq-body">すべてのセルが空、または半角・全角スペースだけの行を空白行として削除します。1 つでも値が入っていれば残ります。</div></details><details class="faq-item"><summary>先頭の説明行を飛ばせますか？</summary><div class="faq-body">「先頭 N 行をスキップ」に数値を入れてください。タイトル行や出力日時が入った CSV をそのまま表にできます。</div></details><details class="faq-item"><summary>ヘッダーのない CSV はどう扱われますか？</summary><div class="faq-body">「1 行目もデータとして扱う」をオンにすると、1 行目を列名にせずデータとして出力します。</div></details><details class="faq-item"><summary>行のシャッフルは何に使いますか？</summary><div class="faq-body">テストデータの並びを崩したいときや、機械学習用にデータを分割する前の並べ替えに向いています。</div></details><details class="faq-item"><summary>データは送信されますか？</summary><div class="faq-body">いいえ。すべてブラウザ内で処理され、サーバーには送信されません。</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>関連ツール</h2>
+    <div class="related"><a class="rel" href="/csv-column.html"><span class="t">列の抽出・削除</span><span class="d">必要な列だけ残す</span></a><a class="rel" href="/csv-clean.html"><span class="t">クレンジング</span><span class="d">空白・記号・空セル</span></a><a class="rel" href="/csv-dedup.html"><span class="t">重複行削除</span><span class="d">重複の抽出も</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/">ツール一覧</a>
+      <a href="/guide/what-is-csv.html">CSV ガイド</a>
+      <a href="/#privacy">プライバシー</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/row-clean.js"></script>
+</body>
+</html>

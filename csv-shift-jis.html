@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV 文字コード変換｜Shift_JIS を UTF-8 に（文字化け修復）【無料】</title>
+<meta name="description" content="Shift_JIS / EUC-JP の CSV を UTF-8 に変換して文字化けを解消します。文字コードは自動判定し、必要なら手動で固定できます。BOM 付き出力にも対応、ファイルは送信されません。">
+<link rel="canonical" href="https://csv.format-portal.com/csv-shift-jis.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-shift-jis.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-shift-jis.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-shift-jis.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV 文字コード変換｜Shift_JIS を UTF-8 に（文字化け修復）【無料】">
+<meta property="og:description" content="Shift_JIS / EUC-JP の CSV を UTF-8 に変換して文字化けを解消します。文字コードは自動判定し、必要なら手動で固定できます。BOM 付き出力にも対応、ファイルは送信されません。">
+<meta property="og:url" content="https://csv.format-portal.com/csv-shift-jis.html">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSV 文字コード変換｜Shift_JIS を UTF-8 に（文字化け修復）【無料】", "url": "https://csv.format-portal.com/csv-shift-jis.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "Shift_JIS / EUC-JP の CSV を UTF-8 に変換して文字化けを解消します。文字コードは自動判定し、必要なら手動で固定できます。BOM 付き出力にも対応、ファイルは送信されません。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "文字化けが直りません", "acceptedAnswer": {"@type": "Answer", "text": "「入力の文字コード」を Shift_JIS または EUC-JP に固定して、もう一度実行してください。自動判定が外れている場合はこれで直ります。"}}, {"@type": "Question", "name": "BOM は付けたほうがいいですか？", "acceptedAnswer": {"@type": "Answer", "text": "Excel でそのまま開きたい場合は BOM 付きが安全です。プログラムで読む場合は BOM なしを選んでください。"}}, {"@type": "Question", "name": "Excel で開くと日本語が化けます", "acceptedAnswer": {"@type": "Answer", "text": "UTF-8 の CSV を Excel が Shift_JIS と誤認するためです。「BOM を付ける」をオンにして保存し直すと解消します。"}}, {"@type": "Question", "name": "EUC-JP にも対応していますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。自動判定の対象で、手動でも選べます。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。変換はブラウザ内の TextDecoder で行われ、ファイルは送信されません。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://csv.format-portal.com/"}, {"@type": "ListItem", "position": 2, "name": "ツール", "item": "https://csv.format-portal.com/#tools"}, {"@type": "ListItem", "position": 3, "name": "CSV の文字コード変換（Shift_JIS → UTF-8）", "item": "https://csv.format-portal.com/csv-shift-jis.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/#tools" class="here">ツール</a>
+      <a href="/guide/what-is-csv.html" class="">ガイド</a>
+      <a href="/en/" hreflang="en">EN</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">ホーム</a><span class="sep">/</span><a href="/#tools">ツール</a><span class="sep">/</span>CSV の文字コード変換（Shift_JIS → UTF-8）</div>
+    <h1>CSV の文字コード変換（Shift_JIS → UTF-8）</h1>
+    <p class="lead">Excel で保存した Shift_JIS の CSV を、そのまま UTF-8 に変換します。文字コードは自動判定。化けている箇所は件数で知らせます。</p>
+    <div class="badges"><span class="badge">アップロード不要</span><span class="badge">登録不要</span><span class="badge">文字コードを自動判定</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">CSV を処理</span>
+        <span class="tc-badge">処理は端末内で完結</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">ファイル</button>
+        <button class="tab" id="tabPaste" type="button">貼り付け</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">CSV をここにドロップ</div>
+          <div class="drop-s">または クリックして選択 ・ Shift_JIS / UTF-8 自動判定</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label>入力の文字コード
+          <select id="encForce"><option value="auto">自動判定</option><option value="shift_jis">Shift_JIS に固定</option><option value="euc-jp">EUC-JP に固定</option><option value="utf-8">UTF-8 に固定</option></select>
+        </label>
+        <label>出力の改行 <select id="encNl"><option value="CRLF">CRLF</option><option value="LF">LF</option></select></label>
+        <label class="chk"><input type="checkbox" id="encBom" checked> BOM を付ける（Excel 用）</label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">実行する</button> <button class="btn btn-sm" id="sample" type="button">サンプルで試す</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>使い方</h2>
+    <ol class="steps"><li>CSV をドロップします（貼り付けでも可）。</li><li>必要なら「入力の文字コード」を Shift_JIS / EUC-JP に固定します。</li><li>「実行する」を押し、文字化けが 0 件になったことを確認して保存します。</li></ol>
+    <h3>このツールでできないこと</h3>
+    <p>UTF-8 から Shift_JIS への書き出しはできません。ブラウザで扱える文字コードの制約で、変換は「Shift_JIS / EUC-JP → UTF-8」の一方向です。Shift_JIS で受け取る必要がある場合は、UTF-8 で保存してから Excel 側で「CSV（コンマ区切り）」として保存し直してください。</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div class="faq"><details class="faq-item"><summary>文字化けが直りません</summary><div class="faq-body">「入力の文字コード」を Shift_JIS または EUC-JP に固定して、もう一度実行してください。自動判定が外れている場合はこれで直ります。</div></details><details class="faq-item"><summary>BOM は付けたほうがいいですか？</summary><div class="faq-body">Excel でそのまま開きたい場合は BOM 付きが安全です。プログラムで読む場合は BOM なしを選んでください。</div></details><details class="faq-item"><summary>Excel で開くと日本語が化けます</summary><div class="faq-body">UTF-8 の CSV を Excel が Shift_JIS と誤認するためです。「BOM を付ける」をオンにして保存し直すと解消します。</div></details><details class="faq-item"><summary>EUC-JP にも対応していますか？</summary><div class="faq-body">はい。自動判定の対象で、手動でも選べます。</div></details><details class="faq-item"><summary>データは送信されますか？</summary><div class="faq-body">いいえ。変換はブラウザ内の TextDecoder で行われ、ファイルは送信されません。</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>関連ツール</h2>
+    <div class="related"><a class="rel" href="/csv-newline.html"><span class="t">改行コード変換</span><span class="d">CRLF ⇄ LF</span></a><a class="rel" href="/csv-delimiter.html"><span class="t">区切り文字変換</span><span class="d">カンマ ⇄ タブ ⇄ ;</span></a><a class="rel" href="/csv-clean.html"><span class="t">クレンジング</span><span class="d">空白・記号・空セル</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/">ツール一覧</a>
+      <a href="/guide/what-is-csv.html">CSV ガイド</a>
+      <a href="/#privacy">プライバシー</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/shift-jis.js"></script>
+</body>
+</html>

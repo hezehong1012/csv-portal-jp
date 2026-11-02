@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV 表記ゆれ統一ツール｜全角半角・日付・電話番号を整形【無料】</title>
+<meta name="description" content="全角の英数字を半角に、半角カナを全角に、日付を YYYY-MM-DD に統一。電話番号のハイフン削除や大文字小文字の統一まで、ブラウザだけで一括処理できます。">
+<link rel="canonical" href="https://csv.format-portal.com/csv-normalize.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/csv-normalize.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/csv-normalize.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/csv-normalize.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV 表記ゆれ統一ツール｜全角半角・日付・電話番号を整形【無料】">
+<meta property="og:description" content="全角の英数字を半角に、半角カナを全角に、日付を YYYY-MM-DD に統一。電話番号のハイフン削除や大文字小文字の統一まで、ブラウザだけで一括処理できます。">
+<meta property="og:url" content="https://csv.format-portal.com/csv-normalize.html">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSV 表記ゆれ統一ツール｜全角半角・日付・電話番号を整形【無料】", "url": "https://csv.format-portal.com/csv-normalize.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "全角の英数字を半角に、半角カナを全角に、日付を YYYY-MM-DD に統一。電話番号のハイフン削除や大文字小文字の統一まで、ブラウザだけで一括処理できます。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "日付はどの形式に対応していますか？", "acceptedAnswer": {"@type": "Answer", "text": "2026/1/5、2026-01-05、2026.1.5、2026年1月5日、20260105 を YYYY-MM-DD に統一します。解釈できない値はそのまま残します。"}}, {"@type": "Question", "name": "半角カナは全角になりますか？", "acceptedAnswer": {"@type": "Answer", "text": "「半角カナを全角に」をオンにすると、ﾃﾞｰﾀ が データ になります。濁点・半濁点も合成します。"}}, {"@type": "Question", "name": "電話番号のハイフンは消せますか？", "acceptedAnswer": {"@type": "Answer", "text": "「電話番号のハイフンを削除」をオンにすると、03-1234-0001 が 0312340001 になります。"}}, {"@type": "Question", "name": "数値の通貨記号は？", "acceptedAnswer": {"@type": "Answer", "text": "「数値の記号・カンマを削除」で ¥1,200 → 1200 になります。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。すべてブラウザ内で完結します。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://csv.format-portal.com/"}, {"@type": "ListItem", "position": 2, "name": "ツール", "item": "https://csv.format-portal.com/#tools"}, {"@type": "ListItem", "position": 3, "name": "CSV の表記ゆれを統一", "item": "https://csv.format-portal.com/csv-normalize.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/#tools" class="here">ツール</a>
+      <a href="/guide/what-is-csv.html" class="">ガイド</a>
+      <a href="/en/" hreflang="en">EN</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">ホーム</a><span class="sep">/</span><a href="/#tools">ツール</a><span class="sep">/</span>CSV の表記ゆれを統一</div>
+    <h1>CSV の表記ゆれを統一</h1>
+    <p class="lead">「ＴＡＮＡＫＡ」「ﾀﾅｶ」「2021/4/1」「2021年4月1日」が混ざった列を、1 つの書式に揃えます。突合やシステム取り込みの前処理に最適です。</p>
+    <div class="badges"><span class="badge">アップロード不要</span><span class="badge">登録不要</span><span class="badge">全角半角・日付を統一</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">CSV を処理</span>
+        <span class="tc-badge">処理は端末内で完結</span>
+      </div>
+      <div class="tc-body">
+      <div class="tabs">
+        <button class="tab on" id="tabFile" type="button">ファイル</button>
+        <button class="tab" id="tabPaste" type="button">貼り付け</button>
+      </div>
+      <div id="paneFile">
+        <div class="drop" id="drop">
+          <div class="drop-t">CSV をここにドロップ</div>
+          <div class="drop-s">または クリックして選択 ・ Shift_JIS / UTF-8 自動判定</div>
+        </div>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv" class="hidden">
+      </div>
+      <div id="panePaste" class="hidden">
+        <textarea id="paste" placeholder="name,email,company&#10;Tanaka,tanaka@example.com,Acme"></textarea>
+      </div>
+      <div class="opts">
+        <label class="chk"><input type="checkbox" id="nmHalf" checked> 全角英数記号 → 半角</label>
+        <label class="chk"><input type="checkbox" id="nmKana" checked> 半角カナ → 全角</label>
+        <label class="chk"><input type="checkbox" id="nmDate" checked> 日付を YYYY-MM-DD に統一</label>
+        <label class="chk"><input type="checkbox" id="nmNum"> 数値の記号・カンマを削除</label>
+        <label class="chk"><input type="checkbox" id="nmPhone"> 電話番号のハイフンを削除</label>
+        <label>英字
+          <select id="nmCase"><option value="keep">変更しない</option><option value="upper">大文字に統一</option><option value="lower">小文字に統一</option></select>
+        </label>
+      </div>
+      <div class="btnrow">
+        <button class="btn btn-primary" id="run" type="button">実行する</button> <button class="btn btn-sm" id="sample" type="button">サンプルで試す</button>
+        <span class="spacer"></span>
+        <span class="drophint" id="fileinfo"></span>
+      </div>
+      <div class="report hidden" id="report"></div>
+      <div id="out" class="hidden"></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>使い方</h2>
+    <ol class="steps"><li>CSV をドロップするか、表を貼り付けます。</li><li>統一したい項目にチェックを入れます。</li><li>「実行する」を押し、変更セル数を確認して保存します。</li></ol>
+    <h3>このツールでできないこと</h3>
+    <p>和暦（令和・平成）から西暦への変換はしません。住所の正規化（旧字体・略称の統一）もしません。電話番号のハイフン削除は、数字とハイフンだけで構成されたセルが対象です。</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div class="faq"><details class="faq-item"><summary>日付はどの形式に対応していますか？</summary><div class="faq-body">2026/1/5、2026-01-05、2026.1.5、2026年1月5日、20260105 を YYYY-MM-DD に統一します。解釈できない値はそのまま残します。</div></details><details class="faq-item"><summary>半角カナは全角になりますか？</summary><div class="faq-body">「半角カナを全角に」をオンにすると、ﾃﾞｰﾀ が データ になります。濁点・半濁点も合成します。</div></details><details class="faq-item"><summary>電話番号のハイフンは消せますか？</summary><div class="faq-body">「電話番号のハイフンを削除」をオンにすると、03-1234-0001 が 0312340001 になります。</div></details><details class="faq-item"><summary>数値の通貨記号は？</summary><div class="faq-body">「数値の記号・カンマを削除」で ¥1,200 → 1200 になります。</div></details><details class="faq-item"><summary>データは送信されますか？</summary><div class="faq-body">いいえ。すべてブラウザ内で完結します。</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>関連ツール</h2>
+    <div class="related"><a class="rel" href="/csv-clean.html"><span class="t">クレンジング</span><span class="d">空白・記号・空セル</span></a><a class="rel" href="/csv-column.html"><span class="t">列の抽出・削除</span><span class="d">必要な列だけ残す</span></a><a class="rel" href="/csv-shift-jis.html"><span class="t">文字コード変換</span><span class="d">Shift_JIS → UTF-8</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/">ツール一覧</a>
+      <a href="/guide/what-is-csv.html">CSV ガイド</a>
+      <a href="/#privacy">プライバシー</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/normalize.js"></script>
+</body>
+</html>
