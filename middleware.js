@@ -10,7 +10,7 @@
 const ONE_YEAR = 60 * 60 * 24 * 365;
 const CRAWLER = /bot|crawler|spider|slurp|googlebot|bingbot|yandex|baiduspider|duckduckbot|facebookexternalhit|twitterbot|linkedinbot|embedly|pinterest/i;
 
-const toEn = (p) => (p === '/' ? '/en/' : '/en' + p);
+const toEn = (p) => (p === '/' ? '/en/' : p.startsWith('/en/') ? p : p === '/en' ? '/en' : '/en' + p);
 const toJa = (p) => (p === '/en/' ? '/' : p.replace(/^\/en/, '') || '/');
 const langOf = (p) => (p.startsWith('/en/') ? 'en' : 'ja');
 const pageFor = (lang, path) => (lang === 'en' ? toEn(path) : toJa(path));
@@ -40,6 +40,7 @@ export default function middleware(request) {
   const cookieHeader = request.headers.get('cookie') || '';
   const remembered = (cookieHeader.match(/(?:^|;\s*)lang=(ja|en)/) || [])[1];
   if (remembered) {
+    if (langOf(url.pathname) === remembered) return;
     const target = pageFor(remembered, url.pathname);
     if (target !== url.pathname) return Response.redirect(new URL(target, url.origin), 307);
     return;

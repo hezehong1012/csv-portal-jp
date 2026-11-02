@@ -4,6 +4,13 @@
       "maxDuration": 60
     }
   },
+  "redirects": [
+    {
+      "source": "/en/en/:path*",
+      "destination": "/en/:path*",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/csv-dedup",
