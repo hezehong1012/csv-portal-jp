@@ -6,6 +6,16 @@
   },
   "redirects": [
     {
+      "source": "/en/en",
+      "destination": "/en/",
+      "permanent": false
+    },
+    {
+      "source": "/en/en/",
+      "destination": "/en/",
+      "permanent": false
+    },
+    {
       "source": "/en/en/:path*",
       "destination": "/en/:path*",
       "permanent": false
