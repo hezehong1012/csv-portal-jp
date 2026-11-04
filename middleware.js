@@ -71,6 +71,8 @@ export const config = {
     '/en/reading.html',
     '/json.html',
     '/en/json.html',
+    '/json-edit.html',
+    '/en/json-edit.html',
     '/pdf.html',
     '/en/pdf.html',
     '/ai.html',
@@ -129,5 +131,7 @@ export const config = {
     '/en/csv-sql',
     '/csv-extract',
     '/en/csv-extract',
+    '/json-edit',
+    '/en/json-edit',
   ],
 };

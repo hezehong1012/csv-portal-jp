@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON エディタ｜ツリー表示・整形・圧縮・JSON→CSV 変換【無料・ブラウザ完結】</title>
+<meta name="description" content="JSON をツリー表示で確認し、整形・圧縮・エスケープ・Unicode デコードがその場でできる無料のオンラインエディタ。JSON→CSV 変換（ネスト平坦化・BOM 対応）と 2 つの JSON の差分比較も同じページのタブで使えます。データは送信されません。">
+<link rel="canonical" href="https://csv.format-portal.com/json-edit.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/json-edit.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/json-edit.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/json-edit.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSON エディタ｜ツリー表示・整形・圧縮・JSON→CSV 変換【無料・ブラウザ完結】">
+<meta property="og:description" content="JSON をツリー表示で確認し、整形・圧縮・エスケープ・Unicode デコードがその場でできる無料のオンラインエディタ。JSON→CSV 変換（ネスト平坦化・BOM 対応）と 2 つの JSON の差分比較も同じページのタブで使えます。データは送信されません。">
+<meta property="og:url" content="https://csv.format-portal.com/json-edit.html">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "JSON エディタ｜ツリー表示・整形・圧縮・JSON→CSV 変換【無料・ブラウザ完結】", "url": "https://csv.format-portal.com/json-edit.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "JSON をツリー表示で確認し、整形・圧縮・エスケープ・Unicode デコードがその場でできる無料のオンラインエディタ。JSON→CSV 変換（ネスト平坦化・BOM 対応）と 2 つの JSON の差分比較も同じページのタブで使えます。データは送信されません。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "整形と圧縮の違いは何ですか？", "acceptedAnswer": {"@type": "Answer", "text": "整形はインデントと改行を付けて読みやすくする処理、圧縮は余白をすべて取り除いて 1 行にする処理です。どちらも JSON としての中身は変わりません。"}}, {"@type": "Question", "name": "ネストした JSON を CSV にするとどうなりますか？", "acceptedAnswer": {"@type": "Answer", "text": "「ネストをドット記法で平坦化」がオンの場合、address.city のような列名に展開されます。配列は JSON 文字列として 1 セルに格納します。"}}, {"@type": "Question", "name": "JSON Lines (.jsonl) はそのまま使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。1 行 1 レコードの JSON Lines は自動判定して、配列として読み込みます。"}}, {"@type": "Question", "name": "Diff はどこまで細かく分かりますか？", "acceptedAnswer": {"@type": "Answer", "text": "ドット記法のパス単位で、追加・削除・変更を判定します。たとえば user.name が変わっていれば「user.name: 変更前 → 変更後」と表示します。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。解析・変換・比較のすべてがブラウザ内で完結し、サーバーには一切送信されません。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://csv.format-portal.com/"}, {"@type": "ListItem", "position": 2, "name": "ツール", "item": "https://csv.format-portal.com/#tools"}, {"@type": "ListItem", "position": 3, "name": "JSON エディタ", "item": "https://csv.format-portal.com/json-edit.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/#tools" class="here">ツール</a>
+      <a href="/guide/what-is-csv.html" class="">ガイド</a>
+      <a class="lang" href="/en/json-edit.html?setlang=en" hreflang="en">EN</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">ホーム</a><span class="sep">/</span><a href="/#tools">ツール</a><span class="sep">/</span>JSON エディタ</div>
+    <h1>JSON エディタ</h1>
+    <p class="lead">ツリー表示で構造をたどり、整形・圧縮・エスケープ・Unicode デコードをその場で。タブを切り替えるだけで JSON→CSV 変換と 2 つの JSON の差分比較も同じページでできます。すべてブラウザ内で処理され、データは送信されません。</p>
+    <div class="badges"><span class="badge">アップロード不要</span><span class="badge">登録不要</span><span class="badge">ツリー表示・JSON→CSV・Diff 対応</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">JSON エディタ</span>
+        <span class="tc-badge">処理は端末内で完結</span>
+      </div>
+      <div class="tc-body">
+        <div class="tabs" role="tablist">
+          <button class="tab on" data-pane="edit" type="button" role="tab">エディタ</button>
+          <button class="tab" data-pane="tocsv" type="button" role="tab">JSON → CSV</button>
+          <button class="tab" data-pane="diff" type="button" role="tab">JSON Diff</button>
+        </div>
+
+        <div class="pane" id="pane-edit">
+          <div class="je-grid">
+            <div>
+              <div class="field"><label for="jeIn">JSON を貼り付け</label>
+                <textarea id="jeIn" spellcheck="false" placeholder="{"name":"Alice","age":30,"tags":["admin","dev"]}"></textarea></div>
+              <div class="btnrow">
+                <button class="btn btn-sm" id="jeFile" type="button">ファイルを選択</button>
+                <input type="file" id="jeF" accept=".json,.jsonl,.ndjson,.txt" hidden>
+                <button class="btn btn-sm" id="jeSample" type="button">サンプル</button>
+                <button class="btn btn-sm" id="jeClear" type="button">クリア</button>
+                <label class="drophint" for="jeF">またはファイルをドロップ</label>
+              </div>
+              <div class="btnrow">
+                <button class="btn btn-primary" id="jeTree" type="button">解析してツリー表示</button>
+                <button class="btn" id="jePretty" type="button">整形</button>
+                <button class="btn" id="jeMin" type="button">圧縮</button>
+                <button class="btn" id="jeEsc" type="button">エスケープ</button>
+                <button class="btn" id="jeUnesc" type="button">エスケープ解除</button>
+                <button class="btn" id="jeUni" type="button">Unicode デコード</button>
+                <button class="btn" id="jeCopy" type="button">コピー</button>
+              </div>
+              <div class="report err hidden" id="jeRep"></div>
+              <div class="field" style="margin-top:14px"><label for="jeOut">出力</label>
+                <textarea id="jeOut" readonly spellcheck="false"></textarea></div>
+            </div>
+            <div>
+              <div class="je-tree-head"><label>ツリービュー</label>
+                <span class="btnrow" style="margin:0">
+                  <button class="btn btn-sm" id="jeExpand" type="button">展開全部</button>
+                  <button class="btn btn-sm" id="jeCollapse" type="button">折りたたみ全部</button>
+                </span></div>
+              <div class="je-tree" id="jeTreeBox"><span class="drophint">「解析してツリー表示」を押すとここに構造が表示されます</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pane hidden" id="pane-tocsv">
+          <div class="field"><label for="jcIn">JSON を貼り付け（配列・オブジェクト・JSON Lines 対応）</label>
+            <textarea id="jcIn" spellcheck="false" placeholder='[{"name":"Alice","age":30,"address":{"city":"Tokyo"}}]'></textarea></div>
+          <div class="btnrow">
+            <button class="btn btn-sm" id="jcFile" type="button">ファイルを選択</button>
+            <input type="file" id="jcF" accept=".json,.jsonl,.ndjson,.txt" hidden>
+            <button class="btn btn-sm" id="jcSample" type="button">サンプル</button>
+            <button class="btn btn-sm" id="jcClear" type="button">クリア</button>
+          </div>
+          <div class="opts" style="margin-top:14px">
+            <label class="chk"><input type="checkbox" id="jcFlat" checked> ネストをドット記法で平坦化</label>
+            <label class="chk"><input type="checkbox" id="jcBom"> Excel 向け BOM を付ける</label>
+            <label class="chk"><input type="checkbox" id="jcHead" checked> ヘッダー行を含める</label>
+            <label>区切り文字
+              <select id="jcDelim"><option value=",">カンマ</option><option value=";">セミコロン</option><option value="&#9;">タブ</option></select></label>
+          </div>
+          <div class="btnrow"><button class="btn btn-primary" id="jcRun" type="button">変換する</button></div>
+          <div class="stat" id="jcStat"><span>まだ変換していません</span></div>
+          <div class="field" style="margin-top:14px"><label for="jcOut">出力（CSV）</label>
+            <textarea id="jcOut" readonly spellcheck="false"></textarea></div>
+          <div class="btnrow">
+            <button class="btn" id="jcCopy" type="button">コピー</button>
+            <button class="btn" id="jcDl" type="button">.csv をダウンロード</button>
+          </div>
+          <div class="report err hidden" id="jcRep"></div>
+        </div>
+
+        <div class="pane hidden" id="pane-diff">
+          <div class="je-grid">
+            <div class="field"><label for="jdA">JSON A（変更前）</label>
+              <textarea id="jdA" spellcheck="false"></textarea></div>
+            <div class="field"><label for="jdB">JSON B（変更後）</label>
+              <textarea id="jdB" spellcheck="false"></textarea></div>
+          </div>
+          <div class="btnrow">
+            <button class="btn btn-primary" id="jdRun" type="button">比較する</button>
+            <button class="btn btn-sm" id="jdSample" type="button">サンプル</button>
+            <span class="spacer"></span>
+            <button class="btn btn-sm" id="jdTxt" type="button">差分をテキストでコピー</button>
+          </div>
+          <div class="stat" id="jdStat"><span>まだ比較していません</span></div>
+          <div class="hidden" id="jdOut" style="margin-top:14px"></div>
+          <div class="report err hidden" id="jdRep"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>使い方</h2>
+    <ol class="steps"><li>JSON を貼り付けるか、.json ファイルを選択します。</li><li>「解析してツリー表示」で構造をたどり、整形・圧縮・エスケープなどの操作を押します。</li><li>「JSON → CSV」タブで変換、「JSON Diff」タブで 2 つの JSON の違いを確認できます。</li></ol>
+    <h3>このツールでできないこと</h3>
+    <p>ツリー表示と Diff は解析結果の確認用です。100 万文字を超えるような巨大な JSON では、ツリーのノード数を上限までに制して表示します。JSON→CSV はオブジェクトの配列（または JSON Lines）を想定しており、配列の中に配列が直接入るデータは 1 行ずつ JSON 文字列として格納します。</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <div class="faq"><details class="faq-item"><summary>整形と圧縮の違いは何ですか？</summary><div class="faq-body">整形はインデントと改行を付けて読みやすくする処理、圧縮は余白をすべて取り除いて 1 行にする処理です。どちらも JSON としての中身は変わりません。</div></details><details class="faq-item"><summary>ネストした JSON を CSV にするとどうなりますか？</summary><div class="faq-body">「ネストをドット記法で平坦化」がオンの場合、address.city のような列名に展開されます。配列は JSON 文字列として 1 セルに格納します。</div></details><details class="faq-item"><summary>JSON Lines (.jsonl) はそのまま使えますか？</summary><div class="faq-body">はい。1 行 1 レコードの JSON Lines は自動判定して、配列として読み込みます。</div></details><details class="faq-item"><summary>Diff はどこまで細かく分かりますか？</summary><div class="faq-body">ドット記法のパス単位で、追加・削除・変更を判定します。たとえば user.name が変わっていれば「user.name: 変更前 → 変更後」と表示します。</div></details><details class="faq-item"><summary>データは送信されますか？</summary><div class="faq-body">いいえ。解析・変換・比較のすべてがブラウザ内で完結し、サーバーには一切送信されません。</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>関連ツール</h2>
+    <div class="related"><a class="rel" href="/json.html"><span class="t">CSV ⇄ JSON</span><span class="d">相互変換・JSON Lines</span></a><a class="rel" href="https://csv-editor.format-portal.com/"><span class="t">オンラインエディタ</span><span class="d">その場で編集・保存</span></a><a class="rel" href="/csv-extract.html"><span class="t">正規表現で抽出</span><span class="d">メール・URL・電話番号</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/">ツール一覧</a>
+      <a href="/guide/what-is-csv.html">CSV ガイド</a>
+      <a href="/#privacy">プライバシー</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/json-edit.js"></script>
+</body>
+</html>

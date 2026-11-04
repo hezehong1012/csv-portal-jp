@@ -627,3 +627,199 @@ OPTIONS_EXTRA = {
       </div>""",
  },
 }
+
+
+# ---------------------------------------------------------------- json-edit
+# Custom page: the tool body is not the CSV shell — three tabs (editor,
+# JSON→CSV, diff) rendered by json-edit.js. Body markup is built here.
+def _je_body(lang):
+    ja = lang == "ja"
+    L = dict(
+        title="JSON エディタ" if ja else "JSON editor",
+        badge="処理は端末内で完結" if ja else "Runs on your device",
+        tab1="エディタ" if ja else "Editor",
+        tab2="JSON → CSV" ,
+        tab3="JSON Diff",
+        paste="JSON を貼り付け" if ja else "Paste JSON",
+        file="ファイルを選択" if ja else "Choose a file",
+        sample="サンプル" if ja else "Sample",
+        clear="クリア" if ja else "Clear",
+        drop="またはファイルをドロップ" if ja else "or drop a file here",
+        treebtn="解析してツリー表示" if ja else "Parse & show tree",
+        pretty="整形" if ja else "Beautify",
+        min="圧縮" if ja else "Minify",
+        esc="エスケープ" if ja else "Escape",
+        unesc="エスケープ解除" if ja else "Unescape",
+        uni="Unicode デコード" if ja else "Decode \\uXXXX",
+        copy="コピー" if ja else "Copy",
+        out="出力" if ja else "Output",
+        treeview="ツリービュー" if ja else "Tree view",
+        expand="展開全部" if ja else "Expand all",
+        collapse="折りたたみ全部" if ja else "Collapse all",
+        treehint="「解析してツリー表示」を押すとここに構造が表示されます" if ja else "Press “Parse & show tree” to render the structure here",
+        jc_in="JSON を貼り付け（配列・オブジェクト・JSON Lines 対応）" if ja else "Paste JSON (array, object or JSON Lines)",
+        jc_flat="ネストをドット記法で平坦化" if ja else "Flatten nesting with dot notation",
+        jc_bom="Excel 向け BOM を付ける" if ja else "Add BOM for Excel",
+        jc_head="ヘッダー行を含める" if ja else "Include header row",
+        jc_delim="区切り文字" if ja else "Delimiter",
+        jc_comma="カンマ" if ja else "Comma",
+        jc_semi="セミコロン" if ja else "Semicolon",
+        jc_tab="タブ" if ja else "Tab",
+        jc_run="変換する" if ja else "Convert",
+        jc_stat="まだ変換していません" if ja else "Not converted yet",
+        jc_out="出力（CSV）" if ja else "Output (CSV)",
+        jc_dl=".csv をダウンロード" if ja else "Download .csv",
+        jd_a="JSON A（変更前）" if ja else "JSON A (before)",
+        jd_b="JSON B（変更後）" if ja else "JSON B (after)",
+        jd_run="比較する" if ja else "Compare",
+        jd_stat="まだ比較していません" if ja else "Not compared yet",
+        jd_add="追加" if ja else "added",
+        jd_del="削除" if ja else "removed",
+        jd_chg="変更" if ja else "changed",
+        jd_none="差分はありません（同一のデータです）" if ja else "No differences — the data is identical.",
+        jd_txt="差分をテキストでコピー" if ja else "Copy diff as text",
+    )
+    ph = '{"name":"Alice","age":30,"tags":["admin","dev"]}'
+    return f"""<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">{L['title']}</span>
+        <span class="tc-badge">{L['badge']}</span>
+      </div>
+      <div class="tc-body">
+        <div class="tabs" role="tablist">
+          <button class="tab on" data-pane="edit" type="button" role="tab">{L['tab1']}</button>
+          <button class="tab" data-pane="tocsv" type="button" role="tab">{L['tab2']}</button>
+          <button class="tab" data-pane="diff" type="button" role="tab">{L['tab3']}</button>
+        </div>
+
+        <div class="pane" id="pane-edit">
+          <div class="je-grid">
+            <div>
+              <div class="field"><label for="jeIn">{L['paste']}</label>
+                <textarea id="jeIn" spellcheck="false" placeholder="{ph}"></textarea></div>
+              <div class="btnrow">
+                <button class="btn btn-sm" id="jeFile" type="button">{L['file']}</button>
+                <input type="file" id="jeF" accept=".json,.jsonl,.ndjson,.txt" hidden>
+                <button class="btn btn-sm" id="jeSample" type="button">{L['sample']}</button>
+                <button class="btn btn-sm" id="jeClear" type="button">{L['clear']}</button>
+                <label class="drophint" for="jeF">{L['drop']}</label>
+              </div>
+              <div class="btnrow">
+                <button class="btn btn-primary" id="jeTree" type="button">{L['treebtn']}</button>
+                <button class="btn" id="jePretty" type="button">{L['pretty']}</button>
+                <button class="btn" id="jeMin" type="button">{L['min']}</button>
+                <button class="btn" id="jeEsc" type="button">{L['esc']}</button>
+                <button class="btn" id="jeUnesc" type="button">{L['unesc']}</button>
+                <button class="btn" id="jeUni" type="button">{L['uni']}</button>
+                <button class="btn" id="jeCopy" type="button">{L['copy']}</button>
+              </div>
+              <div class="report err hidden" id="jeRep"></div>
+              <div class="field" style="margin-top:14px"><label for="jeOut">{L['out']}</label>
+                <textarea id="jeOut" readonly spellcheck="false"></textarea></div>
+            </div>
+            <div>
+              <div class="je-tree-head"><label>{L['treeview']}</label>
+                <span class="btnrow" style="margin:0">
+                  <button class="btn btn-sm" id="jeExpand" type="button">{L['expand']}</button>
+                  <button class="btn btn-sm" id="jeCollapse" type="button">{L['collapse']}</button>
+                </span></div>
+              <div class="je-tree" id="jeTreeBox"><span class="drophint">{L['treehint']}</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pane hidden" id="pane-tocsv">
+          <div class="field"><label for="jcIn">{L['jc_in']}</label>
+            <textarea id="jcIn" spellcheck="false" placeholder='[{{"name":"Alice","age":30,"address":{{"city":"Tokyo"}}}}]'></textarea></div>
+          <div class="btnrow">
+            <button class="btn btn-sm" id="jcFile" type="button">{L['file']}</button>
+            <input type="file" id="jcF" accept=".json,.jsonl,.ndjson,.txt" hidden>
+            <button class="btn btn-sm" id="jcSample" type="button">{L['sample']}</button>
+            <button class="btn btn-sm" id="jcClear" type="button">{L['clear']}</button>
+          </div>
+          <div class="opts" style="margin-top:14px">
+            <label class="chk"><input type="checkbox" id="jcFlat" checked> {L['jc_flat']}</label>
+            <label class="chk"><input type="checkbox" id="jcBom"> {L['jc_bom']}</label>
+            <label class="chk"><input type="checkbox" id="jcHead" checked> {L['jc_head']}</label>
+            <label>{L['jc_delim']}
+              <select id="jcDelim"><option value=",">{L['jc_comma']}</option><option value=";">{L['jc_semi']}</option><option value="&#9;">{L['jc_tab']}</option></select></label>
+          </div>
+          <div class="btnrow"><button class="btn btn-primary" id="jcRun" type="button">{L['jc_run']}</button></div>
+          <div class="stat" id="jcStat"><span>{L['jc_stat']}</span></div>
+          <div class="field" style="margin-top:14px"><label for="jcOut">{L['jc_out']}</label>
+            <textarea id="jcOut" readonly spellcheck="false"></textarea></div>
+          <div class="btnrow">
+            <button class="btn" id="jcCopy" type="button">{L['copy']}</button>
+            <button class="btn" id="jcDl" type="button">{L['jc_dl']}</button>
+          </div>
+          <div class="report err hidden" id="jcRep"></div>
+        </div>
+
+        <div class="pane hidden" id="pane-diff">
+          <div class="je-grid">
+            <div class="field"><label for="jdA">{L['jd_a']}</label>
+              <textarea id="jdA" spellcheck="false"></textarea></div>
+            <div class="field"><label for="jdB">{L['jd_b']}</label>
+              <textarea id="jdB" spellcheck="false"></textarea></div>
+          </div>
+          <div class="btnrow">
+            <button class="btn btn-primary" id="jdRun" type="button">{L['jd_run']}</button>
+            <button class="btn btn-sm" id="jdSample" type="button">{L['sample']}</button>
+            <span class="spacer"></span>
+            <button class="btn btn-sm" id="jdTxt" type="button">{L['jd_txt']}</button>
+          </div>
+          <div class="stat" id="jdStat"><span>{L['jd_stat']}</span></div>
+          <div class="hidden" id="jdOut" style="margin-top:14px"></div>
+          <div class="report err hidden" id="jdRep"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+
+
+PAGES_EXTRA.append(dict(
+    slug="json-edit", script="json-edit.js", fam="conv",
+    title=("JSON エディタ｜ツリー表示・整形・圧縮・JSON→CSV 変換【無料・ブラウザ完結】",
+           "JSON editor — tree view, format, minify, JSON to CSV — free, in your browser"),
+    desc=("JSON をツリー表示で確認し、整形・圧縮・エスケープ・Unicode デコードがその場でできる無料のオンラインエディタ。JSON→CSV 変換（ネスト平坦化・BOM 対応）と 2 つの JSON の差分比較も同じページのタブで使えます。データは送信されません。",
+          "A free online JSON editor: inspect JSON as a collapsible tree, beautify, minify, escape and decode \\uXXXX on the spot. The same page also converts JSON to CSV (with nesting flattened and BOM for Excel) and diffs two JSON documents. Nothing is uploaded."),
+    h1=("JSON エディタ", "JSON editor"),
+    lead=("ツリー表示で構造をたどり、整形・圧縮・エスケープ・Unicode デコードをその場で。タブを切り替えるだけで JSON→CSV 変換と 2 つの JSON の差分比較も同じページでできます。すべてブラウザ内で処理され、データは送信されません。",
+          "Walk the structure as a collapsible tree and beautify, minify, escape or decode on the spot. Switch tabs to convert JSON to CSV or diff two JSON documents — all inside your browser, nothing uploaded."),
+    badge=("ツリー表示・JSON→CSV・Diff 対応", "Tree view, JSON to CSV, diff"),
+    steps=(["JSON を貼り付けるか、.json ファイルを選択します。",
+            "「解析してツリー表示」で構造をたどり、整形・圧縮・エスケープなどの操作を押します。",
+            "「JSON → CSV」タブで変換、「JSON Diff」タブで 2 つの JSON の違いを確認できます。"],
+           ["Paste JSON or choose a .json file.",
+            "Press “Parse & show tree” to walk the structure, then use beautify, minify, escape and the rest.",
+            "Switch to the “JSON → CSV” tab to convert, or “JSON Diff” to compare two documents."]),
+    limits=("ツリー表示と Diff は解析結果の確認用です。100 万文字を超えるような巨大な JSON では、ツリーのノード数を上限までに制して表示します。JSON→CSV はオブジェクトの配列（または JSON Lines）を想定しており、配列の中に配列が直接入るデータは 1 行ずつ JSON 文字列として格納します。",
+            "The tree and the diff are for inspection. Very large JSON (over ~1M characters) shows a capped number of tree nodes. JSON to CSV expects an array of objects (or JSON Lines); arrays nested directly inside rows are stored as JSON strings in one cell."),
+    faq=([("整形と圧縮の違いは何ですか？",
+           "整形はインデントと改行を付けて読みやすくする処理、圧縮は余白をすべて取り除いて 1 行にする処理です。どちらも JSON としての中身は変わりません。"),
+          ("ネストした JSON を CSV にするとどうなりますか？",
+           "「ネストをドット記法で平坦化」がオンの場合、address.city のような列名に展開されます。配列は JSON 文字列として 1 セルに格納します。"),
+          ("JSON Lines (.jsonl) はそのまま使えますか？",
+           "はい。1 行 1 レコードの JSON Lines は自動判定して、配列として読み込みます。"),
+          ("Diff はどこまで細かく分かりますか？",
+           "ドット記法のパス単位で、追加・削除・変更を判定します。たとえば user.name が変わっていれば「user.name: 変更前 → 変更後」と表示します。"),
+          ("データは送信されますか？",
+           "いいえ。解析・変換・比較のすべてがブラウザ内で完結し、サーバーには一切送信されません。")],
+         [("What is the difference between beautify and minify?",
+           "Beautify adds indentation and line breaks for readability; minify strips all whitespace into a single line. The JSON content itself never changes."),
+          ("What happens to nested JSON when converting to CSV?",
+           "With “flatten nesting” on, nested keys become dotted column names like address.city. Arrays inside a row are stored as JSON strings in one cell."),
+          ("Can I paste JSON Lines (.jsonl)?",
+           "Yes — one record per line is detected automatically and read as an array."),
+          ("How detailed is the diff?",
+           "Differences are reported per dot-notation path: if user.name changed, you see “user.name: before → after”, marked as added, removed or changed."),
+          ("Is my data uploaded?",
+           "No. Parsing, converting and comparing all happen in your browser; nothing is sent to a server.")]),
+    related=["json", "editor", "extract"],
+    custom=True,
+    body=(_je_body("ja"), _je_body("en")),
+))

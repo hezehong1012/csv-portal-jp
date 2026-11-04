@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON editor — tree view, format, minify, JSON to CSV — free, in your browser</title>
+<meta name="description" content="A free online JSON editor: inspect JSON as a collapsible tree, beautify, minify, escape and decode \uXXXX on the spot. The same page also converts JSON to CSV (with nesting flattened and BOM for Excel) and diffs two JSON documents. Nothing is uploaded.">
+<link rel="canonical" href="https://csv.format-portal.com/en/json-edit.html">
+<link rel="alternate" hreflang="ja" href="https://csv.format-portal.com/json-edit.html">
+<link rel="alternate" hreflang="en" href="https://csv.format-portal.com/en/json-edit.html">
+<link rel="alternate" hreflang="x-default" href="https://csv.format-portal.com/json-edit.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSON editor — tree view, format, minify, JSON to CSV — free, in your browser">
+<meta property="og:description" content="A free online JSON editor: inspect JSON as a collapsible tree, beautify, minify, escape and decode \uXXXX on the spot. The same page also converts JSON to CSV (with nesting flattened and BOM for Excel) and diffs two JSON documents. Nothing is uploaded.">
+<meta property="og:url" content="https://csv.format-portal.com/en/json-edit.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="google-site-verification" content="Z1vua0Vo7S6XuQMPogmaM0mN5b5TAKBMX3Vg7AgblTs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tools.css">
+<link rel="stylesheet" href="/assets/hub.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "JSON editor — tree view, format, minify, JSON to CSV — free, in your browser", "url": "https://csv.format-portal.com/en/json-edit.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "en", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "A free online JSON editor: inspect JSON as a collapsible tree, beautify, minify, escape and decode \\uXXXX on the spot. The same page also converts JSON to CSV (with nesting flattened and BOM for Excel) and diffs two JSON documents. Nothing is uploaded."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "What is the difference between beautify and minify?", "acceptedAnswer": {"@type": "Answer", "text": "Beautify adds indentation and line breaks for readability; minify strips all whitespace into a single line. The JSON content itself never changes."}}, {"@type": "Question", "name": "What happens to nested JSON when converting to CSV?", "acceptedAnswer": {"@type": "Answer", "text": "With “flatten nesting” on, nested keys become dotted column names like address.city. Arrays inside a row are stored as JSON strings in one cell."}}, {"@type": "Question", "name": "Can I paste JSON Lines (.jsonl)?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — one record per line is detected automatically and read as an array."}}, {"@type": "Question", "name": "How detailed is the diff?", "acceptedAnswer": {"@type": "Answer", "text": "Differences are reported per dot-notation path: if user.name changed, you see “user.name: before → after”, marked as added, removed or changed."}}, {"@type": "Question", "name": "Is my data uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Parsing, converting and comparing all happen in your browser; nothing is sent to a server."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://csv.format-portal.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://csv.format-portal.com/en/#tools"}, {"@type": "ListItem", "position": 3, "name": "JSON editor", "item": "https://csv.format-portal.com/en/json-edit.html"}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WERRPRW455"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WERRPRW455');</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="/en/"><span class="mark">CSV</span>Format Portal</a>
+    <nav class="head-nav">
+      <a href="/en/#tools" class="here">Tools</a>
+      <a href="/en/guide/what-is-csv.html" class="">Guides</a>
+      <a class="lang" href="/json-edit.html?setlang=ja" hreflang="ja">日本語</a>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a><span class="sep">/</span><a href="/en/#tools">Tools</a><span class="sep">/</span>JSON editor</div>
+    <h1>JSON editor</h1>
+    <p class="lead">Walk the structure as a collapsible tree and beautify, minify, escape or decode on the spot. Switch tabs to convert JSON to CSV or diff two JSON documents — all inside your browser, nothing uploaded.</p>
+    <div class="badges"><span class="badge">No upload</span><span class="badge">No sign-up</span><span class="badge">Tree view, JSON to CSV, diff</span></div>
+  </div>
+</section>
+<section class="toolwrap" id="tool">
+  <div class="wrap">
+    <div class="toolcard">
+      <div class="tc-head">
+        <span class="tc-title">JSON editor</span>
+        <span class="tc-badge">Runs on your device</span>
+      </div>
+      <div class="tc-body">
+        <div class="tabs" role="tablist">
+          <button class="tab on" data-pane="edit" type="button" role="tab">Editor</button>
+          <button class="tab" data-pane="tocsv" type="button" role="tab">JSON → CSV</button>
+          <button class="tab" data-pane="diff" type="button" role="tab">JSON Diff</button>
+        </div>
+
+        <div class="pane" id="pane-edit">
+          <div class="je-grid">
+            <div>
+              <div class="field"><label for="jeIn">Paste JSON</label>
+                <textarea id="jeIn" spellcheck="false" placeholder="{"name":"Alice","age":30,"tags":["admin","dev"]}"></textarea></div>
+              <div class="btnrow">
+                <button class="btn btn-sm" id="jeFile" type="button">Choose a file</button>
+                <input type="file" id="jeF" accept=".json,.jsonl,.ndjson,.txt" hidden>
+                <button class="btn btn-sm" id="jeSample" type="button">Sample</button>
+                <button class="btn btn-sm" id="jeClear" type="button">Clear</button>
+                <label class="drophint" for="jeF">or drop a file here</label>
+              </div>
+              <div class="btnrow">
+                <button class="btn btn-primary" id="jeTree" type="button">Parse & show tree</button>
+                <button class="btn" id="jePretty" type="button">Beautify</button>
+                <button class="btn" id="jeMin" type="button">Minify</button>
+                <button class="btn" id="jeEsc" type="button">Escape</button>
+                <button class="btn" id="jeUnesc" type="button">Unescape</button>
+                <button class="btn" id="jeUni" type="button">Decode \uXXXX</button>
+                <button class="btn" id="jeCopy" type="button">Copy</button>
+              </div>
+              <div class="report err hidden" id="jeRep"></div>
+              <div class="field" style="margin-top:14px"><label for="jeOut">Output</label>
+                <textarea id="jeOut" readonly spellcheck="false"></textarea></div>
+            </div>
+            <div>
+              <div class="je-tree-head"><label>Tree view</label>
+                <span class="btnrow" style="margin:0">
+                  <button class="btn btn-sm" id="jeExpand" type="button">Expand all</button>
+                  <button class="btn btn-sm" id="jeCollapse" type="button">Collapse all</button>
+                </span></div>
+              <div class="je-tree" id="jeTreeBox"><span class="drophint">Press “Parse & show tree” to render the structure here</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pane hidden" id="pane-tocsv">
+          <div class="field"><label for="jcIn">Paste JSON (array, object or JSON Lines)</label>
+            <textarea id="jcIn" spellcheck="false" placeholder='[{"name":"Alice","age":30,"address":{"city":"Tokyo"}}]'></textarea></div>
+          <div class="btnrow">
+            <button class="btn btn-sm" id="jcFile" type="button">Choose a file</button>
+            <input type="file" id="jcF" accept=".json,.jsonl,.ndjson,.txt" hidden>
+            <button class="btn btn-sm" id="jcSample" type="button">Sample</button>
+            <button class="btn btn-sm" id="jcClear" type="button">Clear</button>
+          </div>
+          <div class="opts" style="margin-top:14px">
+            <label class="chk"><input type="checkbox" id="jcFlat" checked> Flatten nesting with dot notation</label>
+            <label class="chk"><input type="checkbox" id="jcBom"> Add BOM for Excel</label>
+            <label class="chk"><input type="checkbox" id="jcHead" checked> Include header row</label>
+            <label>Delimiter
+              <select id="jcDelim"><option value=",">Comma</option><option value=";">Semicolon</option><option value="&#9;">Tab</option></select></label>
+          </div>
+          <div class="btnrow"><button class="btn btn-primary" id="jcRun" type="button">Convert</button></div>
+          <div class="stat" id="jcStat"><span>Not converted yet</span></div>
+          <div class="field" style="margin-top:14px"><label for="jcOut">Output (CSV)</label>
+            <textarea id="jcOut" readonly spellcheck="false"></textarea></div>
+          <div class="btnrow">
+            <button class="btn" id="jcCopy" type="button">Copy</button>
+            <button class="btn" id="jcDl" type="button">Download .csv</button>
+          </div>
+          <div class="report err hidden" id="jcRep"></div>
+        </div>
+
+        <div class="pane hidden" id="pane-diff">
+          <div class="je-grid">
+            <div class="field"><label for="jdA">JSON A (before)</label>
+              <textarea id="jdA" spellcheck="false"></textarea></div>
+            <div class="field"><label for="jdB">JSON B (after)</label>
+              <textarea id="jdB" spellcheck="false"></textarea></div>
+          </div>
+          <div class="btnrow">
+            <button class="btn btn-primary" id="jdRun" type="button">Compare</button>
+            <button class="btn btn-sm" id="jdSample" type="button">Sample</button>
+            <span class="spacer"></span>
+            <button class="btn btn-sm" id="jdTxt" type="button">Copy diff as text</button>
+          </div>
+          <div class="stat" id="jdStat"><span>Not compared yet</span></div>
+          <div class="hidden" id="jdOut" style="margin-top:14px"></div>
+          <div class="report err hidden" id="jdRep"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>How to use</h2>
+    <ol class="steps"><li>Paste JSON or choose a .json file.</li><li>Press “Parse &amp; show tree” to walk the structure, then use beautify, minify, escape and the rest.</li><li>Switch to the “JSON → CSV” tab to convert, or “JSON Diff” to compare two documents.</li></ol>
+    <h3>What this tool does not do</h3>
+    <p>The tree and the diff are for inspection. Very large JSON (over ~1M characters) shows a capped number of tree nodes. JSON to CSV expects an array of objects (or JSON Lines); arrays nested directly inside rows are stored as JSON strings in one cell.</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <div class="faq"><details class="faq-item"><summary>What is the difference between beautify and minify?</summary><div class="faq-body">Beautify adds indentation and line breaks for readability; minify strips all whitespace into a single line. The JSON content itself never changes.</div></details><details class="faq-item"><summary>What happens to nested JSON when converting to CSV?</summary><div class="faq-body">With “flatten nesting” on, nested keys become dotted column names like address.city. Arrays inside a row are stored as JSON strings in one cell.</div></details><details class="faq-item"><summary>Can I paste JSON Lines (.jsonl)?</summary><div class="faq-body">Yes — one record per line is detected automatically and read as an array.</div></details><details class="faq-item"><summary>How detailed is the diff?</summary><div class="faq-body">Differences are reported per dot-notation path: if user.name changed, you see “user.name: before → after”, marked as added, removed or changed.</div></details><details class="faq-item"><summary>Is my data uploaded?</summary><div class="faq-body">No. Parsing, converting and comparing all happen in your browser; nothing is sent to a server.</div></details></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <h2>Related tools</h2>
+    <div class="related"><a class="rel" href="/en/json.html"><span class="t">CSV ⇄ JSON</span><span class="d">Convert both ways</span></a><a class="rel" href="https://csv-editor.format-portal.com/en/"><span class="t">Online editor</span><span class="d">Edit and save in place</span></a><a class="rel" href="/en/csv-extract.html"><span class="t">Regex extract</span><span class="d">Email, URL, phone</span></a></div>
+  </div>
+</section>
+<footer class="site">
+  <div class="inner">
+    <div>© 2026 CSV Format Portal</div>
+    <div class="links">
+      <a href="/en/">All tools</a>
+      <a href="/en/guide/what-is-csv.html">CSV guides</a>
+      <a href="/en/#privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/vendor/papaparse.min.js"></script>
+<script src="/assets/engine/core.js"></script>
+<script src="/assets/engine/text.js"></script>
+<script src="/assets/tools/json-edit.js"></script>
+</body>
+</html>

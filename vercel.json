@@ -133,6 +133,14 @@
     {
       "source": "/en/csv-extract",
       "destination": "/en/csv-extract.html"
+    },
+    {
+      "source": "/json-edit",
+      "destination": "/json-edit.html"
+    },
+    {
+      "source": "/en/json-edit",
+      "destination": "/en/json-edit.html"
     }
   ]
 }

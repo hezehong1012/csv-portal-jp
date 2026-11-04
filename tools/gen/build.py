@@ -7,7 +7,7 @@ import os, json, html
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SITE = "https://csv.format-portal.com"
-LASTMOD = "2026-11-02"
+LASTMOD = "2026-11-04"
 
 
 def esc(s):
@@ -63,6 +63,9 @@ TOOLS = [
     dict(slug="json", fam="conv", live=True, href="/json.html",
          ja="CSV ⇄ JSON", en="CSV ⇄ JSON",
          dja="相互変換・JSON Lines", den="Convert both ways"),
+    dict(slug="json-edit", path="json-edit", fam="conv", live=True,
+         ja="JSON エディタ", en="JSON editor",
+         dja="ツリー表示・整形・JSON→CSV", den="Tree view, format, JSON to CSV"),
     dict(slug="pdf", fam="conv", live=True, href="/pdf.html",
          ja="CSV → PDF", en="CSV → PDF",
          dja="表をそのまま印刷", den="Print the table as-is"),
@@ -547,7 +550,11 @@ def build_page(t, lang):
   </div>
 </section>
 """
-    page += tool_shell(t, lang)
+    if t.get("custom"):
+        # non-CSV page (e.g. json-edit): the body markup ships with the page dict
+        page += t["body"][0] if ja else t["body"][1]
+    else:
+        page += tool_shell(t, lang)
     page += content_sections(t, lang)
     page += footer(lang)
     page += """<script src="/assets/vendor/papaparse.min.js"></script>
